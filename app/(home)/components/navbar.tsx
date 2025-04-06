@@ -40,7 +40,7 @@ export default function Navbar() {
     <nav className='pt-1 flex justify-between items-center position-fixed'>
         <h1 className="hover:cursor-pointer mb-6 text-xl font-bold text-gray-400 tracking-wider flex items-center gap-1 pt-3 pl-4">
         
-            <span className="hover:animate-bounce bg-gradient-to-r from-orange-500 to-green-500 text-transparent bg-clip-text -rotate-2">👨🏻‍💻Denis WebDev</span>
+            <span className="hover:animate-bounce bg-gradient-to-r from-orange-500 to-green-500 text-transparent bg-clip-text -rotate-2">{"</>"}Denis WebDev</span>
         </h1>
         <div className="pr-4 flex tracking-wider items-center justify-end gap-4">
             {socialLinks.map((social, index) => (
