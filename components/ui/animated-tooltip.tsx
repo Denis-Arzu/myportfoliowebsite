@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   motion,
   useTransform,
@@ -31,12 +31,26 @@ export const AnimatedTooltip = ({
     useTransform(x, [-100, 100], [-50, 50]),
     springConfig,
   );
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.profile-image')) {
+        setClickedIndex(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   const handleMouseMove = (event: React.MouseEvent<HTMLImageElement>) => {
     const halfWidth = event.currentTarget.offsetWidth / 2;
     x.set(event.nativeEvent.offsetX - halfWidth);
   };
 
-  const handleImageClick = (id: number) => {
+  const handleImageClick = (id: number, event: React.MouseEvent) => {
+    event.stopPropagation();
     setClickedIndex(clickedIndex === id ? null : id);
   };
 
@@ -49,8 +63,8 @@ export const AnimatedTooltip = ({
         >
           {/* Main Profile Image */}
           <div 
-            className="relative h-[60px] w-[60px] cursor-pointer"
-            onClick={() => handleImageClick(item.id)}
+            className="relative h-[60px] w-[60px] cursor-pointer profile-image"
+            onClick={(e) => handleImageClick(item.id, e)}
           >
             <Image
               onMouseMove={handleMouseMove}
