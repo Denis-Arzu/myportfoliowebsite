@@ -2,7 +2,7 @@
 import React, { ReactNode, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, X, ArrowLeft } from 'lucide-react';
-import { SiNextdotjs, SiReact, SiTypescript } from 'react-icons/si';
+
 
 type Technology = {
   name: string;
@@ -49,7 +49,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
         <h3 className="text-xl font-bold text-green-400 mb-4">{skill.type}</h3>
         <button
           onClick={handleOpen}
-          className="group flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors"
+          className="group border-1 border-gray-300 rounded-full px-4 py-2 flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors"
         >
           View More
           <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
