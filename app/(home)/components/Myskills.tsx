@@ -129,10 +129,16 @@ const skillsData: Skill[] = [
 
 export const SkillsSection = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {skillsData.map((skill, index) => (
-        <SkillCard key={index} skill={skill} />
-      ))}
+    <div className="w-full px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {skillsData.map((skill, index) => (
+            <div key={index} className="w-full max-w-sm">
+              <SkillCard skill={skill} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

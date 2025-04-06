@@ -34,7 +34,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
   };
 
   return (
-    <div className="relative w-full max-w-sm min-h-[400px] h-auto rounded-xl overflow-hidden">
+    <div className="relative w-full h-[400px] rounded-xl overflow-hidden">
       {/* Main Card */}
       <motion.div
         className="absolute inset-0 bg-gray-900/90 backdrop-blur-sm border border-gray-800 rounded-xl p-6 flex flex-col items-center justify-center"
@@ -46,7 +46,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
             {skill.icon}
           </div>
         </div>
-        <h3 className="text-xl font-bold text-green-400 mb-4">{skill.type}</h3>
+        <h3 className="text-xl font-bold text-green-400 mb-4 text-center">{skill.type}</h3>
         <button
           onClick={handleOpen}
           className="group border-1 border-gray-300 rounded-full px-4 py-2 flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors"
@@ -118,12 +118,12 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
                 >
                   {currentSlide === 0 ? (
                     <div className="space-y-4">
-                      <h3 className="text-xl font-bold text-green-400">Overview</h3>
-                      <p className="text-gray-300">{skill.description}</p>
+                      <h3 className="text-xl font-bold text-green-400 text-center">Overview</h3>
+                      <p className="text-gray-300 text-center">{skill.description}</p>
                     </div>
                   ) : (
                     <div className="space-y-6">
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-4 justify-center">
                         <div className="text-4xl">
                           {skill.technologies[currentSlide - 1].icon}
                         </div>
@@ -131,7 +131,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
                           {skill.technologies[currentSlide - 1].name}
                         </h3>
                       </div>
-                      <p className="text-gray-300">
+                      <p className="text-gray-300 text-center">
                         {skill.technologies[currentSlide - 1].description}
                       </p>
                       <div className="space-y-2">
@@ -143,7 +143,7 @@ export const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
                             className="absolute inset-y-0 left-0 bg-gradient-to-r from-green-500 to-orange-400"
                           />
                         </div>
-                        <span className="text-sm text-gray-400">
+                        <span className="text-sm text-gray-400 text-center block">
                           {skill.technologies[currentSlide - 1].proficiency}% Proficient
                         </span>
                       </div>
