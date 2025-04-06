@@ -1,5 +1,5 @@
 import { SkillCard } from "@/components/ui/skill-card";
-import { SiAdobeaftereffects, SiAdobeaudition, SiAdobe, SiDavinciresolve, SiNextdotjs, SiReact, SiTypescript, SiAdobeillustrator, SiCanva, SiAdobephotoshop } from "react-icons/si";
+import { SiAdobeaftereffects, SiAdobeaudition, SiDavinciresolve, SiNextdotjs, SiReact, SiTypescript, SiAdobeillustrator, SiCanva, SiAdobephotoshop } from "react-icons/si";
 import { CgWebsite } from "react-icons/cg";
 import { ReactNode } from "react";
 import { FaObjectGroup, FaPaintBrush, FaVideo } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { LiaCuttlefish } from "react-icons/lia";
 // Update icon type to match skill-card.tsx
 type Skill = {
   type: string;
-  icon: ReactNode; // Changed to ReactNode to match react-icons
+  icon: ReactNode;
   description: string;
   mainProficiency: number;
   technologies: {
@@ -23,7 +23,7 @@ const skillsData: Skill[] = [
     // Frontend Development
     {
       type: "Frontend Development",
-      icon: <CgWebsite />, // Using React icon component directly
+      icon: <CgWebsite />,
       description: "Frontend web development is the practice of building the visual and interactive parts of a website or web application—the part users see and interact with directly. I build beautiful, responsive, and interactive websites using HTML, CSS, and JavaScript. With modern tools like React and Next.js, I turn designs into smooth, user-friendly experiences that work across all devices.",
       mainProficiency: 90,
       technologies: [
@@ -90,7 +90,7 @@ const skillsData: Skill[] = [
       //Graphics Design
       {
         type: "Graphic Design",
-        icon: <FaPaintBrush className="text-pink-500" />, // Creative design icon
+        icon: <FaPaintBrush className="text-pink-500" />,
         description:
           "Graphic design is the visual language of storytelling. I create stunning visuals that communicate ideas clearly and creatively—from social media content and branding assets to UI elements and marketing materials. With tools like Photoshop, Canva, and Illustrator, combined with UI/UX design principles, I blend creativity with strategy to deliver designs that are both beautiful and functional.",
         mainProficiency: 82,
@@ -118,14 +118,13 @@ const skillsData: Skill[] = [
           },
           {
             name: "UI/UX Design",
-            icon: <FaObjectGroup className="text-purple-600" />, // Representing interface layout/design
+            icon: <FaObjectGroup className="text-purple-600" />,
             description:
               "Understanding of layout, visual hierarchy, color theory, and user behavior to design intuitive, user-friendly interfaces across platforms.",
             proficiency: 78,
           },
         ],
       },
-      
 ];
 
 export const SkillsSection = () => {

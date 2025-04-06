@@ -70,7 +70,7 @@ const HeroSection = () => {
             <a
               href="https://wa.me/254111480091" 
               target='_blank'
-              className="text-green-400 hover:text-orange-400 font-medium transition-colors border-1 border-green-400 rounded-md p-2 duration-200"
+              className="text-gray-400 hover:text-orange-400 hover:border-orange-400 bg-gray-700/50 font-medium transition-colors border-1 border-gray-400 rounded-full p-2 duration-200 backdrop-blur-sm"
             >
               Get in touch ➜
             </a>
