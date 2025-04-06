@@ -3,8 +3,19 @@ import React from 'react';
 import { SiGmail, SiGithub, SiWhatsapp } from "react-icons/si";
 import { motion } from 'framer-motion';
 
-export default function Navbar() {
-    const socialLinks = [
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: React.ReactNode;
+}
+
+interface Section {
+  name: string;
+  href: string;
+}
+
+const Navbar: React.FC = () => {
+    const socialLinks: SocialLink[] = [
         {
             name: 'GitHub',
             url: 'https://github.com/Denis-Arzu',
@@ -22,10 +33,11 @@ export default function Navbar() {
         }
     ];
 
-    const sections = [
+    const sections: Section[] = [
         { name: 'Home', href: '#home' },
         { name: 'About', href: '#about' },
-        { name: 'Skills', href: '#skills' }
+        { name: 'Skills', href: '#skills' },
+        { name: 'Projects', href: '#projects' }
     ];
 
     return (
@@ -80,4 +92,6 @@ export default function Navbar() {
             </div>
         </nav>
     );
-}
+};
+
+export default Navbar;

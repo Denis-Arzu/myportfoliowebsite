@@ -6,8 +6,9 @@ import AboutSectitle from "./components/aboutsectitle";
 import Myskillssectitle from "./components/Myskillssectitle";
 import { SkillsSection } from "./components/Myskills";
 import Loader from "./components/loader";
+import ProjectsSection from './components/ProjectsSection';
 
-const Page = () => {
+const Page: React.FC = () => {
   return (
     <>
       <Loader />
@@ -28,17 +29,19 @@ const Page = () => {
         </div>
         
         <div id="about">
-            <AboutSectitle />
-            <div className="p-3 border border-green-600 text-orange-300 relative z-10 ml-10 mr-10">
-              <About />
-            </div>
-            <div className="h-10 xl:h-32 bg-gradient-to-t from-black relative mt-10 w-full"></div>
+          <AboutSectitle />
+          <div className="p-3 border border-green-600 text-orange-300 relative z-10 ml-10 mr-10">
+            <About />
+          </div>
+          <div className="h-10 xl:h-32 bg-gradient-to-t from-black relative mt-10 w-full"></div>
         </div>
 
         <div id="skills">
           <Myskillssectitle />
           <SkillsSection />
         </div>
+
+        <ProjectsSection />
       </div>
     </>
   );
