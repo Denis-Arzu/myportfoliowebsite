@@ -15,24 +15,56 @@ import {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
+          <AccordionTrigger>{"Which kind of websites do I specialize in?"}</AccordionTrigger>
+          <AccordionContent>
+          I specialize in creating responsive, user-friendly websites that are optimized for both desktop and mobile devices. My focus is on building <br />
+          <span className="text-green-500">
+          ✅ Business websites
+          </span> <br />
+          <span className="text-green-500">
+          ✅ Portfolio websites
+          </span> <br />
+          
+          <span className="text-green-500">
+          ✅ Blog websites
+          </span> <br />
+
+          <span className="text-green-500">
+          ✅ Landing pages
+          </span> <br />
+          <span className="text-green-500">
+          ✅ Personal websites
+          </span> <br />
+          <span className="text-green-500">
+          ✅ Educational websites
+          </span> <br />
+          <span className="text-green-500">
+          ✅ Real estate websites
+          </span> <br />
+          <span className="text-green-500">
+          ✅ E-commerce websites and online stores <span className="text-gray-500 italic">(Coming soon)</span>
+          </span>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
           <AccordionTrigger>{"Which programming languages and frameworks do I specialize in?"}</AccordionTrigger>
           <AccordionContent>
             I specialize in HTML, CSS, JavaScript, and and I’m proficient with modern frameworks like React and Next.js. I also have experience with CSS tools such as Tailwind CSS to create efficient and scalable web solutions.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-3">
+        <AccordionItem value="item-4">
           <AccordionTrigger>{"What’s my process for collaborating with clients and stakeholders?"}</AccordionTrigger>
           <AccordionContent>
           My approach starts with understanding your vision and business goals. I believe in transparent communication and iterative feedback, ensuring every stage of the project—from initial planning and wireframing to final deployment—is aligned with your expectations. This collaborative process guarantees a successful, tailor-made solution.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-4">
+        <AccordionItem value="item-5">
           <AccordionTrigger>{"Is there a limit to the number of projects I can handle?"}</AccordionTrigger>
           <AccordionContent>
           Yes, I limit the number of projects I take on to ensure I can give each client the attention and dedication they deserve. I believe in quality over quantity, and I’m committed to delivering exceptional results.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-5">
+        <AccordionItem value="item-6">
           <AccordionTrigger>{"Is there anything else that I do apart from web development?"}</AccordionTrigger>
           <AccordionContent>
           Yes, i also have experience in graphic design and video editing. I can help you create a professional and engaging visual identity for your brand.
@@ -40,5 +72,6 @@ import {
         </AccordionItem>
       </Accordion>
     )
+
   }
   

@@ -4,14 +4,14 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className=" md:px-3 lg:px-15 py-5">
+    <section className=" md:px-3 lg:px-15 py-15">
      
 
       {/* Responsive Container */}
       <div className="text-white min-h-[60vh] flex flex-col lg:flex-row-reverse items-center justify-between">
         
         {/* Right Section with Decorative Icons (Appears First on Large Screens) */}
-        <div className="mb-5 relative flex justify-center md:justify-start mx-auto lg:order-first">
+        <div className="mb-10 relative flex justify-center md:justify-start mx-auto lg:order-first">
 
         <div className='absolute top-0 left-0 mb-10'>
         <MovingBorderBtn className="flex flex-shrink items-center justify-center p-4 hover:scale-105 transition-transform">
@@ -70,14 +70,14 @@ const HeroSection = () => {
             <a
               href="https://wa.me/254111480091" 
               target='_blank'
-              className="text-green-400 hover:text-orange-400 font-medium transition-colors duration-200"
+              className="text-green-400 hover:text-orange-400 font-medium transition-colors border-1 border-green-400 rounded-md p-2 duration-200"
             >
               Get in touch ➜
             </a>
           </div>
           
           <h1 className="lg:text-5xl text-4xl max-w-md font-bold leading-tight">Hello and nice to meet you!👋</h1>
-          <h2 className="text-2xl font-semibold underline underline-offset-8 decoration-4 decoration-green-500">{"I'm Denis"}</h2>
+          <h2 className="text-2xl font-semibold underline underline-offset-8 decoration-4 decoration-green-500">{"I'm Denis."}</h2>
           <p className="text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0">
             {"Based in Kenya, I'm a Frontend developer passionate about building modern web applications that users love."}
           </p>
