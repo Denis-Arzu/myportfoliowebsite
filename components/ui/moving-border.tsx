@@ -10,18 +10,27 @@ import {
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
-// Shared types to avoid duplication
+// Define common props interface used by both components
 type CommonProps = {
   children: React.ReactNode;
-  duration?: number;
-  [key: string]: unknown;
+  duration?: number; // Animation duration in milliseconds
+  [key: string]: unknown; // Allow additional props
 };
 
-// Component for the outer border container
+/**
+ * MovingBorderBtn - A button component with an animated moving border effect
+ * @param borderRadius - Border radius of the button (default: "1.75rem")
+ * @param children - Content to render inside the button
+ * @param as - Component to render as (default: "div")
+ * @param containerClassName - Additional classes for container
+ * @param borderClassName - Additional classes for border
+ * @param duration - Animation duration
+ * @param className - Additional classes for main content
+ */
 export function MovingBorderBtn({
   borderRadius = "1.75rem",
   children,
-  as: Component = "div", // Changed default from "MovingBorder" to "div"
+  as: Component = "div",
   containerClassName,
   borderClassName,
   duration,
@@ -29,7 +38,7 @@ export function MovingBorderBtn({
   ...otherProps
 }: CommonProps & {
   borderRadius?: string;
-  as?: React.ElementType; // More specific type than 'any'
+  as?: React.ElementType;
   containerClassName?: string;
   borderClassName?: string;
   className?: string;
@@ -37,7 +46,7 @@ export function MovingBorderBtn({
   return (
     <Component
       className={cn(
-        "absolute h-13 w-50 overflow-hidden bg-transparent p-[1px]",
+        "absolute h-16 w-70 overflow-hidden bg-transparent p-[1px]",
         containerClassName,
       )}
       style={{
@@ -45,6 +54,7 @@ export function MovingBorderBtn({
       }}
       {...otherProps}
     >
+      {/* Border container with gradient background */}
       <div
         className="absolute inset-0"
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
@@ -52,13 +62,14 @@ export function MovingBorderBtn({
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
             className={cn(
-              " h-10 w-50 bg-[radial-gradient(#F8F8FF_20%,transparent_60%)] opacity-[0.2]",
+              " h-10 w-60 bg-[radial-gradient(#F8F8FF_20%,transparent_60%)] opacity-[0.2]",
               borderClassName,
             )}
           />
         </MovingBorder>
       </div>
 
+      {/* Main content container */}
       <div
         className={cn(
           "relative flex h-full w-full items-center justify-center border border-green-800 bg-black-900/[0.8] text-sm text-white antialiased backdrop-blur-xl",
@@ -74,7 +85,13 @@ export function MovingBorderBtn({
   );
 }
 
-// Component for the moving border animation
+/**
+ * MovingBorder - Creates an animated border effect using SVG and motion
+ * @param children - Content to render with the moving border effect
+ * @param duration - Animation duration in milliseconds (default: 3000)
+ * @param rx - Horizontal border radius of SVG rect
+ * @param ry - Vertical border radius of SVG rect
+ */
 export const MovingBorder = ({
   children,
   duration = 3000,
@@ -85,9 +102,11 @@ export const MovingBorder = ({
   rx?: string;
   ry?: string;
 }) => {
-  const pathRef = useRef<SVGRectElement>(null); // More specific type
+  // Reference to SVG rect element for path calculations
+  const pathRef = useRef<SVGRectElement>(null);
   const progress = useMotionValue<number>(0);
 
+  // Animate the border movement
   useAnimationFrame((time) => {
     const length = pathRef.current?.getTotalLength();
     if (length) {
@@ -96,6 +115,7 @@ export const MovingBorder = ({
     }
   });
 
+  // Transform progress value into x/y coordinates along the path
   const x = useTransform(
     progress,
     (val) => pathRef.current?.getPointAtLength(val)?.x ?? 0
@@ -105,10 +125,12 @@ export const MovingBorder = ({
     (val) => pathRef.current?.getPointAtLength(val)?.y ?? 0
   );
 
+  // Create transform template for positioning
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
   return (
     <>
+      {/* SVG container for the border path */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
@@ -126,6 +148,7 @@ export const MovingBorder = ({
           ref={pathRef}
         />
       </svg>
+      {/* Animated element that follows the border path */}
       <motion.div
         style={{
           position: "absolute",

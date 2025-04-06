@@ -13,7 +13,7 @@ const HeroSection = () => {
         {/* Right Section with Decorative Icons (Appears First on Large Screens) */}
         <div className="mb-5 relative flex justify-center md:justify-start mx-auto lg:order-first">
 
-        <div className='absolute top-0 left-0 mb-20'>
+        <div className='absolute top-0 left-0 mb-10'>
         <MovingBorderBtn className="flex flex-shrink items-center justify-center p-4 hover:scale-105 transition-transform">
           
             <span className=" text-gray-300">
@@ -33,13 +33,13 @@ const HeroSection = () => {
             
             {/* Upper Group */}
             <div className="flex w-30">
-              <h1 className="lg:text-9xl text-7xl animate-pulse">💡</h1>
+              <h1 className="lg:text-9xl text-8xl animate-pulse">💡</h1>
             </div>
 
             {/* Lower Group */} 
             <div className="flex gap-1 -translate-x-6 lg:translate-x-0">
-              <h1 className="lg:text-9xl text-7xl animate-pulse duration-[200] bg-orange-500 bg-clip-text text-transparent">🧠</h1>
-              <h1 className="lg:text-9xl text-7xl animate-pulse bg-green-500 bg-clip-text text-transparent">🧩</h1>
+              <h1 className="lg:text-9xl text-8xl animate-pulse duration-[200] bg-orange-500 bg-clip-text text-transparent">🧠</h1>
+              <h1 className="lg:text-9xl text-8xl animate-pulse bg-green-500 bg-clip-text text-transparent">🧩</h1>
             </div>
 
             <div className="glow absolute top-[48%] right-1/2 z-10"></div>
@@ -55,17 +55,25 @@ const HeroSection = () => {
 
         {/* Text Content */}
         <div className="space-y-6 text-center lg:text-left">
-          <div className="inset-0 flex top-0 left-20">
+          <div className="inset-0 flex items-center gap-4">
             <AnimatedTooltip 
               items={[
                 {
                   id: 1,
-                  name: "Frontend Developer",
-                  designation: "Always available for work.",
-                  image: "/images/home/denis-profile-image.png",
+                  name: "Web Developer",
+                  designation: "Always available for work",
+                  image: "/images/home/denis-profile-image.png", // corrected path
+                  
                 }
-              ]}
-            />
+              ]}/>
+              
+            <a
+              href="https://wa.me/254111480091" 
+              target='_blank'
+              className="text-green-400 hover:text-orange-400 font-medium transition-colors duration-200"
+            >
+              Get in touch ➜
+            </a>
           </div>
           
           <h1 className="lg:text-5xl text-4xl max-w-md font-bold leading-tight">Hello and nice to meet you!👋</h1>
@@ -73,12 +81,7 @@ const HeroSection = () => {
           <p className="text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0">
             {"Based in Kenya, I'm a Frontend developer passionate about building modern web applications that users love."}
           </p>
-          <a
-            href="https://wa.me/254111480091" target='_blank'
-            className="inline-block bg-green-600 hover:bg-orange-400 text-white font-bold px-6 py-2 rounded-md transition-colors duration-200"
-          >
-            Get in touch ➜
-          </a>
+
         </div>
 
       </div>
