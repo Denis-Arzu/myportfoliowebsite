@@ -7,7 +7,7 @@ import Myskillssectitle from "./components/Myskillssectitle";
 import { SkillsSection } from "./components/Myskills";
 import Loader from "./components/loader";
 import ProjectsSection from './components/ProjectsSection';
-import { motion } from 'framer-motion';
+
 
 const Page: React.FC = () => {
   return (
