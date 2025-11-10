@@ -21,6 +21,11 @@ import {
           <span className="text-green-500">
           ✅ Business websites
           </span> <br />
+
+          <span className="text-green-500">
+          ✅ AI automation agents and bots
+          </span> <br />
+
           <span className="text-green-500">
           ✅ Portfolio websites
           </span> <br />
@@ -42,14 +47,14 @@ import {
           ✅ Real estate websites
           </span> <br />
           <span className="text-green-500">
-          ✅ E-commerce websites and online stores <span className="text-gray-500 italic">(Coming soon)</span>
+          ✅ E-commerce websites and online stores
           </span>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>{"Which programming languages and frameworks do I specialize in?"}</AccordionTrigger>
           <AccordionContent>
-            I specialize in HTML, CSS, JavaScript, and and I’m proficient with modern frameworks like React and Next.js. I also have experience with CSS tools such as Tailwind CSS to create efficient and scalable web solutions.
+            I specialize in Javascript and and I’m proficient with modern frameworks like React and Next.js. I also have experience with CSS tools such as Tailwind CSS to create efficient and scalable web solutions.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
@@ -67,7 +72,7 @@ import {
         <AccordionItem value="item-6">
           <AccordionTrigger>{"Is there anything else that I do apart from web development?"}</AccordionTrigger>
           <AccordionContent>
-          Yes, i also have experience in graphic design and video editing. I can help you create a professional and engaging visual identity for your brand.
+          Yes, i also have experience in graphic design and video editing. I can help you create a professional and engaging visual identity for your brand and also stunning marketing video ads for your product launches.
           </AccordionContent>
         </AccordionItem>
       </Accordion>

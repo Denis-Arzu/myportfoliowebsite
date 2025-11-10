@@ -15,9 +15,8 @@ const Page: React.FC = () => {
       <Loader />
       <main className="relative min-h-[300vh] overflow-hidden text-foreground">
         {/* Background effects */}
-        <div className="fixed inset-0 bg-black" />
-        <div className="fixed inset-0 bg-gradient-to-b from-indigo-900/20 via-black to-purple-900/20" />
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.1),transparent_50%)]" />
+        <div className="fixed inset-0 bg-gradient-to-b from-gray-900 via-black to-black" />
+        <div className="fixed inset-0 bg-gradient-to-br from-orange-950/30 via-black to-gray-900/50" />
 
         <div className="relative z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

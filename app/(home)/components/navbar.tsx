@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { SiGmail, SiGithub, SiWhatsapp } from "react-icons/si";
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 interface SocialLink {
   name: string;
@@ -48,10 +48,13 @@ const Navbar: React.FC = () => {
                     <motion.h1 
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="text-2xl font-bold tracking-wider flex items-center gap-1"
+                        className="text-2xl font-bold tracking-wider flex items-center gap-2"
                     >
-                        <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text -rotate-2 hover:rotate-0 transition-transform duration-300">
-                            {"</>"} Denis WebDev
+                        <span className="text-green-600 hover:scale-105 transition-transform duration-300">
+                            Dentrix
+                        </span>
+                        <span className="text-white">
+                            Apps
                         </span>
                     </motion.h1>
 

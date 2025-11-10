@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 const Loader = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -33,7 +33,7 @@ const Loader = () => {
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center">
         {/* Code brackets */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -60,17 +60,20 @@ const Loader = () => {
           >
             {">"}
           </motion.span>
-        </motion.div>
+        </motion.div> */}
 
         {/* Logo text */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl font-bold mb-8"
+          className="text-4xl font-bold mb-8 flex items-center gap-2"
         >
-          <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 text-transparent bg-clip-text">
-            Denis WebDev
+          <span className="text-green-600">
+            Dentrix
+          </span>
+          <span className="text-white">
+            Apps
           </span>
         </motion.h1>
 

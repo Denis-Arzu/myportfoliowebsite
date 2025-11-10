@@ -1,6 +1,7 @@
 import { AnimatedTooltip } from '@/components/ui/animated-tooltip';
 import { MovingBorderBtn } from '@/components/ui/moving-border';
 import React from 'react';
+import Image from 'next/image';
 
 const HeroSection = () => {
   return (
@@ -8,32 +9,30 @@ const HeroSection = () => {
       {/* Responsive Container */}
       <div className="text-white min-h-[60vh] flex flex-col lg:flex-row-reverse items-center justify-between">
         
-        {/* Right Section with Decorative Icons */}
-        <div className="mb-10 relative flex justify-center md:justify-start mx-auto lg:order-first">
-          <div className="absolute top-0 left-0 mb-10">
+        {/* Right Section with Decorative Image */}
+        <div className="mb-10 relative flex flex-col items-center md:items-start mx-auto lg:order-first">
+          <div className="mb-6 z-20">
             <MovingBorderBtn className="flex flex-shrink items-center justify-center p-4 hover:scale-105 transition-transform">
               <span className="text-base text-gray-300">
                 {"📢Let me "}
-                <span className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+                <span className="font-bold bg-gradient-to-r from-orange-500 via-gray-500 to-green-500 text-transparent bg-clip-text">
                   craft your ideas into reality!
                 </span>
               </span>
             </MovingBorderBtn>
           </div>
 
-          {/* Shape Wrapper */}
-          <div className="ml-10 inset-0 mt-10 lg:w-87 lg:h-87 relative w-56 h-56 space-y-4 -rotate-[30deg]">
-            {/* Upper Group */}
-            <div className="flex w-30">
-              <h1 className="lg:text-9xl text-8xl animate-pulse">💡</h1>
+          {/* Image Wrapper */}
+          <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-full h-full rounded-2xl overflow-hidden">
+              <Image
+                src="/images/home/Generated Image November 10, 2025 - 8_37PM.png"
+                alt="Denis Decorative Image"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
-
-            {/* Lower Group */} 
-            <div className="flex gap-1 -translate-x-6 lg:translate-x-0">
-              <h1 className="lg:text-9xl text-8xl animate-pulse">🧠</h1>
-              <h1 className="lg:text-9xl text-8xl animate-pulse">🧩</h1>
-            </div>
-
             <div className="glow absolute top-[48%] right-1/2 z-10"></div>
           </div>
         </div>
@@ -45,9 +44,9 @@ const HeroSection = () => {
               items={[
                 {
                   id: 1,
-                  name: "Web Developer",
+                  name: "Full-Stack Web Apps Developer",
                   designation: "Always available for work",
-                  image: "/images/home/denis-profile-image.png"
+                  image: "/images/home/Generated Image November 10, 2025 - 8_37PM.png"
                 }
               ]}
             />
@@ -65,7 +64,7 @@ const HeroSection = () => {
           <h1 className="lg:text-5xl text-4xl max-w-md font-bold leading-tight">Hello and nice to meet you!👋</h1>
           <h2 className="text-2xl font-semibold underline underline-offset-8 decoration-4 decoration-green-500">{"I'm Denis."}</h2>
           <p className="text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0">
-            {"Based in Kenya, I'm a Frontend developer passionate about building modern web applications that users love."}
+            {"Based in Kenya, I'm a full stack developer specializing in building modern web applications that users love."}
           </p>
         </div>
       </div>
