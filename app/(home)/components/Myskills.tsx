@@ -1,9 +1,8 @@
 import { SkillCard } from "@/components/ui/skill-card";
-import { SiAdobeaftereffects, SiAdobeaudition, SiDavinciresolve, SiNextdotjs, SiReact, SiTypescript, SiAdobeillustrator, SiCanva, SiAdobephotoshop } from "react-icons/si";
+import { SiNextdotjs, SiReact, SiTypescript, SiPython, SiNodedotjs, SiFlutter, SiCplusplus } from "react-icons/si";
 import { CgWebsite } from "react-icons/cg";
 import { ReactNode } from "react";
-import { FaObjectGroup, FaPaintBrush, FaVideo } from "react-icons/fa";
-import { LiaCuttlefish } from "react-icons/lia";
+import { FaChartLine, FaServer } from "react-icons/fa";
 
 // Update icon type to match skill-card.tsx
 type Skill = {
@@ -20,11 +19,11 @@ type Skill = {
 }
 
 const skillsData: Skill[] = [
-    // Frontend Development
+    // Full-Stack & AI Development
     {
-      type: "Frontend Development",
+      type: "Full-Stack & AI Development",
       icon: <CgWebsite />,
-      description: "Frontend web development is the practice of building the visual and interactive parts of a website or web application—the part users see and interact with directly. I build beautiful, responsive, and interactive websites using HTML, CSS, and JavaScript. With modern tools like React and Next.js, I turn designs into smooth, user-friendly experiences that work across all devices.",
+      description: "Building scalable SaaS platforms, AI-powered web apps, and mobile applications (Flutter). I construct robust architectures that drive business value and deliver seamless user experiences.",
       mainProficiency: 90,
       technologies: [
         {
@@ -45,86 +44,54 @@ const skillsData: Skill[] = [
           description: "Strong command of TypeScript in web apps, including types, generics, interfaces, and type safety in complex components.",
           proficiency: 80,
         },
+        {
+          name: "Python",
+          icon: <SiPython className="text-yellow-500" />,
+          description: "Building scalable backend services, automations, and integrating AI models.",
+          proficiency: 85,
+        },
+        {
+          name: "Node.js",
+          icon: <SiNodedotjs className="text-green-500" />,
+          description: "Creating fast, scalable server-side applications and RESTful APIs.",
+          proficiency: 80,
+        },
+        {
+          name: "Flutter",
+          icon: <SiFlutter className="text-cyan-500" />,
+          description: "Developing cross-platform mobile applications with native performance and expressive UIs.",
+          proficiency: 75,
+        }
       ],
     },
 
-    // Video Editing
+    // Algorithmic Trading & Automation
     {
-        type: "Video Editing",
-        icon: <FaVideo className="text-red-500" />,
-        description:
-          "Video editing is the art of shaping visuals, sound, and motion into a compelling story. I craft engaging video content that captures attention—whether it's short-form social clips, cinematic edits, or branded visuals. Using tools like DaVinci Resolve, After Effects, CapCut, and Adobe Audition, I blend creativity with precision to deliver high-quality videos that leave an impact.",
+        type: "Algorithmic Trading & Automation",
+        icon: <FaChartLine className="text-green-500" />,
+        description: "Developing high-frequency trading engines, Expert Advisors (EAs), and automated financial bots. Specializing in bridging robust backend infrastructure with real-time market data APIs for platforms like Deriv.",
         mainProficiency: 88,
         technologies: [
           {
-            name: "DaVinci Resolve",
-            icon: <SiDavinciresolve className="text-orange-800" />,
-            description:
-              "Professional-grade color grading and video editing with advanced tools for cinematic storytelling and post-production workflows.",
+            name: "C++",
+            icon: <SiCplusplus className="text-blue-600" />,
+            description: "Building ultra-low latency core trading engines and Expert Advisors (EAs).",
             proficiency: 90,
           },
           {
-            name: "Adobe After Effects",
-            icon: <SiAdobeaftereffects className="text-purple-500" />,
-            description:
-              "Motion graphics and visual effects creation for intros, transitions, and dynamic video compositions.",
+            name: "Python",
+            icon: <SiPython className="text-yellow-500" />,
+            description: "Data analysis, quantitative modeling, and AI-driven algorithmic logic.",
             proficiency: 85,
           },
           {
-            name: "CapCut",
-            icon: <LiaCuttlefish className="text-black" />,
-            description:
-              "Fast and flexible short-form video editing, ideal for social media content with trendy effects and transitions.",
-            proficiency: 80,
-          },
-          {
-            name: "Adobe Audition",
-            icon: <SiAdobeaudition className="text-green-500" />,
-            description:
-              "Audio editing and sound design for voiceovers, background music, and audio cleanup in professional video projects.",
-            proficiency: 75,
-          },
-        ],
-      },
-      
-      //Graphics Design
-      {
-        type: "Graphic Design",
-        icon: <FaPaintBrush className="text-pink-500" />,
-        description:
-          "Graphic design is the visual language of storytelling. I create stunning visuals that communicate ideas clearly and creatively—from social media content and branding assets to UI elements and marketing materials. With tools like Photoshop, Canva, and Illustrator, combined with UI/UX design principles, I blend creativity with strategy to deliver designs that are both beautiful and functional.",
-        mainProficiency: 82,
-        technologies: [
-          {
-            name: "Adobe Photoshop",
-            icon: <SiAdobephotoshop className="text-blue-500" />,
-            description:
-              "Expertise in image editing, compositing, retouching, and digital design for both web and print media.",
-            proficiency: 90,
-          },
-          {
-            name: "Canva",
-            icon: <SiCanva className="text-teal-400" />,
-            description:
-              "Fast, collaborative graphic creation for social media, presentations, and branding—perfect for quick, on-brand content.",
+            name: "System Architecture",
+            icon: <FaServer className="text-gray-500" />,
+            description: "Designing robust VPS deployments, message queuing (ZMQ), and low-latency execution environments.",
             proficiency: 85,
-          },
-          {
-            name: "Adobe Illustrator",
-            icon: <SiAdobeillustrator className="text-orange-500" />,
-            description:
-              "Vector design skills for logos, icons, illustrations, and scalable branding assets with precision and creativity.",
-            proficiency: 80,
-          },
-          {
-            name: "UI/UX Design",
-            icon: <FaObjectGroup className="text-purple-600" />,
-            description:
-              "Understanding of layout, visual hierarchy, color theory, and user behavior to design intuitive, user-friendly interfaces across platforms.",
-            proficiency: 78,
-          },
+          }
         ],
-      },
+      }
 ];
 
 export const SkillsSection = () => {
