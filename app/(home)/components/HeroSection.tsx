@@ -46,7 +46,7 @@ const HeroSection = () => {
                   id: 1,
                   name: "Founder @ Dentrix Apps | Algorithmic Trader",
                   designation: "Algorithm Engineer & Full-Stack Maker",
-                  image: "/images/home/Generated Image November 10, 2025 - 8_37PM.png"
+                  image: "/images/home/profilepic.png"
                 }
               ]}
             />
