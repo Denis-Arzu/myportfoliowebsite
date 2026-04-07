@@ -1,110 +1,82 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'motion/react';
 
-const Loader = () => {
-  const [isVisible, setIsVisible] = useState(true);
+interface LoaderProps {
+  onDone: () => void;
+}
+
+const Loader = ({ onDone }: LoaderProps) => {
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
-
+    const timer = setTimeout(() => setVisible(false), 2400);
     return () => clearTimeout(timer);
   }, []);
 
-  if (!isVisible) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-      {/* Animated background */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          background: [
-            'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)',
-            'radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.1) 0%, transparent 50%)',
-            'radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)',
-          ],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center justify-center">
-        {/* Code brackets */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-2 mb-4"
-        >
-          <motion.span
-            className="text-4xl font-bold text-indigo-400"
-            animate={{ rotate: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            {"<"}
-          </motion.span>
-          <motion.span
-            className="text-4xl font-bold text-purple-400"
-            animate={{ rotate: [0, -5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-          >
-            {"/"}
-          </motion.span>
-          <motion.span
-            className="text-4xl font-bold text-pink-400"
-            animate={{ rotate: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-          >
-            {">"}
-          </motion.span>
-        </motion.div> */}
-
-        {/* Logo text */}
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl font-bold mb-8 flex items-center gap-2"
-        >
-          <span className="text-green-600">
-            Dentrix
-          </span>
-          <span className="text-white">
-            Apps
-          </span>
-        </motion.h1>
-
-        {/* Loading dots */}
-        <motion.div className="flex space-x-2">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400"
-              animate={{
-                y: [0, -10, 0],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{
-                duration: 1,
-                repeat: Infinity,
-                delay: i * 0.2,
-              }}
-            />
-          ))}
-        </motion.div>
-
-        {/* Fade out animation */}
+    <AnimatePresence onExitComplete={onDone}>
+      {visible && (
         <motion.div
-          className="absolute inset-0 bg-black"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 0 : 1 }}
-          transition={{ duration: 0.5 }}
-        />
-      </div>
-    </div>
+          key="loader"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          {/* Animated background pulse */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: [
+                'radial-gradient(circle at 20% 50%, oklch(0.52 0.24 264 / 12%) 0%, transparent 55%)',
+                'radial-gradient(circle at 80% 50%, oklch(0.60 0.22 300 / 12%) 0%, transparent 55%)',
+                'radial-gradient(circle at 20% 50%, oklch(0.52 0.24 264 / 12%) 0%, transparent 55%)',
+              ],
+            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          <div className="relative z-10 flex flex-col items-center gap-8">
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex flex-col items-center"
+            >
+              {/* Logo Image */}
+              <div className="relative w-32 h-32 sm:w-48 sm:h-48 mb-2">
+                <Image
+                  src="/images/home/dentrixappslg.png"
+                  alt="Dentrix Apps Logo"
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-contain"
+                  priority
+                />
+              </div>
+            </motion.div>
+
+            {/* Loading bar */}
+            <motion.div
+              className="h-px w-48 overflow-hidden rounded-full bg-white/10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <motion.div
+                className="h-full bg-gradient-to-r from-[oklch(0.52_0.24_264)] via-[oklch(0.55_0.18_145)] to-[oklch(0.60_0.22_300)]"
+                initial={{ x: "-100%" }}
+                animate={{ x: "0%" }}
+                transition={{ duration: 2.2, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
+              />
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

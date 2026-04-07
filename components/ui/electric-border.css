@@ -1,0 +1,91 @@
+.electric-border {
+  position: relative;
+  display: inline-flex;
+  /* Use the inline variable injected by the React component */
+  border-radius: calc(var(--borderRadius, 24) * 1px);
+  isolation: isolate;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.eb-canvas-container {
+  position: absolute;
+  /* The borderOffset is 60px inside the component */
+  top: -60px;
+  left: -60px;
+  right: -60px;
+  bottom: -60px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.eb-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.eb-layers {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.eb-background-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--electric-border-color, #5227ff);
+  opacity: 0.1;
+  filter: blur(12px);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.eb-glow-1 {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 15px var(--electric-border-color, #5227ff);
+  opacity: 0.15;
+  transition: opacity 0.4s ease;
+}
+
+.eb-glow-2 {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 12px var(--electric-border-color, #5227ff);
+  opacity: 0.2;
+  transition: opacity 0.4s ease;
+}
+
+/* Hover States for extra premium feel */
+.electric-border:hover {
+  transform: scale(1.02);
+}
+
+.electric-border:hover .eb-background-glow {
+  opacity: 0.25;
+  filter: blur(16px);
+}
+
+.electric-border:hover .eb-glow-1 {
+  opacity: 0.4;
+  box-shadow: 0 0 25px var(--electric-border-color, #5227ff);
+}
+
+.electric-border:hover .eb-glow-2 {
+  opacity: 0.5;
+  box-shadow: inset 0 0 20px var(--electric-border-color, #5227ff);
+}
+
+.eb-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

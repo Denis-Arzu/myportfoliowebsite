@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 export const AnimatedTooltip = ({
     items,
+    onHoverChange,
 }: {
     items: {
         id: number;
@@ -12,9 +13,16 @@ export const AnimatedTooltip = ({
         designation: string;
         image: string;
     }[];
+    onHoverChange?: (isActive: boolean) => void;
 }) => {
     // Track which tooltip is currently shown
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+    const tooltipRef = React.useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        onHoverChange?.(hoveredIndex !== null);
+    }, [hoveredIndex, onHoverChange]);
 
     // Handle clicks outside tooltip to close it
     useEffect(() => {
@@ -36,7 +44,11 @@ export const AnimatedTooltip = ({
                 <div
                     className="group relative tooltip-area"
                     key={item.id}
-                    onClick={() => setHoveredIndex(hoveredIndex === idx ? null : idx)} // Toggle tooltip on click
+                    onMouseEnter={() => {
+                        setHoveredIndex(idx);
+                    }}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setHoveredIndex(hoveredIndex === idx ? null : idx)} // Toggle tooltip on click for mobile
                 >
                     {/* Main Profile Image */}
                     <div 
@@ -69,8 +81,10 @@ export const AnimatedTooltip = ({
                                         damping: 10,
                                     },
                                 }}
-                                exit={{ opacity: 0, y: 20, scale: 0.6 }}
-                                className="absolute top-0 z-50 flex -translate-y-1/2 flex-col items-center justify-center rounded-md bg-black p-4 shadow-xl w-[250px] left-[105%] sm:left-[110%] md:left-[120%] max-w-[calc(100vw-80px)] sm:max-w-[250px] tooltip-area"
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                className={`absolute z-[100] flex flex-col items-center justify-center rounded-xl bg-black/90 backdrop-blur-2xl border border-white/10 border-l-2 border-l-green-500 p-4 shadow-2xl w-[250px] max-w-[calc(100vw-40px)] tooltip-area
+                                    top-[120%] left-1/2 -translate-x-1/2
+                                    md:top-1/4 md:left-[110%] md:translate-x-0`}
                             >
                                 {/* Expanded Profile Image */}
                                 <div className="relative w-full h-[180px] sm:h-[150px] mb-3 rounded-md overflow-hidden">
@@ -91,7 +105,7 @@ export const AnimatedTooltip = ({
                                 <div className="relative z-30 text-xs sm:text-base font-bold text-green-400">
                                     {item.name}
                                 </div>
-                                <div className="text-xs sm:text-sm text-white">{item.designation}</div>
+                                <div className="text-xs sm:text-sm text-[oklch(0.95_0.02_285)] font-semibold tracking-wide drop-shadow-md">{item.designation}</div>
                             </motion.div>
                         )}
                     </AnimatePresence>
