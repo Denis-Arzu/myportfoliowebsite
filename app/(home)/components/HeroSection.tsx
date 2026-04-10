@@ -7,7 +7,9 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { DecryptedText } from "@/components/ui/decrypted-text";
 import { GlitchText } from "@/components/ui/glitch-text";
 import RotatingText from "@/components/ui/rotating-text";
-import React, { useEffect, useRef, useState } from "react";
+import RollingProgress from "./RollingProgress";
+import { TypingText } from "@/components/ui/typing-text";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
@@ -146,12 +148,12 @@ function BoardCard({ board, direction, isPriority }: { board: Board; direction: 
     <motion.div
       ref={cardRef}
       key={board.id}
-      initial={{ opacity: 0, x: 60, filter: 'blur(12px)', scale: 0.98 }}
-      animate={{ opacity: 1, x: 0, filter: 'blur(0px)', scale: 1 }}
-      exit={{ opacity: 0, x: -60, filter: 'blur(12px)', scale: 0.98 }}
+      initial={{ opacity: 0, x: 80 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -80 }}
       transition={{ 
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1] // Custom quint ease for high-end feel
+        duration: 0.4,
+        ease: [0.23, 1, 0.32, 1] // Faster flick ease
       }}
       onPointerMove={handlePointerMove}
       className="card-bg-animated relative w-full rounded-2xl overflow-hidden flex flex-col gap-4 p-6 cursor-default"
@@ -249,15 +251,20 @@ const HeroSection = () => {
   const { scrollY } = useScroll();
   const headlineY = useTransform(scrollY, [0, 500], [0, -55]);
 
-  // Auto-cycle every 5s
-  useEffect(() => {
+  // Advance logic: triggered by Heading completion + 1s delay
+  const handleNextBoard = useCallback(() => {
     if (paused) return;
-    const id = setInterval(() => {
-      setDirection(1);
-      setActiveBoard((b) => (b + 1) % boards.length);
-    }, CYCLE_MS);
-    return () => clearInterval(id);
+    setDirection(1);
+    setActiveBoard((b) => (b + 1) % boards.length);
   }, [paused]);
+
+  const onHeadingComplete = () => {
+    // Wait 1.5 seconds after typing before instantly swiping another card
+    const timer = setTimeout(() => {
+      handleNextBoard();
+    }, 1500);
+    return () => clearTimeout(timer);
+  };
 
   const goTo = (idx: number) => {
     setDirection(idx > activeBoard ? 1 : -1);
@@ -328,24 +335,12 @@ const HeroSection = () => {
             </AnimatePresence>
           </div>
 
-          {/* Dot indicators */}
-          <div className="flex justify-center gap-2 mt-4 flex-wrap">
-            {boards.map((b, i) => (
-              <button
-                key={b.id}
-                onClick={() => goTo(i)}
-                aria-label={`Board: ${b.tagline}`}
-                className="transition-all duration-300 rounded-full shrink-0"
-                style={{
-                  width: i === activeBoard ? 24 : 8,
-                  height: 8,
-                  background: i === activeBoard
-                    ? boards[i].accent
-                    : "oklch(1 0 0 / 0.12)",
-                }}
-              />
-            ))}
-          </div>
+          {/* Rolling ball S-curve progress indicator */}
+          <RollingProgress
+            activeIndex={activeBoard}
+            boards={boards}
+            onGoTo={goTo}
+          />
         </div>
 
         {/* ── Left: text block ─────────────────────────────────────────── */}
@@ -386,12 +381,13 @@ const HeroSection = () => {
                 exit={{ opacity: 0, x: -40, filter: 'blur(10px)' }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <BlurText
-                  as="h1"
+                <TypingText
+                  key={current.headline}
                   text={current.headline}
                   className="lg:text-5xl text-4xl font-bold leading-tight tracking-tight text-white break-words max-w-full"
-                  stagger={0.04}
-                  blurAmount={10}
+                  speed={45} // Slower typing for "humble reading time"
+                  delay={400} // Start typing sooner after the fast swipe
+                  onComplete={onHeadingComplete}
                 />
               </motion.div>
             </AnimatePresence>
@@ -407,8 +403,8 @@ const HeroSection = () => {
               initial={{ opacity: 0, x: 30, filter: 'blur(10px)' }}
               animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0, x: -30, filter: 'blur(10px)' }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="text-gray-400 leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+              className="text-gray-400 leading-relaxed md:text-lg"
             >
               {current.sideDescription}
             </motion.p>
