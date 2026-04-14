@@ -114,10 +114,25 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-work-sans);
+    /* Optimization for lower-end browsers */
+    text-rendering: optimizeSpeed;
   }
   code, pre {
     font-family: var(--font-geist-mono);
   }
+
+  /* Optimize layout shifts and rendering */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
+  }
+}
+
+/* ─── Performance Optimization ─────────────────────────────────────────── */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 /* ─── Custom utilities (Tailwind v4 @utility) ───────────────────────────── */

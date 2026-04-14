@@ -24,6 +24,7 @@ export const Footer = () => {
                   alt="Dentrix Logo"
                   width={40}
                   height={40}
+                  sizes="40px"
                   className="w-full h-full object-contain"
                 />
               </div>

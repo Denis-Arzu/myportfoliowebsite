@@ -96,6 +96,7 @@ const ProjectsSection: React.FC = () => {
                     src={project.image}
                     alt={project.alt}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 1200px"
                     className="object-contain bg-black transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                     priority={i === 0}
                   />
