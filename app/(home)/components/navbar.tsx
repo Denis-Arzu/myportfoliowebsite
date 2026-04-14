@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { SiGmail, SiGithub, SiWhatsapp } from "react-icons/si";
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform, Variants } from 'motion/react';
 import { Magnetic } from '@/components/ui/magnetic';
 import Loader from './loader';
 
 interface SocialLink { name: string; url: string; icon: React.ReactNode }
 interface Section { name: string; href: string }
 
-const menuVariants = {
+const menuVariants: Variants = {
   initial: { y: "100%", opacity: 0 },
   animate: { 
     y: 0, 
@@ -35,7 +35,7 @@ const menuVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   initial: { y: 20, opacity: 0 },
   animate: { y: 0, opacity: 1 },
   exit: { y: 20, opacity: 0 }
