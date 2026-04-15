@@ -1,13 +1,14 @@
-# TODO
+# Favicon & PWA Implementation
 
-## Existing
-- [ ] Fix products page layout so content is not hidden by viewport-locked containers.
-- [ ] Redesign products listing into two premium card components aligned with app theme.
-- [ ] Validate spacing/scroll behavior between products section and footer.
+## Step 1: Favicon & Apple Touch Icon Integration [COMPLETE]
+- [x] Convert app/icon.svg to public/icon.png (512x512) - used existing high-res logo PNG copy
+- [x] Ensure app/icon.svg exists (already does)
+- [x] Update app/layout.tsx metadata: icons: { icon: '/icon.svg', apple: '/icon.png' }
 
-## SEO/GEO Implementation
-- [x] Update root metadata in `app/layout.tsx` with requested description and `/icon.svg` favicon.
-- [x] Add `components/ui/StructuredData.tsx` with Organization + SoftwareApplication JSON-LD.
-- [x] Mount `<StructuredData />` in root layout.
-- [x] Update `app/sitemap.ts` to include all important routes and homepage anchor URLs.
-- [x] Verify `public/robots.txt` points to sitemap and allows crawling.
+## Step 2: Manifest & Home Screen Optimization [COMPLETE]
+- [x] Create public/manifest.json with short_name 'Dentrix', name 'Dentrix Apps Lab', icon.png ref
+- [x] Update metadata with manifest: '/manifest.json'
+
+Next.js auto-generates correct <link rel="icon">, apple-touch-icon, manifest link tags in <head>.
+
+Dev server running: http://localhost:3000 - inspect head to verify.

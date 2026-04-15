@@ -34,8 +34,10 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/icon.svg",
+    icon: '/icon.svg',
+    apple: '/icon.png'
   },
+  manifest: '/manifest.json',
 };
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
