@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Work_Sans, Geist_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '@/components/theme-provider';
+import { StructuredData } from "@/components/ui/StructuredData";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Dentrix Apps | High-Performance Software Engineering",
-  description: "Dentrix Apps is a high-performance software engineering lab specializing in AI SaaS platforms, algorithmic trading engines, and enterprise business systems.",
+  description: "Dentrix Apps - High-performance software engineering lab specializing in AI SaaS and Quant engines.",
   keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "fintech Kenya"],
   authors: [{ name: "Dentrix Apps" }],
   openGraph: {
@@ -33,8 +34,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/images/home/dentrixappslogoicon.png",
-    apple: "/images/home/dentrixappslogoicon.png",
+    icon: "/icon.svg",
   },
 };
 
@@ -63,6 +63,7 @@ export default function RootLayout({
       <body className={`${workSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SmoothScroll>
           <ThemeWrapper>
+            <StructuredData />
             {children}
           </ThemeWrapper>
         </SmoothScroll>
