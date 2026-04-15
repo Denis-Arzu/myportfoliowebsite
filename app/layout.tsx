@@ -24,12 +24,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Dentrix Apps | High-Performance Software Engineering",
-  description: "Dentrix Apps - High-performance software engineering lab specializing in AI SaaS and Quant engines.",
-  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "fintech Kenya"],
+  description: "Dentrix Apps - High-performance software engineering lab specializing in AI SaaS and Trading engines.",
+  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "fintech Kenya", "enterprise software", "scalable applications", "high-performance software", "AI development", "quantitative finance", "software solutions", "technology innovation", "software development", "AI-powered applications", "trading platforms", "fintech solutions", "software engineering lab", "AI software", "trading engines", "scalable software", "high-performance applications", "software engineering company", "AI development company", "algorithmic trading software", "enterprise software solutions", "scalable applications development", "high-performance software engineering", "AI SaaS solutions", "quantitative finance software", "technology innovation company", "software development services", "AI-powered applications development", "trading platforms development", "fintech solutions provider"],
   authors: [{ name: "Dentrix Apps" }],
   openGraph: {
     title: "Dentrix Apps | High-Performance Software Engineering",
-    description: "AI SaaS, Algorithmic Trading Engines & Enterprise Apps — built to scale, perform, and disrupt.",
+    description: "AI SaaS, Algorithmic Trading Engines & Enterprise Apps — built to scale, perform, and disrupt. Crafting the future of software with precision and innovation.",
     siteName: "Dentrix Apps",
     type: "website",
   },
