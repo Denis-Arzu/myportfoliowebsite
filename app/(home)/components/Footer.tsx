@@ -81,7 +81,7 @@ export const Footer = () => {
                 </a>
               </Magnetic>
               <Magnetic strength={0.4}>
-                <a href="mailto:hello@dentrixapps.com" className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/5 transition-all outline-none">
+                <a href="mailto:ceo@dentrixapps.com" className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/5 transition-all outline-none">
                   <SiGmail className="w-5 h-5" />
                 </a>
               </Magnetic>

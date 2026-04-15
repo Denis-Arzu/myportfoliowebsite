@@ -10,7 +10,7 @@ import AboutSectitle from "./components/aboutsectitle";
 import Myskillssectitle from "./components/Myskillssectitle";
 import { SkillsSection } from "./components/Myskills";
 import Loader from "./components/loader";
-import ProjectsSection from './components/ProjectsSection';
+
 import MethodologySection from "./components/MethodologySection";
 import { GlobalImpact } from "./components/GlobalImpact";
 import { EngineeringStandards } from "./components/EngineeringStandards";
@@ -127,16 +127,7 @@ const Page: React.FC = () => {
               <EngineeringStandards />
             </motion.section>
 
-            {/* ── Products ─────────────────────────────────────────── */}
-            <motion.div
-              className="min-h-[100dvh] flex flex-col justify-center"
-              initial={{ opacity: 0, scale: 0.93 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ type: "spring", stiffness: 85, damping: 20 }}
-            >
-              <ProjectsSection />
-            </motion.div>
+
 
             {/* ── Testimonials ─────────────────────────────────────── */}
             <motion.div
