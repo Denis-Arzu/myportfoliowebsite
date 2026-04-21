@@ -57,7 +57,7 @@ const CaseStudies: React.FC = () => {
             Enterprise Delivery Evidence
           </p>
           <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-white">
-            Case Studies / Engineering Outcomes
+            Dentrix Apps Engineering Outcomes
           </h2>
           <p className="mt-3 text-sm text-[oklch(0.85_0_0)]/85 max-w-3xl">
             Built for decision-makers seeking measurable software outcomes across compliance,

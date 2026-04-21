@@ -60,11 +60,11 @@ export function About() {
             conventional path of traditional education and chose engineering
             excellence instead — a deliberate, difficult decision that became the
             foundation of everything we build. That catalyst for disruption shapes
-            every line of code we write.
+            every line of code we commit to our repositories and every deployment pipeline we engineer.
           </p>
           <p>
             Today, Dentrix Apps operates at the intersection of artificial
-            intelligence, quantitative finance, and enterprise software. We don't
+            intelligence, quantitative finance, and enterprise software architecture. We don't
             build generic tools. We architect high-leverage systems designed
             specifically to give the businesses we partner with a structural
             advantage in their markets.

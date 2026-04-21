@@ -19,14 +19,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dentrix Apps | High-Performance Software Engineering",
-  description: "Dentrix Apps - High-performance software engineering lab specializing in AI SaaS and Trading engines.",
-  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "enterprise software", "scalable applications", "high-performance software", "AI development", "quantitative finance", "software solutions", "technology innovation", "software development", "AI-powered applications", "trading platforms", "fintech solutions", "software engineering lab", "AI software", "trading engines", "scalable software", "high-performance applications", "software engineering company", "AI development company", "algorithmic trading software", "enterprise software solutions", "scalable applications development", "high-performance software engineering", "AI SaaS solutions", "quantitative finance software", "technology innovation company", "software development services", "AI-powered applications development", "trading platforms development", "fintech solutions provider"],
+  title: {
+    default: "Dentrix Apps | High-Performance Software Engineering Lab",
+    template: "%s | Dentrix Apps"
+  },
+  description: "Dentrix Apps is a US-focused software engineering lab specializing in algorithmic trading engines (C++/Python), Next.js 16 architectures, and AI SaaS integrations. We build B2B digital infrastructure.",
+  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "enterprise software", "scalable applications", "high-performance software", "AI development", "quantitative finance", "digital infrastructure", "trading platforms", "fintech solutions"],
   authors: [{ name: "Dentrix Apps" }],
+  alternates: {
+    canonical: "https://dentrixapps.com",
+  },
   openGraph: {
-    title: "Dentrix Apps | High-Performance Software Engineering",
-    description: "AI SaaS, Algorithmic Trading Engines & Enterprise Apps — built to scale, perform, and disrupt. Crafting the future of software with precision and innovation.",
-    siteName: "Dentrix Apps",
+    title: "Dentrix Apps | High-Performance Software Engineering Lab",
+    description: "Dentrix Apps is a US-focused software engineering lab specializing in algorithmic trading engines (C++/Python), Next.js 16 architectures, and AI SaaS integrations. We build B2B digital infrastructure.",
+    siteName: "Dentrix Apps LLC",
+    url: "https://dentrixapps.com",
     type: "website",
   },
   icons: {

@@ -40,7 +40,7 @@ const slides: Slide[] = [
   {
     id: "engineering-core",
     headline: "Engineering High-Performance Trading & Web Ecosystems.",
-    sideDescription: "We build the mechanical gears of digital leverage. From ultra-low latency quant engines to scalable web architectures, we deliver technical edge as a product.",
+    sideDescription: "We build the mechanical gears of digital leverage. From quantitative engines requiring extreme latency optimization to scalable cloud computing architectures, our advanced deployment pipelines deliver technical edge as a product.",
     boards: [
       {
         id: "trading_bots",
@@ -80,7 +80,7 @@ const slides: Slide[] = [
   {
     id: "digital-expansion",
     headline: "Scaling Your Impact through Mobile & Cloud Ecosystems.",
-    sideDescription: "Reach every device, everywhere. We architect resilient mobile apps and secure cloud infrastructures that grow at the speed of your ambition.",
+    sideDescription: "Reach every device, everywhere. We architect resilient mobile applications and secure cloud computing infrastructures with automated deployment pipelines that scale at the speed of your ambition.",
     boards: [
       {
         id: "mobile_app",
