@@ -111,7 +111,7 @@ export default function TermsOfService() {
         </div>
 
         {/* Footer Navigation */}
-        <div className="mt-12 flex justify-between items-center text-xs text-[oklch(0.8_0_0/0.5)]">
+        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 text-center sm:text-left text-xs text-[oklch(0.8_0_0/0.5)]">
           <a href="/privacy-policy" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
             &lt; RETURN_TO_PRIVACY_POLICY
           </a>

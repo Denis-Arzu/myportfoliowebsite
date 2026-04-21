@@ -51,7 +51,7 @@ const slides: Slide[] = [
         gradient: "linear-gradient(135deg, oklch(0.65 0.15 60 / 0.8) 0%, oklch(0.15 0.05 60 / 0.9) 100%)",
         accent: "oklch(0.65 0.15 60)",
         iconPath: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6",
-        span: "col-span-2",
+        span: "col-span-1 sm:col-span-2",
       },
       {
         id: "web_dev",
@@ -113,7 +113,7 @@ const slides: Slide[] = [
         gradient: "linear-gradient(135deg, oklch(0.55 0.18 245 / 0.8) 0%, oklch(0.15 0.05 245 / 0.9) 100%)",
         accent: "oklch(0.55 0.18 245)",
         iconPath: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
-        span: "col-span-2",
+        span: "col-span-1 sm:col-span-2",
       },
     ]
   }
@@ -258,7 +258,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, x: -50 * direction, filter: "blur(8px)" }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="grid grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {current.boards.map((board, bIdx) => (
                   <ServiceBentoCard key={board.id} board={board} isPriority={activeSlide === 0 && bIdx < 2} />

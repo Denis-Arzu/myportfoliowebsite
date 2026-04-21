@@ -98,10 +98,10 @@ export const Footer = () => {
             <p className="text-gray-400 text-xs text-center sm:text-left font-mono">
               /root/legal/compliance :: © {currentYear} Dentrix Apps LLC. All rights reserved.
             </p>
-            <div className="flex gap-4 text-xs text-gray-400 font-mono items-center">
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-400 font-mono items-center justify-center sm:justify-start">
               <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Systems Operational</span>
-              <span>·</span>
-              <span>Global Client Delivery Ready</span>
+              <span className="hidden sm:inline">·</span>
+              <span className="text-center sm:text-left">Global Client Delivery Ready</span>
             </div>
           </div>
         </div>
