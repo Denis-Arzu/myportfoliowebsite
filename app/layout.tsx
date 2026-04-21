@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Work_Sans, Geist_Mono, Geist } from "next/font/google";
+import { Geist_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '@/components/theme-provider';
 import { StructuredData } from "@/components/ui/StructuredData";
+import PrivacyBanner from "@/app/(home)/components/PrivacyBanner";
 
-const workSans = Work_Sans({
-  subsets: ["latin"],
-  variable: "--font-work-sans",
-  display: 'swap',
-});
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -25,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Dentrix Apps | High-Performance Software Engineering",
   description: "Dentrix Apps - High-performance software engineering lab specializing in AI SaaS and Trading engines.",
-  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "fintech Kenya", "enterprise software", "scalable applications", "high-performance software", "AI development", "quantitative finance", "software solutions", "technology innovation", "software development", "AI-powered applications", "trading platforms", "fintech solutions", "software engineering lab", "AI software", "trading engines", "scalable software", "high-performance applications", "software engineering company", "AI development company", "algorithmic trading software", "enterprise software solutions", "scalable applications development", "high-performance software engineering", "AI SaaS solutions", "quantitative finance software", "technology innovation company", "software development services", "AI-powered applications development", "trading platforms development", "fintech solutions provider"],
+  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "enterprise software", "scalable applications", "high-performance software", "AI development", "quantitative finance", "software solutions", "technology innovation", "software development", "AI-powered applications", "trading platforms", "fintech solutions", "software engineering lab", "AI software", "trading engines", "scalable software", "high-performance applications", "software engineering company", "AI development company", "algorithmic trading software", "enterprise software solutions", "scalable applications development", "high-performance software engineering", "AI SaaS solutions", "quantitative finance software", "technology innovation company", "software development services", "AI-powered applications development", "trading platforms development", "fintech solutions provider"],
   authors: [{ name: "Dentrix Apps" }],
   openGraph: {
     title: "Dentrix Apps | High-Performance Software Engineering",
@@ -62,11 +58,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${workSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistMono.variable} ${geistSans.variable} font-mono antialiased`}>
         <SmoothScroll>
           <ThemeWrapper>
             <StructuredData />
             {children}
+            <PrivacyBanner />
           </ThemeWrapper>
         </SmoothScroll>
       </body>

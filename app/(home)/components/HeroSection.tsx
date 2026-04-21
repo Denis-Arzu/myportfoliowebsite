@@ -159,7 +159,8 @@ function ServiceBentoCard({ board, isPriority }: { board: Board; isPriority: boo
           src={board.bgImage}
           alt={board.tagline}
           fill
-          priority={isPriority}
+          priority={isPriority || board.id === "cloud_solutions"}
+          loading={isPriority || board.id === "cloud_solutions" ? "eager" : undefined}
           sizes="(max-width: 768px) 50vw, 400px"
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
@@ -227,7 +228,7 @@ const HeroSection = () => {
         >
           {/* Status Badge */}
           <div className="mb-6 w-full">
-            <MovingBorderBtn containerClassName="h-10 w-full" className="flex items-center justify-center bg-black/40 backdrop-blur-xl shrink-0 px-1 sm:px-4">
+            <MovingBorderBtn containerClassName="h-10 w-full" className="flex items-center justify-center bg-black/40 border border-[oklch(0.85_0.3_150/0.3)] shrink-0 px-1 sm:px-4">
               <div className="flex items-center gap-1 sm:gap-3 max-w-full overflow-hidden">
                 <span className="animate-pulse text-green-400 shrink-0 text-[10px]">●</span>
                 <FuzzyText 
@@ -290,14 +291,15 @@ const HeroSection = () => {
                 name: "Denis K.",
                 designation: "Founder & CEO",
                 image: "/images/home/profilepic.png",
+                sizes: "56px",
               }]}
             />
             <Magnetic strength={0.3}>
               <a
                 href="https://wa.me/254111480091"
-                className="group relative px-6 py-3 rounded-full bg-white text-black font-bold text-[12px] tracking-tight transition-all hover:scale-105"
+                className="group relative px-6 py-3 border border-[oklch(0.85_0.3_150/0.5)] bg-[oklch(0.85_0.3_150)] text-black font-bold text-[12px] tracking-tight transition-all hover:scale-105"
               >
-                <GlitchText speed={0.4}>START A PROJECT</GlitchText>
+                <GlitchText speed={0.3}>{"\u003E Execute_Custom_Quote"}</GlitchText>
               </a>
             </Magnetic>
           </div>
@@ -312,10 +314,10 @@ const HeroSection = () => {
                 transition={{ duration: 0.4 }}
               >
                 <TypingText
-                  text={current.headline}
+                  text={"> Initializing High-Performance Global Infrastructure..."}
                   className="text-3xl lg:text-5xl font-black tracking-tight leading-[1.1] text-white"
-                  speed={35}
-                  delay={500}
+                  speed={32}
+                  delay={250}
                   onComplete={onHeadingComplete}
                 />
               </motion.div>
@@ -340,6 +342,10 @@ const HeroSection = () => {
               {current.sideDescription}
             </motion.p>
           </AnimatePresence>
+
+          <div className="border border-[oklch(0.85_0.3_150/0.3)] bg-[oklch(0_0_0/0.9)] px-4 py-2 text-[10px] sm:text-xs text-[oklch(0.9_0.03_150)] tracking-wide font-mono inline-flex mx-auto lg:mx-0">
+            [Status: 100% WCAG Compliant] | [Uptime SLA: 99.9%]
+          </div>
 
           <div className="flex items-center gap-6 justify-center lg:justify-start pt-2">
             {[

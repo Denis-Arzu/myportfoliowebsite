@@ -38,7 +38,7 @@ const Loader = ({ onDone }: LoaderProps) => {
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
 
-          <div className="relative z-10 flex flex-col items-center gap-8">
+          <div className="relative z-10 flex flex-col items-center gap-6">
             {/* Logo */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85, y: 10 }}
@@ -47,7 +47,7 @@ const Loader = ({ onDone }: LoaderProps) => {
               className="flex flex-col items-center"
             >
               {/* Logo Image */}
-              <div className="relative w-32 h-32 sm:w-48 sm:h-48 mb-2">
+              <div className="relative w-32 h-32 sm:w-48 sm:h-48 mb-1">
                 <Image
                   src="/images/home/dentrixappslg.png"
                   alt="Dentrix Apps Logo"
@@ -57,6 +57,9 @@ const Loader = ({ onDone }: LoaderProps) => {
                   priority
                 />
               </div>
+              <p className="mt-1 text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[oklch(0.92_0.02_150)]/90 font-mono">
+                fix(world, code)
+              </p>
             </motion.div>
 
             {/* Loading bar */}

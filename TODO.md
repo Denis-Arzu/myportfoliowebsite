@@ -1,14 +1,23 @@
-# Favicon & PWA Implementation
+# UI Refinement — Capabilities & Standards Premium Bento Upgrade
 
-## Step 1: Favicon & Apple Touch Icon Integration [COMPLETE]
-- [x] Convert app/icon.svg to public/icon.png (512x512) - used existing high-res logo PNG copy
-- [x] Ensure app/icon.svg exists (already does)
-- [x] Update app/layout.tsx metadata: icons: { icon: '/icon.svg', apple: '/icon.png' }
+## Step 1: Capabilities section cleanup and redesign (`Myskills.tsx`)
+- [ ] Remove circular progress percentage indicator from cards.
+- [ ] Remove unused proficiency data fields/components tied to percentage arc.
+- [ ] Upgrade grid to true full-width bento layout (`lg:grid-cols-12` with balanced spans).
+- [ ] Add minimal premium lighting (subtle radial glow + top sheen + refined border glow).
 
-## Step 2: Manifest & Home Screen Optimization [COMPLETE]
-- [x] Create public/manifest.json with short_name 'Dentrix', name 'Dentrix Apps Lab', icon.png ref
-- [x] Update metadata with manifest: '/manifest.json'
+## Step 2: Standards section cleanup and redesign (`EngineeringStandards.tsx`)
+- [ ] Remove circular performance percentage indicator from cards.
+- [ ] Remove unused system performance data fields/components tied to percentage arc.
+- [ ] Upgrade grid to full-width bento layout matching capabilities section.
+- [ ] Add subtle premium lighting and consistent high-end card depth.
 
-Next.js auto-generates correct <link rel="icon">, apple-touch-icon, manifest link tags in <head>.
+## Step 3: Global wording cleanup in products-facing content
+- [ ] Update `/products` supporting copy to replace US-specific terms with global-neutral language:
+  - [ ] `CaseStudies.tsx`
+  - [ ] `ActiveBuilds.tsx`
 
-Dev server running: http://localhost:3000 - inspect head to verify.
+## Step 4: Final pass
+- [ ] Ensure no duplicated/unused code remains after removing progress arc components.
+- [ ] Ensure spacing and grid fill behavior looks consistent across `/capabilities` and `/standards`.
+- [ ] Keep `GlobalImpact` label as `Markets: US & Global` per latest approved request.

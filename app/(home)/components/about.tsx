@@ -159,7 +159,7 @@ export function About() {
           Start a conversation ➜
         </a>
         <span className="text-xs text-gray-600">
-          Dentrix Apps · Remote-first · Based in Kenya
+          Dentrix Apps · Remote-first · Global delivery
         </span>
       </div>
     </div>
