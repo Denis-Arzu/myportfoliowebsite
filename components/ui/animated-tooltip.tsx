@@ -12,6 +12,7 @@ export const AnimatedTooltip = ({
         name: string;
         designation: string;
         image: string;
+        sizes?: string;
     }[];
     onHoverChange?: (isActive: boolean) => void;
 }) => {
@@ -58,7 +59,7 @@ export const AnimatedTooltip = ({
                             fill
                             src={item.image}
                             alt={item.name}
-                            sizes="60px"
+                            sizes={item.sizes || "60px"}
                             className="rounded-full border-2 border-gray-400 object-cover object-top transition duration-500 group-hover:z-30 group-hover:scale-105"
                         />
                         {/* Online Badge - Shows active status */}
