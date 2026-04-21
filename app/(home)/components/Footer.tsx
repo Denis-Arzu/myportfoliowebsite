@@ -61,9 +61,6 @@ export const Footer = () => {
             <Magnetic strength={0.2} className="w-fit">
               <a id="terms-of-service" href="/terms-of-service" className="text-gray-300 hover:text-[oklch(0.85_0.3_150)] text-sm transition-colors block">[Terms of Service]</a>
             </Magnetic>
-            <Magnetic strength={0.2} className="w-fit">
-              <a id="do-not-sell" href="/do-not-sell-or-share" className="text-gray-300 hover:text-[oklch(0.85_0.3_150)] text-sm transition-colors block">[Do Not Sell or Share My Personal Information]</a>
-            </Magnetic>
           </div>
 
           {/* Column 4: Contact & Socials */}
