@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import { aboutContent } from "@/lib/content-data";
 
 const pillars = [
   {
@@ -40,39 +41,26 @@ export function About() {
     <div className="space-y-16 py-16">
 
       {/* ── Founder's Letter ──────────────────────────────────────────── */}
+      {/* ── Founder's Letter ──────────────────────────────────────────── */}
       <div className="space-y-10">
+        <h2 className="text-3xl font-bold text-white tracking-tight">
+          {aboutContent.heading}
+        </h2>
         {/* Pull-quote mission statement */}
         <blockquote className="relative border-l-2 border-[oklch(0.55_0.18_145)] pl-6 py-1">
           <p className="text-xl md:text-2xl font-semibold text-white leading-snug tracking-tight">
-            "To empower ambitious businesses with high-leverage AI and scalable
-            infrastructure — turning technical complexity into lasting competitive
-            advantage."
+            {aboutContent.foundingPrinciple.split('—')[0]}
           </p>
           <footer className="mt-3 text-sm text-gray-500 font-medium uppercase tracking-widest">
-            — Dentrix Apps, founding principle
+            — {aboutContent.foundingPrinciple.split('—')[1]?.trim() || "Dentrix Apps"}
           </footer>
         </blockquote>
 
         {/* Narrative body */}
         <div className="space-y-4 text-gray-400 leading-relaxed max-w-3xl">
-          <p>
-            Dentrix Apps was not born in a classroom. We stepped away from the
-            conventional path of traditional education and chose engineering
-            excellence instead — a deliberate, difficult decision that became the
-            foundation of everything we build. That catalyst for disruption shapes
-            every line of code we commit to our repositories and every deployment pipeline we engineer.
-          </p>
-          <p>
-            Today, Dentrix Apps operates at the intersection of artificial
-            intelligence, quantitative finance, and enterprise software architecture. We don't
-            build generic tools. We architect high-leverage systems designed
-            specifically to give the businesses we partner with a structural
-            advantage in their markets.
-          </p>
-          <p>
-            We are intentionally small and selective. Every engagement receives the
-            full depth of Dentrix Apps' capability — not a fraction of it.
-          </p>
+          <p>{aboutContent.paragraph1}</p>
+          <p>{aboutContent.paragraph2}</p>
+          <p>{aboutContent.paragraph3}</p>
         </div>
       </div>
 
@@ -148,18 +136,17 @@ export function About() {
       </div>
 
       {/* ── CTA ──────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-4 pt-2">
+      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
         <a
-          href="https://wa.me/254111480091"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-black transition-colors duration-200"
+          href="#contact"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-black transition-colors duration-200 whitespace-nowrap"
           style={{ background: "oklch(0.55 0.18 145)" }}
         >
           Start a conversation ➜
         </a>
-        <span className="text-xs text-gray-600">
-          Dentrix Apps · Remote-first · Global delivery
+        <span className="text-xs text-gray-600 leading-relaxed">
+          {aboutContent.visionStatement}
         </span>
       </div>
     </div>

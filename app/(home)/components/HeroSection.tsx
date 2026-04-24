@@ -8,12 +8,13 @@ import { GlitchText } from "@/components/ui/glitch-text";
 import RotatingText from "@/components/ui/rotating-text";
 import { TypingText } from "@/components/ui/typing-text";
 import { ServiceIcon } from "@/components/ui/service-icon";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
   motion,
 } from "motion/react";
+import { heroContent, servicesContent } from "@/lib/content-data";
 
 /* ─── Service Board Data ────────────────────────────────────────────────── */
 
@@ -39,14 +40,14 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: "engineering-core",
-    headline: "Engineering High-Performance Trading & Web Ecosystems.",
-    sideDescription: "We build the mechanical gears of digital leverage. From quantitative engines requiring extreme latency optimization to scalable cloud computing architectures, our advanced deployment pipelines deliver technical edge as a product.",
+    headline: heroContent.primaryHeadline,
+    sideDescription: heroContent.subheadline,
     boards: [
       {
-        id: "trading_bots",
+        id: servicesContent[0].id,
         tagline: "Trading Bots",
-        copy: "Ultra-low latency quant engines for 24/7 alpha.",
-        waText: "I need a quote for an Automated Trading Bot.",
+        copy: servicesContent[0].outcome_description,
+        waText: "I want to discuss: " + servicesContent[0].title,
         bgImage: "/images/services/trading_bots_bg.png",
         gradient: "linear-gradient(135deg, oklch(0.65 0.15 60 / 0.8) 0%, oklch(0.15 0.05 60 / 0.9) 100%)",
         accent: "oklch(0.65 0.15 60)",
@@ -54,10 +55,10 @@ const slides: Slide[] = [
         span: "col-span-1 sm:col-span-2",
       },
       {
-        id: "web_dev",
-        tagline: "Web Dev",
-        copy: "Scalable apps with resilient foundations.",
-        waText: "I need a quote for a Web Application.",
+        id: servicesContent[4].id,
+        tagline: "Full-Stack Apps",
+        copy: servicesContent[4].outcome_description,
+        waText: "I want to discuss: " + servicesContent[4].title,
         bgImage: "/images/services/web_dev_bg.png",
         gradient: "linear-gradient(135deg, oklch(0.52 0.24 264 / 0.8) 0%, oklch(0.15 0.05 264 / 0.9) 100%)",
         accent: "oklch(0.52 0.24 264)",
@@ -65,10 +66,10 @@ const slides: Slide[] = [
         span: "col-span-1",
       },
       {
-        id: "ui_ux",
-        tagline: "UI/UX",
-        copy: "Premium aesthetics for global conversion.",
-        waText: "I need a quote for UI/UX Design.",
+        id: servicesContent[6].id,
+        tagline: "AI Integrations",
+        copy: servicesContent[6].outcome_description,
+        waText: "I want to discuss: " + servicesContent[6].title,
         bgImage: "/images/services/ui_ux_bg.png",
         gradient: "linear-gradient(135deg, oklch(0.60 0.22 300 / 0.8) 0%, oklch(0.15 0.05 300 / 0.9) 100%)",
         accent: "oklch(0.60 0.22 300)",
@@ -79,14 +80,14 @@ const slides: Slide[] = [
   },
   {
     id: "digital-expansion",
-    headline: "Scaling Your Impact through Mobile & Cloud Ecosystems.",
-    sideDescription: "Reach every device, everywhere. We architect resilient mobile applications and secure cloud computing infrastructures with automated deployment pipelines that scale at the speed of your ambition.",
+    headline: "Scaling Your Impact through Autonomous Ecosystems.",
+    sideDescription: "Reach every device, everywhere. We architect resilient data pipelines and autonomous AI agents with automated deployment that scale at the speed of your ambition.",
     boards: [
       {
-        id: "mobile_app",
-        tagline: "Mobile",
-        copy: "Cross-platform reach with native performance.",
-        waText: "I need a quote for a Mobile App.",
+        id: servicesContent[1].id,
+        tagline: "Data Pipelines",
+        copy: servicesContent[1].outcome_description,
+        waText: "I want to discuss: " + servicesContent[1].title,
         bgImage: "/images/services/mobile_app_bg.png",
         gradient: "linear-gradient(135deg, oklch(0.65 0.15 150 / 0.8) 0%, oklch(0.15 0.05 150 / 0.9) 100%)",
         accent: "oklch(0.65 0.15 150)",
@@ -94,10 +95,10 @@ const slides: Slide[] = [
         span: "col-span-1",
       },
       {
-        id: "api_integration",
-        tagline: "API/Systems",
-        copy: "Seamless bridging of siloed architectures.",
-        waText: "I need a quote for API Integrations.",
+        id: servicesContent[2].id,
+        tagline: "Automation",
+        copy: servicesContent[2].outcome_description,
+        waText: "I want to discuss: " + servicesContent[2].title,
         bgImage: "/images/services/api_integration_bg.png",
         gradient: "linear-gradient(135deg, oklch(0.70 0.15 80 / 0.8) 0%, oklch(0.15 0.05 80 / 0.9) 100%)",
         accent: "oklch(0.70 0.15 80)",
@@ -105,10 +106,10 @@ const slides: Slide[] = [
         span: "col-span-1",
       },
       {
-        id: "cloud_solutions",
-        tagline: "Cloud",
-        copy: "Hardened environments for enterprise scale.",
-        waText: "I need a quote for Cloud Solutions.",
+        id: servicesContent[5].id,
+        tagline: "Tech Audits",
+        copy: servicesContent[5].outcome_description,
+        waText: "I want to discuss: " + servicesContent[5].title,
         bgImage: "/images/services/cloud_solutions_bg.png",
         gradient: "linear-gradient(135deg, oklch(0.55 0.18 245 / 0.8) 0%, oklch(0.15 0.05 245 / 0.9) 100%)",
         accent: "oklch(0.55 0.18 245)",
@@ -153,6 +154,7 @@ function ServiceBentoCard({ board, isPriority }: { board: Board; isPriority: boo
     <motion.div
       whileHover={{ y: -4 }}
       className={`relative group rounded-xl overflow-hidden flex flex-col justify-end p-4 min-h-[140px] border border-white/10 ${board.span || "col-span-1"}`}
+      style={{ willChange: "transform" }}
     >
       <div className="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
         <Image
@@ -195,6 +197,15 @@ const HeroSection = () => {
   const [paused, setPaused] = useState(false);
   const [direction, setDirection] = useState(1);
   const [isTooltipActive, setIsTooltipActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const handleNextSlide = useCallback(() => {
     if (paused) return;
@@ -203,9 +214,10 @@ const HeroSection = () => {
   }, [paused]);
 
   const onHeadingComplete = () => {
+    const delay = isMobile ? 6000 : 4000; // Longer interval on mobile for GPU conservation
     const timer = setTimeout(() => {
       handleNextSlide();
-    }, 4000);
+    }, delay);
     return () => clearTimeout(timer);
   };
 
@@ -259,6 +271,7 @@ const HeroSection = () => {
                 exit={{ opacity: 0, x: -50 * direction, filter: "blur(8px)" }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                style={{ willChange: "transform, opacity" }}
               >
                 {current.boards.map((board, bIdx) => (
                   <ServiceBentoCard key={board.id} board={board} isPriority={activeSlide === 0 && bIdx < 2} />
@@ -296,10 +309,10 @@ const HeroSection = () => {
             />
             <Magnetic strength={0.3}>
               <a
-                href="https://wa.me/254111480091"
+                href={heroContent.primaryCta.href}
                 className="group relative px-6 py-3 border border-[oklch(0.85_0.3_150/0.5)] bg-[oklch(0.85_0.3_150)] text-black font-bold text-[12px] tracking-tight transition-all hover:scale-105"
               >
-                <GlitchText speed={0.3}>{"\u003E Execute_Custom_Quote"}</GlitchText>
+                <GlitchText speed={0.3}>{`> ${heroContent.primaryCta.text}`}</GlitchText>
               </a>
             </Magnetic>
           </div>
@@ -314,7 +327,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.4 }}
               >
                 <TypingText
-                  text={"> Initializing High-Performance Global Infrastructure..."}
+                  text={current.headline}
                   className="text-3xl lg:text-5xl font-black tracking-tight leading-[1.1] text-white"
                   speed={32}
                   delay={250}
@@ -344,18 +357,14 @@ const HeroSection = () => {
           </AnimatePresence>
 
           <div className="border border-[oklch(0.85_0.3_150/0.3)] bg-[oklch(0_0_0/0.9)] px-4 py-2 text-[10px] sm:text-xs text-[oklch(0.9_0.03_150)] tracking-wide font-mono inline-flex mx-auto lg:mx-0">
-            [Status: 100% WCAG Compliant] | [Uptime SLA: 99.9%]
+            [{heroContent.statusBarLeft}] | [{heroContent.statusBarRight}]
           </div>
 
           <div className="flex items-center gap-6 justify-center lg:justify-start pt-2">
-            {[
-              { label: "VELOCITY", value: "10x" },
-              { label: "PRECISION", value: "99%" },
-              { label: "UPTIME", value: "24/7" }
-            ].map((stat) => (
+            {heroContent.stats.map((stat) => (
               <div key={stat.label} className="text-center lg:text-left">
-                <div className="text-xl font-bold text-white">{stat.value}</div>
-                <div className="text-[9px] font-bold text-gray-500 tracking-widest">{stat.label}</div>
+                <div className="text-xl font-bold text-white">{stat.value}{stat.suffix}</div>
+                <div className="text-[9px] font-bold text-gray-500 tracking-widest">{stat.label.toUpperCase()}</div>
               </div>
             ))}
           </div>

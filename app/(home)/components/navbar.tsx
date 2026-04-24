@@ -94,8 +94,8 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
     { name: 'Methodology', href: '#methodology' },
     { name: 'About', href: '#about' },
     { name: 'Capabilities', href: '#skills' },
-    { name: 'Standards', href: '#standards' },
-    { name: 'Products', href: '/products', isExternal: true },
+    { name: 'Products', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
   ];
 
   /* ─── Navigation Handler ─────────────────────────────────────────────── */
