@@ -20,27 +20,89 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Dentrix Apps | High-Performance Software Engineering Lab",
+    default: "Dentrix Apps | Algorithmic Trading Engines & AI Automation Systems",
     template: "%s | Dentrix Apps"
   },
-  description: "Dentrix Apps is a US-focused software engineering lab specializing in algorithmic trading engines (C++/Python), Next.js 16 architectures, and AI SaaS integrations. We build B2B digital infrastructure.",
-  keywords: ["Dentrix Apps", "AI SaaS", "algorithmic trading", "software engineering", "Next.js", "Flutter", "enterprise software", "scalable applications", "high-performance software", "AI development", "quantitative finance", "digital infrastructure", "trading platforms", "fintech solutions"],
-  authors: [{ name: "Dentrix Apps" }],
+  description: "Dentrix Apps is a US-focused software engineering lab building algorithmic trading engines (C++/Python), AI automation systems, and scalable Next.js applications. We engineer high-leverage infrastructure for quantitative firms, SaaS founders, and enterprise teams. Based in Nairobi, serving globally. Projects start at $100. Response <12 hours.",
+  keywords: [
+    "algorithmic trading developer",
+    "C++ trading bot builder",
+    "Python automation engineer",
+    "custom web scraper development",
+    "AI video generation system",
+    "Next.js expert Kenya",
+    "faceless YouTube automation",
+    "quantitative systems architect",
+    "data pipeline engineer",
+    "Discord bot developer",
+    "API integration specialist",
+    "software engineering lab Nairobi",
+    "offshore development team Africa"
+  ],
+  authors: [{ name: "Denis Kioko", url: "https://linkedin.com/in/denis-kioko-743234365" }],
+  creator: "Denis Kioko",
+  publisher: "Dentrix Apps",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   alternates: {
     canonical: "https://dentrixapps.com",
+    languages: {
+      en: "https://dentrixapps.com",
+    },
   },
   openGraph: {
-    title: "Dentrix Apps | High-Performance Software Engineering Lab",
-    description: "Dentrix Apps is a US-focused software engineering lab specializing in algorithmic trading engines (C++/Python), Next.js 16 architectures, and AI SaaS integrations. We build B2B digital infrastructure.",
-    siteName: "Dentrix Apps LLC",
+    title: "Dentrix Apps | We Engineer Systems That Print Money",
+    description: "High-performance software engineering lab specializing in algorithmic trading engines, AI automation systems, and scalable infrastructure. C++/Python/Next.js. Based in Nairobi. Serving globally.",
     url: "https://dentrixapps.com",
+    siteName: "Dentrix Apps",
+    locale: "en_US",
     type: "website",
+    alternateLocale: "en_GB",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Dentrix Apps | Algorithmic Trading & AI Automation Lab",
+      }
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    site: "@dentrixapps",
+    creator: "@deniskiooko",
+    title: "Dentrix Apps | Algorithmic Trading & AI Automation Lab",
+    description: "We build systems that print money. C++ trading engines. Data pipelines. Faceless video factories. Nairobi-based, globally served.",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Dentrix Apps - High-Performance Software Engineering Lab",
+      }
+    ],
+  },
+  metadataBase: new URL("https://dentrixapps.com"),
+  verification: {
+    google: "google-site-verification-code",
+    yandex: "yandex-verification-code",
+  },
+  category: "technology",
+  classification: "Software Engineering, Algorithmic Trading, AI Development",
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.png'
+    icon: "/icon.png",
+    apple: "/icon.png",
   },
-  manifest: '/manifest.json',
+  manifest: "/manifest.json",
 };
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
