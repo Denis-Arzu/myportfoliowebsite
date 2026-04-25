@@ -1,26 +1,28 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Vortex } from "@/components/ui/vortex";
-import { SplashCursor } from "@/components/ui/splash-cursor";
+import dynamic from 'next/dynamic';
+const HeavyVortex = dynamic(() => import('@/components/ui/vortex').then((m) => m.Vortex), { ssr: false });
+const HeavySplashCursor = dynamic(() => import('@/components/ui/splash-cursor').then((m) => m.SplashCursor), { ssr: false });
+const HeavyGlobalImpact = dynamic(() => import('./components/GlobalImpact').then((m) => m.GlobalImpact), { ssr: false });
+const HeavyMethodologySection = dynamic(() => import('./components/MethodologySection').then((m) => m.default), { ssr: false });
+const HeavyEngineeringStandards = dynamic(() => import('./components/EngineeringStandards').then((m) => m.EngineeringStandards), { ssr: false });
+const HeavyTestimonials = dynamic(() => import('./components/Testimonials').then((m) => m.TestimonialsSection), { ssr: false });
+const HeavyFAQ = dynamic(() => import('./components/FAQSection').then((m) => m.FAQSection), { ssr: false });
+const HeavyLeadMagnet = dynamic(() => import('./components/LeadMagnet').then((m) => m.LeadMagnet), { ssr: false });
+const HeavyContact = dynamic(() => import('./components/ContactSection').then((m) => m.ContactSection), { ssr: false });
+const HeavyProjects = dynamic(() => import('./components/ProjectsSection').then((m) => m.default ?? m.ProjectsSection), { ssr: false });
+const HeavyFooter = dynamic(() => import('./components/Footer').then((m) => m.Footer), { ssr: false });
+const HeavyUrgencyBar = dynamic(() => import('./components/UrgencyBar').then((m) => m.UrgencyBar), { ssr: false });
 import Navbar from "./components/navbar";
-import HeroSection from "./components/HeroSection";
+const LazyHeroSection = dynamic(() => import('./components/HeroSection'), { ssr: false });
 import { About } from "./components/about";
 import AboutSectitle from "./components/aboutsectitle";
 import Myskillssectitle from "./components/Myskillssectitle";
 import { SkillsSection } from "./components/Myskills";
 import Loader from "./components/loader";
 
-import MethodologySection from "./components/MethodologySection";
-import { GlobalImpact } from "./components/GlobalImpact";
-import { EngineeringStandards } from "./components/EngineeringStandards";
-import { TestimonialsSection } from "./components/Testimonials";
-import { Footer } from "./components/Footer";
-import { ContactSection } from "./components/ContactSection";
-import ProjectsSection from "./components/ProjectsSection";
-import { UrgencyBar } from "./components/UrgencyBar";
-import { FAQSection } from "./components/FAQSection";
-import { LeadMagnet } from "./components/LeadMagnet";
+// Static imports for heavy sections removed in favor of dynamic imports for performance
 
 const Page: React.FC = () => {
   const [pageReady, setPageReady] = useState(false);
@@ -48,16 +50,16 @@ const Page: React.FC = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* ── Urgency Bar ──────────────────────────────────────── */}
-            <UrgencyBar />
+            <HeavyUrgencyBar />
 
             {/* ── Canvas background: solid black + vortex particles ─── */}
             <div className="fixed inset-0 bg-black" />
-            <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
-              <Vortex particleCount={isMobile ? 60 : 130} intensity={isMobile ? 0.5 : 0.85} />
-            </div>
+              <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
+                <HeavyVortex particleCount={isMobile ? 60 : 130} intensity={isMobile ? 0.5 : 0.85} />
+              </div>
 
             {/* ── Subtle cursor splash ripples (desktop only) ────────── */}
-            {!isMobile && <SplashCursor intensity={0.4} />}
+              {!isMobile && <HeavySplashCursor intensity={0.4} />}
 
             {/* ── Hero ─────────────────────────────────────────────── */}
             <div
@@ -67,7 +69,7 @@ const Page: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <Navbar />
                 <div className="pt-24 pb-8">
-                  <HeroSection />
+                  <LazyHeroSection />
                 </div>
               </div>
               <div className="h-20 xl:h-32 bg-gradient-to-t from-black absolute bottom-0 left-0 w-full pointer-events-none" />
@@ -82,7 +84,7 @@ const Page: React.FC = () => {
               viewport={{ once: false, amount: 0.3 }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
             >
-              <GlobalImpact />
+              <HeavyGlobalImpact />
             </motion.div>
 
             {/* ── Methodology ──────────────────────────────────────── */}
@@ -94,7 +96,7 @@ const Page: React.FC = () => {
               viewport={{ once: false, amount: 0.2 }}
               transition={{ type: "spring", stiffness: 90, damping: 22 }}
             >
-              <MethodologySection />
+              <HeavyMethodologySection />
             </motion.div>
 
             {/* ── About ────────────────────────────────────────────── */}
@@ -141,7 +143,7 @@ const Page: React.FC = () => {
               viewport={{ once: false, amount: 0.15 }}
               transition={{ type: "spring", stiffness: 85, damping: 20 }}
             >
-              <EngineeringStandards />
+              <HeavyEngineeringStandards />
             </motion.section>
 
             {/* ── Projects ─────────────────────────────────────────── */}
@@ -152,7 +154,7 @@ const Page: React.FC = () => {
               viewport={{ once: false, amount: 0.1 }}
               transition={{ type: "spring", stiffness: 90, damping: 20 }}
             >
-              <ProjectsSection />
+              <HeavyProjects />
             </motion.div>
 
             {/* ── Testimonials ─────────────────────────────────────── */}
@@ -163,7 +165,7 @@ const Page: React.FC = () => {
               viewport={{ once: false, amount: 0.1 }}
               transition={{ type: "spring", stiffness: 90, damping: 20 }}
             >
-              <TestimonialsSection />
+              <HeavyTestimonials />
             </motion.div>
 
             {/* ── FAQ ──────────────────────────────────────────────── */}
@@ -173,17 +175,17 @@ const Page: React.FC = () => {
               viewport={{ once: false, amount: 0.1 }}
               transition={{ type: "spring", stiffness: 90, damping: 20 }}
             >
-              <FAQSection />
+              <HeavyFAQ />
             </motion.div>
 
             {/* ── Lead Magnet ─────────────────────────────────────── */}
-            <LeadMagnet />
+            <HeavyLeadMagnet />
 
             {/* ── Contact ──────────────────────────────────────────── */}
-            <ContactSection />
+            <HeavyContact />
 
             {/* ── Footer ───────────────────────────────────────────── */}
-            <Footer />
+            <HeavyFooter />
           </motion.main>
         )}
       </AnimatePresence>
