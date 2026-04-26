@@ -48,8 +48,8 @@ importers:
         specifier: ^6.12.2
         version: 6.12.2
       tailwind-merge:
-        specifier: ^3.1.0
-        version: 3.5.0
+        specifier: ^2.6.0
+        version: 2.6.1
       tw-animate-css:
         specifier: ^1.2.5
         version: 1.4.0
@@ -2463,8 +2463,8 @@ packages:
   svix@1.90.0:
     resolution: {integrity: sha512-ljkZuyy2+IBEoESkIpn8sLM+sxJHQcPxlZFxU+nVDhltNfUMisMBzWX/UR8SjEnzoI28ZjCzMbmYAPwSTucoMw==}
 
-  tailwind-merge@3.5.0:
-    resolution: {integrity: sha512-I8K9wewnVDkL1NTGoqWmVEIlUcB9gFriAEkXkfCjX5ib8ezGxtR3xD7iZIxrfArjEsH7F1CHD4RFUtxefdqV/A==}
+  tailwind-merge@2.6.1:
+    resolution: {integrity: sha512-Oo6tHdpZsGpkKG88HJ8RR1rg/RdnEkQEfMoEk2x1XRI3F1AxeU+ijRXpiVUF4UbLfcxxRGw6TbUINKYdWVsQTQ==}
 
   tailwindcss@4.2.1:
     resolution: {integrity: sha512-/tBrSQ36vCleJkAOsy9kbNTgaxvGbyOamC30PRePTQe/o1MFwEKHQk4Cn7BNGaPtjp+PuUrByJehM1hgxfq4sw==}
@@ -5192,7 +5192,7 @@ snapshots:
       standardwebhooks: 1.0.0
       uuid: 10.0.0
 
-  tailwind-merge@3.5.0: {}
+  tailwind-merge@2.6.1: {}
 
   tailwindcss@4.2.1: {}
 
