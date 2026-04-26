@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lighthouse:baseline": "lighthouse https://dentrixapps.com --output=baseline.html --output-path=./lighthouse-baseline.html --only-categories=performance,accessibility,best-practices,seo"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",

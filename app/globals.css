@@ -211,6 +211,10 @@
   will-change: transform;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
 /* Shiny text sweep — apply to a <span> wrapping text */
 @keyframes shiny-sweep {
   0%   { background-position: -200% center; }
@@ -371,3 +375,27 @@ a:hover .glitch::after {
     scroll-behavior: auto !important;
   }
 }
+/* Design tokens (future-proof: use CSS vars to align with design-tokens.ts) */
+.dark {
+  --bg: #0A0A0B;
+  --bg-elev: #18181B;
+  --card: #1C1C1F;
+  --text: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --accent: #3B82F6;
+  --accent-hover: #2563EB;
+  --border: rgba(255,255,255,0.2);
+  --gradient-start: #3B82F6;
+  --gradient-end: #8B5CF6;
+}
+
+.brand-swatch { background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)); }
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.12) 37%, rgba(255,255,255,0.04) 63%);
+  background-size: 200% 100%;
+  animation: skeleton-gradient 1.2s linear infinite;
+  border-radius: 6px;
+}
+@keyframes skeleton-gradient { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }

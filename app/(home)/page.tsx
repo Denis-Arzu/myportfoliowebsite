@@ -13,7 +13,7 @@ const HeavyLeadMagnet = dynamic(() => import('./components/LeadMagnet').then((m)
 const HeavyContact = dynamic(() => import('./components/ContactSection').then((m) => m.ContactSection), { ssr: false });
 const HeavyProjects = dynamic(() => import('./components/ProjectsSection').then((m) => m.default ?? m.ProjectsSection), { ssr: false });
 const HeavyFooter = dynamic(() => import('./components/Footer').then((m) => m.Footer), { ssr: false });
-const HeavyUrgencyBar = dynamic(() => import('./components/UrgencyBar').then((m) => m.UrgencyBar), { ssr: false });
+// HeavyUrgencyBar removed per emergency repair plan
 import Navbar from "./components/navbar";
 const LazyHeroSection = dynamic(() => import('./components/HeroSection'), { ssr: false });
 import { About } from "./components/about";
@@ -49,8 +49,7 @@ const Page: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* ── Urgency Bar ──────────────────────────────────────── */}
-            <HeavyUrgencyBar />
+            {/* Urgency Bar removed: no banner */}
 
             {/* ── Canvas background: solid black + vortex particles ─── */}
             <div className="fixed inset-0 bg-black" />

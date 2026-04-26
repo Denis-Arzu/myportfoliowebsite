@@ -2,13 +2,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { SiGmail, SiGithub, SiWhatsapp } from "react-icons/si";
+// Social icons removed for navbar polish; social links now in footer only
 import { ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform, Variants } from 'motion/react';
 import { Magnetic } from '@/components/ui/magnetic';
 import Loader from './loader';
 
-interface SocialLink { name: string; url: string; icon: React.ReactNode }
+// interface SocialLink { name: string; url: string; icon: React.ReactNode }
 interface Section { name: string; href: string; isExternal?: boolean }
 
 /* ─── Animation Variants ──────────────────────────────────────────────── */
@@ -83,11 +83,7 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const socialLinks: SocialLink[] = [
-    { name: 'GitHub', url: 'https://github.com/Denis-Arzu', icon: <SiGithub /> },
-    { name: 'WhatsApp', url: 'https://wa.me/254111480091', icon: <SiWhatsapp /> },
-    { name: 'Email', url: 'mailto:ceo@dentrixapps.com', icon: <SiGmail /> },
-  ];
+  const socialLinks: any[] = [];
 
   const sections: Section[] = [
     { name: 'Home', href: '#home' },
@@ -179,22 +175,7 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
               ))}
             </div>
 
-            {/* Desktop Socials */}
-            <div className="hidden lg:flex items-center gap-4">
-              {socialLinks.map((social) => (
-                <Magnetic key={social.name} strength={0.3}>
-                  <a
-                    href={social.url}
-                    aria-label={social.name}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg text-gray-400 hover:text-white transition-all p-2 rounded-xl hover:bg-white/5"
-                  >
-                    {social.icon}
-                  </a>
-                </Magnetic>
-              ))}
-            </div>
+            {/* Desktop Socials removed (polish) */}
 
             {/* Mobile Toggle */}
             {isBackMode ? (
@@ -270,20 +251,7 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
               variants={itemVariants}
               className="mt-12 sm:mt-16 pt-8 border-t border-white/5 flex flex-col gap-6"
             >
-              <div className="flex gap-6">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.name}
-                    variants={itemVariants}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-white text-2xl transition-all"
-                  >
-                    {social.icon}
-                  </motion.a>
-                ))}
-              </div>
+              {/* Social icons removed from navbar; moved to footer only for polish */}
               <motion.p variants={itemVariants} className="text-gray-600 text-[10px] font-mono tracking-widest uppercase">
                 Dentrix Apps · Engineering Excellence
               </motion.p>

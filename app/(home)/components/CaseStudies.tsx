@@ -73,9 +73,9 @@ const CaseStudies: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: idx * 0.08 }}
-              className="grid grid-cols-1 lg:grid-cols-2 terminal-panel"
+              className="grid grid-cols-1 lg:grid-cols-2 bg-background-card border border-border-subtle rounded-lg overflow-hidden"
             >
-              <div className="relative min-h-[260px] border-b lg:border-b-0 lg:border-r border-[oklch(0.85_0.3_150/0.25)]">
+              <div className="relative min-h-[260px] border-b lg:border-b-0 lg:border-r border-border-subtle">
                 <Image
                   src={study.visual}
                   alt={study.visualAlt}
