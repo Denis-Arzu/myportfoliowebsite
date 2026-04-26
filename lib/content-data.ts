@@ -145,7 +145,7 @@ export const projectsContent = [
       { label: "Uptime", value: "99.9%" },
     ],
     status: "LIVE — Accepting Users",
-    image_path: "/images/projects/maganji.jpg",
+    image_path: "/images/projects/maganji-screenshot.png",
   },
   {
     id: "tuandike",
@@ -161,7 +161,7 @@ export const projectsContent = [
       { label: "User Retention", value: "High" },
     ],
     status: "LIVE — Growing User Base",
-    image_path: "/images/projects/tuandike.jpg",
+    image_path: "/images/projects/tuandike-screenshot.png",
   },
   {
     id: "creatoros",
@@ -177,7 +177,7 @@ export const projectsContent = [
       { label: "Automation Level", value: "90%" },
     ],
     status: "IN DEVELOPMENT — Join Waitlist",
-    image_path: "/images/projects/creatoros.jpg",
+    image_path: "/images/projects/tuandike-screenshot.png",
     is_coming_soon: true,
   },
 ];

@@ -41,7 +41,6 @@ export function About() {
     <div className="space-y-16 py-16">
 
       {/* ── Founder's Letter ──────────────────────────────────────────── */}
-      {/* ── Founder's Letter ──────────────────────────────────────────── */}
       <div className="space-y-10">
         <h2 className="text-3xl font-bold text-white tracking-tight">
           {aboutContent.heading}
@@ -135,7 +134,6 @@ export function About() {
         </div>
       </div>
 
-      {/* ── CTA ──────────────────────────────────────────────────────── */}
       {/* ── CTA ──────────────────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
         <a

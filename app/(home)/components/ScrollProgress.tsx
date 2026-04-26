@@ -19,7 +19,7 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed top-[64px] left-0 w-full h-[2px] z-[60] bg-border-subtle">
+    <div className="fixed top-[64px] left-0 w-full h-[2px] z-[60] bg-white/5">
       <div 
         className="h-full bg-gradient-to-r from-blue-400 to-sky-500 transition-all duration-150 ease-out"
         style={{ width: `${Math.min(progress, 100)}%` }}

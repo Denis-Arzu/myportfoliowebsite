@@ -3,7 +3,6 @@ import { Geist_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '@/components/theme-provider';
 import { StructuredData } from "@/components/ui/StructuredData";
-import Head from 'next/head';
 import PrivacyBanner from "@/app/(home)/components/PrivacyBanner";
 
 
@@ -128,11 +127,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Head>
+      <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preload" as="image" href="/images/og-image.png" />
-      </Head>
+      </head>
       <body className={`${geistMono.variable} ${geistSans.variable} font-mono antialiased`}>
         <SmoothScroll>
           <ThemeWrapper>

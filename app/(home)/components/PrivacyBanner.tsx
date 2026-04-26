@@ -37,13 +37,13 @@ const PrivacyBanner: React.FC = () => {
         </p>
         <div className="flex items-center gap-2">
           <a
-            href="#privacy-policy"
+            href="/privacy-policy"
             className="border border-[oklch(0.85_0.3_150/0.3)] px-2.5 py-1 text-[oklch(0.9_0.03_150)] hover:text-white"
           >
             Privacy Policy
           </a>
           <a
-            href="#do-not-sell"
+            href="/do-not-sell"
             className="border border-[oklch(0.85_0.3_150/0.3)] px-2.5 py-1 text-[oklch(0.9_0.03_150)] hover:text-white"
           >
             Do Not Sell/Share

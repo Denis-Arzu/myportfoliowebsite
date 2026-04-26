@@ -12,9 +12,9 @@
 */
 @theme inline {
   /* Fonts */
-  --font-sans: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-geist-mono);
+  --font-display: var(--font-geist-sans);
 
   /* Radius scale */
   --radius-sm: calc(var(--radius) - 4px);
@@ -116,8 +116,6 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-geist-mono);
-    /* Optimization for lower-end browsers */
-    text-rendering: optimizeSpeed;
     background-image:
       repeating-linear-gradient(
         to bottom,
@@ -139,11 +137,6 @@
     outline-offset: 2px;
   }
 
-  /* Optimize layout shifts and rendering */
-  section {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 1000px;
-  }
 }
 
 /* ─── Performance Optimization ─────────────────────────────────────────── */
@@ -151,6 +144,98 @@
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform, opacity;
+}
+
+/* ─── Hero Light Beams (mouse-reactive, top-center) ────────────────────── */
+.hero-light-rays {
+  --ray-x: 50%;
+  --ray-y: 0deg;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-light-rays::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: var(--ray-x, 50%);
+  width: 160%;
+  height: 110%;
+  transform: translateX(-50%) rotate(var(--ray-y, 0deg));
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  background: conic-gradient(
+    from 90deg at 50% 0%,
+    transparent 0%,
+    rgba(99, 102, 241, 0.14) 2.5%,
+    transparent 5%,
+    transparent 7%,
+    rgba(59, 130, 246, 0.18) 9%,
+    transparent 12%,
+    transparent 15%,
+    rgba(139, 92, 246, 0.12) 17%,
+    transparent 20%,
+    transparent 24%,
+    rgba(99, 102, 241, 0.15) 26%,
+    transparent 29%,
+    transparent 33%,
+    rgba(59, 130, 246, 0.10) 35%,
+    transparent 38%,
+    transparent 62%,
+    rgba(59, 130, 246, 0.10) 65%,
+    transparent 67%,
+    transparent 71%,
+    rgba(99, 102, 241, 0.15) 74%,
+    transparent 76%,
+    transparent 80%,
+    rgba(139, 92, 246, 0.12) 83%,
+    transparent 85%,
+    transparent 88%,
+    rgba(59, 130, 246, 0.18) 91%,
+    transparent 93%,
+    transparent 95%,
+    rgba(99, 102, 241, 0.14) 97.5%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 0%, transparent 75%);
+  animation: hero-rays-pulse 5s ease-in-out infinite alternate;
+}
+
+/* Ambient glow — follows mouse */
+.hero-ambient {
+  --glow-x: 50%;
+  --glow-y: 0%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 50% 50% at var(--glow-x, 50%) calc(5% + var(--glow-y, 0%)),
+    rgba(99, 102, 241, 0.20) 0%,
+    rgba(59, 130, 246, 0.10) 30%,
+    rgba(139, 92, 246, 0.04) 50%,
+    transparent 70%
+  );
+  transition: background 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: hero-glow-breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes hero-rays-pulse {
+  0%   { opacity: 0.75; }
+  100% { opacity: 1; }
+}
+
+@keyframes hero-glow-breathe {
+  0%   { opacity: 0.6; filter: blur(0px); }
+  100% { opacity: 1; filter: blur(2px); }
 }
 
 /* ─── Custom utilities (Tailwind v4 @utility) ───────────────────────────── */
