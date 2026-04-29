@@ -42,12 +42,12 @@ export function About() {
 
       {/* ── Founder's Letter ──────────────────────────────────────────── */}
       <div className="space-y-10">
-        <h2 className="text-3xl font-bold text-white tracking-tight">
+        <h2 className="text-2xl font-semibold text-white/70 tracking-tight">
           {aboutContent.heading}
         </h2>
         {/* Pull-quote mission statement */}
-        <blockquote className="relative border-l-2 border-[oklch(0.55_0.18_145)] pl-6 py-1">
-          <p className="text-xl md:text-2xl font-semibold text-white leading-snug tracking-tight">
+        <blockquote className="relative border-l border-white/10 pl-6 py-1">
+          <p className="text-lg md:text-xl font-semibold text-white/70 leading-snug tracking-tight">
             {aboutContent.foundingPrinciple.split('—')[0]}
           </p>
           <footer className="mt-3 text-sm text-gray-500 font-medium uppercase tracking-widest">
@@ -77,27 +77,16 @@ export function About() {
                 onClick={() => setActivePillar(isOpen ? null : pillar.id)}
                 className="text-left rounded-xl p-5 backdrop-blur-sm transition-all duration-200"
                 style={{
-                  background: isOpen
-                    ? "oklch(0.52 0.24 264 / 0.08)"
-                    : "oklch(1 0 0 / 0.03)",
-                  border: isOpen
-                    ? "1px solid oklch(0.52 0.24 264 / 0.5)"
-                    : "1px solid oklch(1 0 0 / 0.05)",
-                  boxShadow: isOpen ? "inset 0 0 20px oklch(0.52 0.24 264 / 0.1)" : "none",
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.06)",
                 }}
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div
-                    className="w-8 h-8 flex items-center justify-center rounded-lg"
-                    style={{
-                      background: "oklch(0.52 0.24 264 / 0.12)",
-                      border: "1px solid oklch(0.52 0.24 264 / 0.3)",
-                    }}
-                  >
+                  <div className="w-8 h-8 flex items-center justify-center">
                     <svg
-                      className="w-4 h-4 text-indigo-400"
+                      className="w-4 h-4 text-white/30"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth={1.5}
@@ -106,7 +95,7 @@ export function About() {
                       <path strokeLinecap="round" strokeLinejoin="round" d={pillar.icon} />
                     </svg>
                   </div>
-                  <span className="text-sm font-semibold text-white uppercase tracking-wider">
+                  <span className="text-sm font-medium text-white/60 uppercase tracking-wider">
                     {pillar.label}
                   </span>
                   <motion.span

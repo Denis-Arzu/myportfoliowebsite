@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { ShinyText } from "@/components/ui/shiny-text";
-
 interface BentoCard {
   id: string;
   title: string;
@@ -75,10 +73,10 @@ function BentoCardItem({ card }: { card: BentoCard }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative rounded-2xl overflow-hidden backdrop-blur-md bg-black/50 p-6 flex flex-col gap-4 cursor-default
+      className={`relative rounded-2xl overflow-hidden p-6 flex flex-col gap-4 cursor-default
         ${card.span === "double" ? "lg:col-span-2" : "col-span-1"}
       `}
-      style={{ border: `1px solid ${card.accentColor}` }}
+      style={{ border: "1px solid rgba(255,255,255,0.05)" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -87,35 +85,24 @@ function BentoCardItem({ card }: { card: BentoCard }) {
         className="absolute inset-0 pointer-events-none"
         animate={{ opacity: hovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        style={{
-          background: `radial-gradient(ellipse at 30% 40%, ${card.accentColor.replace("0.5)", "0.12)")} 0%, transparent 70%)`,
-        }}
+        style={{ background: "radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.015) 0%, transparent 70%)" }}
       />
 
       {/* Icon */}
-      <div
-        className="relative z-10 w-10 h-10 flex items-center justify-center rounded-xl"
-        style={{ background: card.accentColor.replace("0.5)", "0.12)"), border: `1px solid ${card.accentColor}` }}
-      >
-        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <div className="relative z-10">
+        <svg className="w-4 h-4 text-white/25" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d={card.icon} />
         </svg>
       </div>
 
       {/* Title — ShinyText for premium lustre */}
       <div className="relative z-10 space-y-1">
-        <h3 className="text-lg font-bold">
-          <ShinyText speed={hovered ? 2 : 5}>
-            {card.title}
-          </ShinyText>
-        </h3>
-        <p className="text-xs text-gray-500 uppercase tracking-widest font-medium">
-          {card.tagline}
-        </p>
+        <h3 className="text-base font-semibold text-white/80">{card.title}</h3>
+        <p className="text-xs text-white/25 uppercase tracking-widest">{card.tagline}</p>
       </div>
 
       {/* Description */}
-      <p className="relative z-10 text-sm text-gray-400 leading-relaxed flex-1">
+      <p className="relative z-10 text-sm text-white/35 leading-relaxed flex-1">
         {card.description}
       </p>
 
@@ -128,8 +115,8 @@ function BentoCardItem({ card }: { card: BentoCard }) {
         {card.detail.split(" · ").map((chip) => (
           <span
             key={chip}
-            className="text-xs px-2 py-0.5 rounded-full text-gray-300 font-mono"
-            style={{ background: card.accentColor.replace("0.5)", "0.1)"), border: `1px solid ${card.accentColor.replace("0.5)", "0.3)")}` }}
+            className="text-xs px-2 py-0.5 rounded-full text-white/30 font-mono"
+            style={{ border: "1px solid rgba(255,255,255,0.08)" }}
           >
             {chip}
           </span>
@@ -151,7 +138,7 @@ export default function MethodologySection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl font-bold text-indigo-400 underline underline-offset-8 decoration-4 decoration-indigo-500/60 mb-3">
+          <h2 className="text-xl font-semibold text-white/60 tracking-wide mb-3">
             The Dentrix Methodology
           </h2>
           <p className="text-sm text-gray-500 max-w-md mx-auto">

@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ShinyText } from "@/components/ui/shiny-text";
-
 /* ─── Types ──────────────────────────────────────────────────────────────── */
 
 interface Phase {
@@ -91,40 +89,6 @@ const phases: Phase[] = [
   },
 ];
 
-/* ─── Performance Arc ─────────────────────────────────────────────────────── */
-
-function PerformanceArc({ value, accent }: { value: number; accent: string }) {
-  const r = 16;
-  const circ = 2 * Math.PI * r;
-  const dash = (value / 100) * circ;
-  const color = accent.replace("0.55)", "0.9)");
-
-  return (
-    <div className="flex flex-col items-center" title={`System performance: ${value}%`}>
-      <svg width="44" height="44" viewBox="0 0 44 44">
-        <circle cx="22" cy="22" r={r} fill="none" stroke="oklch(1 0 0 / 0.06)" strokeWidth="2.2" />
-        <motion.circle
-          cx="22" cy="22" r={r}
-          fill="none"
-          stroke={color}
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeDasharray={`${dash} ${circ}`}
-          transform="rotate(-90 22 22)"
-          initial={{ strokeDasharray: `0 ${circ}` }}
-          whileInView={{ strokeDasharray: `${dash} ${circ}` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.4, ease: "easeOut", delay: 0.3 }}
-        />
-        <text x="22" y="26" textAnchor="middle" fontSize="9" fill={color} fontFamily="monospace" fontWeight="700">
-          {value}%
-        </text>
-      </svg>
-      <span className="text-[10px] text-gray-600 uppercase tracking-wider mt-0.5 font-medium">perf</span>
-    </div>
-  );
-}
-
 /* ─── Phase Card ─────────────────────────────────────────────────────────── */
 
 function PhaseCard({ phase, index }: { phase: Phase; index: number }) {
@@ -137,65 +101,37 @@ function PhaseCard({ phase, index }: { phase: Phase; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative rounded-2xl overflow-hidden backdrop-blur-md bg-black/55 flex flex-col gap-4 p-6
+      className={`relative rounded-2xl overflow-hidden flex flex-col gap-4 p-6
         ${phase.span === "double" ? "lg:col-span-2" : "col-span-1"}
       `}
-      style={{ border: `1px solid ${phase.accentColor}` }}
+      style={{ border: "1px solid rgba(255,255,255,0.05)" }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Accent glow */}
+      {/* Subtle glow */}
       <motion.div
         className="pointer-events-none absolute inset-0"
         animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.35 }}
-        style={{
-          background: `radial-gradient(ellipse at 20% 30%, ${phase.accentColor.replace("0.55)", "0.09)")} 0%, transparent 65%)`,
-        }}
+        transition={{ duration: 0.5 }}
+        style={{ background: "radial-gradient(ellipse at 20% 30%, rgba(255,255,255,0.015) 0%, transparent 70%)" }}
       />
 
-      {/* Header row: phase number + performance arc */}
-      <div className="relative z-10 flex items-start justify-between">
-        <div className="flex items-center gap-3">
-          {/* Phase number badge */}
-          <div
-            className="text-xs font-black font-mono px-2.5 py-1 rounded-lg shrink-0"
-            style={{
-              background: phase.accentColor.replace("0.55)", "0.12)"),
-              border: `1px solid ${phase.accentColor}`,
-              color: phase.accentColor.replace("0.55)", "0.95)"),
-            }}
-          >
-            {phase.number}
-          </div>
-
-          {/* Icon */}
-          <div
-            className="w-9 h-9 flex items-center justify-center rounded-xl shrink-0"
-            style={{
-              background: phase.accentColor.replace("0.55)", "0.10)"),
-              border: `1px solid ${phase.accentColor}`,
-            }}
-          >
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d={phase.icon} />
-            </svg>
-          </div>
-        </div>
-
-        <PerformanceArc value={phase.systemPerformance} accent={phase.accentColor} />
+      {/* Header row */}
+      <div className="relative z-10 flex items-center gap-3">
+        <span className="text-xs font-mono text-white/20 tabular-nums">{phase.number}</span>
+        <svg className="w-4 h-4 text-white/30" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d={phase.icon} />
+        </svg>
       </div>
 
       {/* Title + tagline */}
       <div className="relative z-10 space-y-1">
-        <h3 className="text-lg font-bold">
-          <ShinyText speed={hovered ? 2 : 5}>{phase.title}</ShinyText>
-        </h3>
-        <p className="text-xs text-gray-500 uppercase tracking-widest">{phase.tagline}</p>
+        <h3 className="text-base font-semibold text-white/80">{phase.title}</h3>
+        <p className="text-xs text-white/25 uppercase tracking-widest">{phase.tagline}</p>
       </div>
 
       {/* Description */}
-      <p className="relative z-10 text-sm text-gray-400 leading-relaxed flex-1">{phase.description}</p>
+      <p className="relative z-10 text-sm text-white/35 leading-relaxed flex-1">{phase.description}</p>
 
       {/* Deliverables toggle */}
       <div className="relative z-10">
@@ -222,9 +158,9 @@ function PhaseCard({ phase, index }: { phase: Phase; index: number }) {
               {phase.deliverables.map((d) => (
                 <li
                   key={d}
-                  className="text-xs font-mono text-gray-500 leading-relaxed flex items-start gap-2"
+                  className="text-xs font-mono text-white/30 leading-relaxed flex items-start gap-2"
                 >
-                  <span style={{ color: phase.accentColor.replace("0.55)", "0.8)") }} className="mt-0.5 shrink-0">→</span>
+                  <span className="text-white/20 mt-0.5 shrink-0">→</span>
                   {d}
                 </li>
               ))}
@@ -244,7 +180,7 @@ export function EngineeringStandards() {
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="flex flex-col items-center justify-center gap-2 mt-3 mb-6">
-          <h2 className="text-2xl font-bold text-indigo-400 underline underline-offset-8 decoration-4 decoration-indigo-500/60">
+          <h2 className="text-xl font-semibold text-white/60 tracking-wide">
             Engineering Standards
           </h2>
           <p className="text-sm text-gray-500 max-w-md text-center">

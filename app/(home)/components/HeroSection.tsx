@@ -56,7 +56,7 @@ export default function HeroSection() {
               "Scale Infinitely."
             ]}
             interval={3000}
-            className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent"
+            className="text-white/90"
           />
         </h1>
 
