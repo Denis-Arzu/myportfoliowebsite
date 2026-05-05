@@ -87,10 +87,10 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
 
   const sections: Section[] = [
     { name: 'Home', href: '#home' },
-    { name: 'Methodology', href: '#methodology' },
+    { name: 'Portfolio', href: '#portfolio' },
+    { name: 'Services', href: '#services' },
+    { name: 'Pricing', href: '#pricing' },
     { name: 'About', href: '#about' },
-    { name: 'Capabilities', href: '#skills' },
-    { name: 'Products', href: '#projects' },
     { name: 'Contact', href: '#contact' },
   ];
 

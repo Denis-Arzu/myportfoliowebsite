@@ -9,6 +9,7 @@ const contactSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   company: z.string().optional(),
   budget: z.string().optional(),
+  serviceType: z.string().optional(),
   description: z.string().min(10, "Please provide at least 10 characters"),
 });
 
@@ -53,6 +54,7 @@ export async function submitContactForm(
     email: formData.get("email"),
     company: formData.get("company"),
     budget: formData.get("budget"),
+    serviceType: formData.get("serviceType"),
     description: formData.get("description"),
   };
 
@@ -66,7 +68,7 @@ export async function submitContactForm(
     };
   }
 
-  const { name, email, company, budget, description } = result.data;
+  const { name, email, company, budget, serviceType, description } = result.data;
 
   // 2. Rate limit
   if (isRateLimited(email)) {
@@ -113,6 +115,7 @@ export async function submitContactForm(
               <tr><td style="padding: 8px 0; color: #888; width: 120px;">Name</td><td style="padding: 8px 0; color: #fff;">${name}</td></tr>
               <tr><td style="padding: 8px 0; color: #888;">Email</td><td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #818cf8;">${email}</a></td></tr>
               <tr><td style="padding: 8px 0; color: #888;">Company</td><td style="padding: 8px 0; color: #fff;">${company || "—"}</td></tr>
+              <tr><td style="padding: 8px 0; color: #888;">Service Type</td><td style="padding: 8px 0; color: #fff;">${serviceType || "Not specified"}</td></tr>
               <tr><td style="padding: 8px 0; color: #888;">Budget</td><td style="padding: 8px 0; color: #22c55e; font-weight: bold;">${budget || "Not specified"}</td></tr>
             </table>
             <div style="margin-top: 24px; padding: 16px; background: #111; border: 1px solid #222; border-radius: 8px;">
@@ -146,6 +149,7 @@ export async function submitContactForm(
     console.log(`  Name:    ${name}`);
     console.log(`  Email:   ${email}`);
     console.log(`  Company: ${company || "—"}`);
+    console.log(`  Service: ${serviceType || "—"}`);
     console.log(`  Budget:  ${budget || "—"}`);
     console.log(`  Message: ${description}`);
     console.log(`  Time:    ${new Date().toISOString()}`);

@@ -20,24 +20,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Dentrix Apps | Algorithmic Trading Engines & AI Automation Systems",
+    default: "Dentrix Apps | AI Voice Studio — Voiceovers, Cloning & Dubbing",
     template: "%s | Dentrix Apps"
   },
-  description: "Dentrix Apps is a US-focused software engineering lab building algorithmic trading engines (C++/Python), AI automation systems, and scalable Next.js applications. We engineer high-leverage infrastructure for quantitative firms, SaaS founders, and enterprise teams. Based in Nairobi, serving globally. Projects start at $100. Response <12 hours.",
+  description: "Professional AI voice services: voiceovers, voice cloning, multilingual dubbing, and voice agents. Built for creators, brands, and businesses who refuse to sound amateur. Same-day delivery. Studio quality. Based in Nairobi, serving globally.",
   keywords: [
-    "algorithmic trading developer",
-    "C++ trading bot builder",
-    "Python automation engineer",
-    "custom web scraper development",
-    "AI video generation system",
-    "Next.js expert Kenya",
-    "faceless YouTube automation",
-    "quantitative systems architect",
-    "data pipeline engineer",
-    "Discord bot developer",
-    "API integration specialist",
-    "software engineering lab Nairobi",
-    "offshore development team Africa"
+    "AI voiceover service",
+    "AI voice cloning",
+    "multilingual dubbing",
+    "SSML voice enhancement",
+    "YouTube intro voiceover",
+    "podcast ad voice",
+    "professional AI voice",
+    "voice agent development",
+    "ElevenLabs expert",
+    "AI audio production",
+    "voice localization",
+    "brand voice cloning",
+    "AI voice studio",
+    "e-learning narration",
+    "commercial voiceover AI"
   ],
   authors: [{ name: "Denis Kioko", url: "https://linkedin.com/in/denis-kioko-743234365" }],
   creator: "Denis Kioko",
@@ -60,8 +62,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dentrix Apps | We Engineer Systems That Print Money",
-    description: "High-performance software engineering lab specializing in algorithmic trading engines, AI automation systems, and scalable infrastructure. C++/Python/Next.js. Based in Nairobi. Serving globally.",
+    title: "Dentrix Apps | AI Voice Studio — Your Brand's Voice, Engineered",
+    description: "Professional AI voiceovers, voice cloning, and multilingual dubbing. Same-day delivery. Studio quality. Built for creators and brands who refuse to sound amateur.",
     url: "https://dentrixapps.com",
     siteName: "Dentrix Apps",
     locale: "en_US",
@@ -72,7 +74,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Dentrix Apps | Algorithmic Trading & AI Automation Lab",
+        alt: "Dentrix Apps | AI Voice Studio — Voiceovers, Cloning & Dubbing",
       }
     ],
   },
@@ -80,14 +82,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@dentrixapps",
     creator: "@deniskiooko",
-    title: "Dentrix Apps | Algorithmic Trading & AI Automation Lab",
-    description: "We build systems that print money. C++ trading engines. Data pipelines. Faceless video factories. Nairobi-based, globally served.",
+    title: "Dentrix Apps | AI Voice Studio",
+    description: "Professional AI voiceovers, voice cloning & multilingual dubbing. Same-day delivery. Studio quality. Nairobi-based, globally served.",
     images: [
       {
         url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Dentrix Apps - High-Performance Software Engineering Lab",
+        alt: "Dentrix Apps - AI Voice Studio",
       }
     ],
   },
@@ -97,7 +99,7 @@ export const metadata: Metadata = {
     yandex: "yandex-verification-code",
   },
   category: "technology",
-  classification: "Software Engineering, Algorithmic Trading, AI Development",
+  classification: "AI Voice Services, Voice Cloning, Audio Production, Dubbing",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",

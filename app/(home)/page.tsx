@@ -4,16 +4,14 @@ import { motion, AnimatePresence } from "motion/react";
 import dynamic from 'next/dynamic';
 const HeavyVortex = dynamic(() => import('@/components/ui/vortex').then((m) => m.Vortex), { ssr: false });
 const HeavySplashCursor = dynamic(() => import('@/components/ui/splash-cursor').then((m) => m.SplashCursor), { ssr: false });
-const HeavyGlobalImpact = dynamic(() => import('./components/GlobalImpact').then((m) => m.GlobalImpact), { ssr: false });
 const HeavyMethodologySection = dynamic(() => import('./components/MethodologySection').then((m) => m.default), { ssr: false });
 const HeavyEngineeringStandards = dynamic(() => import('./components/EngineeringStandards').then((m) => m.EngineeringStandards), { ssr: false });
 const HeavyTestimonials = dynamic(() => import('./components/Testimonials').then((m) => m.TestimonialsSection), { ssr: false });
 const HeavyFAQ = dynamic(() => import('./components/FAQSection').then((m) => m.FAQSection), { ssr: false });
-const HeavyLeadMagnet = dynamic(() => import('./components/LeadMagnet').then((m) => m.LeadMagnet), { ssr: false });
 const HeavyContact = dynamic(() => import('./components/ContactSection').then((m) => m.ContactSection), { ssr: false });
-const HeavyProjects = dynamic(() => import('./components/ProjectsSection').then((m) => m.default ?? m.ProjectsSection), { ssr: false });
+const HeavyVoiceDemoSection = dynamic(() => import('./components/VoiceDemoSection').then((m) => m.VoiceDemoSection ?? m.default), { ssr: false });
+const HeavyPricingSection = dynamic(() => import('./components/PricingSection').then((m) => m.PricingSection ?? m.default), { ssr: false });
 const HeavyFooter = dynamic(() => import('./components/Footer').then((m) => m.Footer), { ssr: false });
-// HeavyUrgencyBar removed per emergency repair plan
 import Navbar from "./components/navbar";
 const LazyHeroSection = dynamic(() => import('./components/HeroSection'), { ssr: false });
 import { About } from "./components/about";
@@ -21,8 +19,6 @@ import AboutSectitle from "./components/aboutsectitle";
 import Myskillssectitle from "./components/Myskillssectitle";
 import { SkillsSection } from "./components/Myskills";
 import Loader from "./components/loader";
-
-// Static imports for heavy sections removed in favor of dynamic imports for performance
 
 const Page: React.FC = () => {
   const [pageReady, setPageReady] = useState(false);
@@ -49,8 +45,6 @@ const Page: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Urgency Bar removed: no banner */}
-
             {/* ── Canvas background: solid black + vortex particles ─── */}
             <div className="fixed inset-0 bg-black" />
               <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
@@ -74,21 +68,36 @@ const Page: React.FC = () => {
               <div className="h-20 xl:h-32 bg-gradient-to-t from-black absolute bottom-0 left-0 w-full pointer-events-none" />
             </div>
 
-            {/* ── Global Impact ────────────────────────────────────── */}
+            {/* ── Voice Portfolio ─────────────────────────────────── */}
             <motion.div
-              id="impact"
+              id="portfolio"
               className="relative z-10 min-h-[100dvh] flex flex-col justify-center"
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
             >
-              <HeavyGlobalImpact />
+              <HeavyVoiceDemoSection />
             </motion.div>
 
-            {/* ── Methodology ──────────────────────────────────────── */}
+            {/* ── Services ─────────────────────────────────────────── */}
+            <motion.section
+              id="services"
+              className="relative py-10 min-h-[100dvh] flex flex-col justify-center"
+              initial={{ opacity: 0, y: 70 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ type: "spring", stiffness: 80, damping: 18 }}
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Myskillssectitle />
+                <SkillsSection />
+              </div>
+            </motion.section>
+
+            {/* ── Process (Methodology) ─────────────────────────────── */}
             <motion.div
-              id="methodology"
+              id="process"
               className="min-h-[100dvh] flex flex-col justify-center"
               initial={{ opacity: 0, x: 80, scale: 0.97 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -96,6 +105,41 @@ const Page: React.FC = () => {
               transition={{ type: "spring", stiffness: 90, damping: 22 }}
             >
               <HeavyMethodologySection />
+            </motion.div>
+
+            {/* ── Why Us (Engineering Standards) ──────────────────── */}
+            <motion.section
+              id="why-us"
+              className="relative py-10 min-h-[100dvh] flex flex-col justify-center"
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ type: "spring", stiffness: 85, damping: 20 }}
+            >
+              <HeavyEngineeringStandards />
+            </motion.section>
+
+            {/* ── Pricing ──────────────────────────────────────────── */}
+            <motion.div
+              id="pricing"
+              className="min-h-[100dvh] flex flex-col justify-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ type: "spring", stiffness: 90, damping: 20 }}
+            >
+              <HeavyPricingSection />
+            </motion.div>
+
+            {/* ── Testimonials ─────────────────────────────────────── */}
+            <motion.div
+              className="min-h-[100dvh] flex flex-col justify-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ type: "spring", stiffness: 90, damping: 20 }}
+            >
+              <HeavyTestimonials />
             </motion.div>
 
             {/* ── About ────────────────────────────────────────────── */}
@@ -118,55 +162,6 @@ const Page: React.FC = () => {
               </div>
             </motion.section>
 
-            {/* ── Capabilities ─────────────────────────────────────── */}
-            <motion.section
-              id="skills"
-              className="relative py-10 min-h-[100dvh] flex flex-col justify-center"
-              initial={{ opacity: 0, y: 70 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ type: "spring", stiffness: 80, damping: 18 }}
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <Myskillssectitle />
-                <SkillsSection />
-              </div>
-            </motion.section>
-
-            {/* ── Engineering Standards ────────────────────────────── */}
-            <motion.section
-              id="standards"
-              className="relative py-10 min-h-[100dvh] flex flex-col justify-center"
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{ type: "spring", stiffness: 85, damping: 20 }}
-            >
-              <HeavyEngineeringStandards />
-            </motion.section>
-
-            {/* ── Projects ─────────────────────────────────────────── */}
-            <motion.div
-              className="min-h-[100dvh] flex flex-col justify-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ type: "spring", stiffness: 90, damping: 20 }}
-            >
-              <HeavyProjects />
-            </motion.div>
-
-            {/* ── Testimonials ─────────────────────────────────────── */}
-            <motion.div
-              className="min-h-[100dvh] flex flex-col justify-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.1 }}
-              transition={{ type: "spring", stiffness: 90, damping: 20 }}
-            >
-              <HeavyTestimonials />
-            </motion.div>
-
             {/* ── FAQ ──────────────────────────────────────────────── */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -176,9 +171,6 @@ const Page: React.FC = () => {
             >
               <HeavyFAQ />
             </motion.div>
-
-            {/* ── Lead Magnet ─────────────────────────────────────── */}
-            <HeavyLeadMagnet />
 
             {/* ── Contact ──────────────────────────────────────────── */}
             <HeavyContact />

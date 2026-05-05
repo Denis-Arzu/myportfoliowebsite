@@ -4,17 +4,17 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "ProfessionalService"],
   name: "Dentrix Apps",
-  alternateName: "Dentrix Apps Software Engineering Lab",
+  alternateName: "Dentrix Apps AI Voice Studio",
   url: "https://dentrixapps.com",
   logo: "https://dentrixapps.com/icon.png",
   foundingDate: "2024",
-  description: "High-performance software engineering lab specializing in algorithmic trading engines, AI automation systems, and scalable web infrastructure. Building digital leverage as a product.",
-  disambiguatingDescription: "A software development and algorithmic trading engineering firm, distinct from any dental or medical management software.",
-  industry: ["Software Engineering", "AI Development", "Algorithmic Trading"],
+  description: "Professional AI voice studio offering voiceovers, voice cloning, multilingual dubbing, and voice agent development. Built for creators, brands, and businesses who refuse to sound amateur. Same-day delivery. Studio quality.",
+  disambiguatingDescription: "An AI audio production and voice engineering studio, distinct from any dental or medical management software.",
+  industry: ["AI Voice Services", "Audio Production", "Voice Cloning", "Software Engineering"],
   founder: {
     "@type": "Person",
     name: "Denis Kioko",
-    jobTitle: "Founder & CEO",
+    jobTitle: "Founder & Voice Engineer",
     url: "https://linkedin.com/in/denis-kioko-743234365"
   },
   address: {
@@ -26,7 +26,7 @@ const organizationSchema = {
   areaServed: [
     { "@type": "Country", name: "US" },
     { "@type": "Country", name: "GB" },
-    { "@type": "Country", name: "SG" }
+    { "@type": "Country", name: "KE" }
   ],
   contactPoint: {
     "@type": "ContactPoint",
@@ -36,61 +36,34 @@ const organizationSchema = {
     availableLanguage: ["en-US", "en-GB"]
   },
   knowsAbout: [
-    "AlgorithmicTrading",
+    "AIVoiceSynthesis",
+    "VoiceCloning",
+    "MultilingualDubbing",
+    "TextToSpeech",
+    "SSMLVoiceEnhancement",
+    "AudioProduction",
+    "VoiceAgents",
     "SoftwareEngineering",
-    "PythonDevelopment",
-    "CPlusPlusProgramming",
-    "NextJSDevelopment",
-    "WebScraping",
-    "AIAutomation",
-    "DataPipelines",
-    "QuantitativeFinance"
+    "ContentCreation"
   ],
   sameAs: [
     "https://github.com/Denis-Arzu",
     "https://www.linkedin.com/in/denis-arzu",
-    "https://twitter.com/dentrixapps",
-    "https://tuandike.online",
-    "https://maganji.site"
+    "https://twitter.com/dentrixapps"
   ],
   hasOffer: {
     "@type": "Offer",
     itemOffered: {
       "@type": "Service",
-      name: "Custom Software Development Services",
-      description: "Bespoke engineering solutions including trading engines, automation systems, and full-stack applications",
+      name: "AI Voice Services",
+      description: "Professional AI voiceovers, voice cloning, multilingual dubbing in 29+ languages, and custom voice agent development. Same-day delivery available.",
       priceCurrency: "USD",
-      price: "100-5000"
+      price: "25-5000"
     }
   }
 };
 
-const softwareApplicationsSchema = [
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Tuandike",
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Web",
-    url: "https://tuandike.online",
-    creator: {
-      "@type": "Organization",
-      name: "Dentrix Apps",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Maganji Engine",
-    applicationCategory: "FinanceApplication",
-    operatingSystem: "Web",
-    url: "https://maganji.site",
-    creator: {
-      "@type": "Organization",
-      name: "Dentrix Apps",
-    },
-  },
-];
+const softwareApplicationsSchema: unknown[] = [];
 
 export function StructuredData() {
   return (

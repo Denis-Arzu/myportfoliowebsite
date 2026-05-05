@@ -1,110 +1,79 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "motion/react";
-import { ShinyText } from "@/components/ui/shiny-text";
 import { servicesContent } from "@/lib/content-data";
+import { Mic, Copy, Globe, Phone, Code2 } from "lucide-react";
 
-const colors = [
-  "oklch(0.52 0.24 264 / 0.55)", // indigo
-  "oklch(0.55 0.18 145 / 0.55)", // green
-  "oklch(0.65 0.15 60 / 0.55)", // orange
-  "oklch(0.60 0.22 300 / 0.55)", // purple
-  "oklch(0.65 0.15 150 / 0.55)", // cyan
-  "oklch(0.70 0.15 80 / 0.55)", // yellow/lime
-  "oklch(0.55 0.18 245 / 0.55)", // blue
-  "oklch(0.52 0.24 264 / 0.55)", // indigo (repeat)
-];
+const iconMap: Record<string, React.ReactNode> = {
+  Mic: <Mic className="w-4 h-4" />,
+  Copy: <Copy className="w-4 h-4" />,
+  Globe: <Globe className="w-4 h-4" />,
+  Phone: <Phone className="w-4 h-4" />,
+  Code2: <Code2 className="w-4 h-4" />,
+};
 
-const spans = [
-  "lg:col-span-4", "lg:col-span-4", "lg:col-span-4", // row 1: 3 items
-  "lg:col-span-6", "lg:col-span-6", // row 2: 2 items
-  "lg:col-span-4", "lg:col-span-4", "lg:col-span-4", // row 3: 3 items
-];
-
-function ServiceCard({ service, index }: { service: any; index: number }) {
-  const [hovered, setHovered] = useState(false);
-  const accentColor = colors[index % colors.length];
-  const span = spans[index % spans.length];
-
+function ServiceCard({ service, index }: { service: typeof servicesContent[0]; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.55, delay: (index % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative rounded-2xl overflow-hidden bg-[oklch(0_0_0/0.9)] flex flex-col gap-5 p-6 sm:p-7 min-h-[400px] ${span}`}
+      className="relative rounded-2xl overflow-hidden flex flex-col gap-5 p-6 sm:p-7 min-h-[360px]"
       style={{
-        border: `1px solid ${accentColor.replace("0.55)", "0.3)")}`,
-        boxShadow: `0 0 0 1px ${accentColor.replace("0.55)", "0.08)")}, inset 0 0 30px ${accentColor.replace("0.55)", "0.05)")}`,
+        border: "1px solid rgba(255,255,255,0.05)",
+        background: "transparent",
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        animate={{ opacity: hovered ? 1 : 0.55 }}
-        transition={{ duration: 0.35 }}
-        style={{
-          background: `radial-gradient(ellipse at 22% 18%, ${accentColor.replace("0.55)", "0.14)")} 0%, transparent 62%)`,
-        }}
-      />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/5 to-transparent" />
-
+      {/* Icon */}
       <div className="relative z-10 flex items-start justify-between">
-        <div
-          className="w-11 h-11 flex items-center justify-center rounded-xl shrink-0 text-xl"
-          style={{
-            background: accentColor.replace("0.55)", "0.12)"),
-            border: `1px solid ${accentColor}`,
-          }}
-        >
-          {service.icon}
+        <div className="w-10 h-10 flex items-center justify-center rounded-lg shrink-0 text-white/25 border border-white/10">
+          {iconMap[service.icon] || <Mic className="w-4 h-4" />}
+        </div>
+        <div className="flex flex-wrap gap-1.5 justify-end">
+          {service.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/25 font-mono"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 
       <div className="relative z-10 space-y-1">
-        <h3 className="text-lg font-bold">
-          <ShinyText speed={hovered ? 2 : 5}>{service.title}</ShinyText>
-        </h3>
-        <p className="text-[10px] text-gray-500 uppercase tracking-widest font-mono">{service.price_anchor}</p>
+        <h3 className="text-base font-semibold text-white/80">{service.title}</h3>
+        <p className="text-[10px] text-white/25 uppercase tracking-widest font-mono">{service.outcomeTitle}</p>
       </div>
 
-      <p className="relative z-10 text-sm text-gray-400 leading-relaxed flex-1">{service.outcome_description}</p>
+      <p className="relative z-10 text-sm text-white/35 leading-relaxed flex-1">{service.description}</p>
 
-      {service.live_product && (
-        <div className="relative z-10 flex flex-wrap gap-1.5 mt-2">
-          <span className="text-xs text-gray-500 italic" style={{ color: accentColor.replace("0.55)", "0.9)") }}>
-            ↳ Live: {service.live_product}
-          </span>
-        </div>
-      )}
-
-      <div className="relative z-10 mt-2">
-         <p className="text-[10px] text-gray-500 uppercase mb-2">Tech Stack</p>
-         <div className="flex flex-wrap gap-2">
-          {service.tech_stack.map((tech: string) => (
-            <span
-              key={tech}
-              className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full text-gray-300 font-mono"
-              style={{
-                background: accentColor.replace("0.55)", "0.08)"),
-                border: `1px solid ${accentColor.replace("0.55)", "0.3)")}`,
-              }}
-            >
-              {tech}
-            </span>
+      {/* Deliverables */}
+      <div className="relative z-10 space-y-1.5">
+        <p className="text-[10px] text-white/20 uppercase tracking-widest font-mono">Deliverables</p>
+        <ul className="space-y-1">
+          {service.deliverables.map((d) => (
+            <li key={d} className="text-xs text-white/30 flex items-start gap-2">
+              <span className="text-white/15 mt-0.5 shrink-0">→</span>
+              {d}
+            </li>
           ))}
-         </div>
+        </ul>
       </div>
 
-      <div className="relative z-10 mt-4 border-t border-white/10 pt-4 flex items-center justify-between">
-        <p className="text-xs text-gray-500 italic line-clamp-1 flex-1 pr-2">Best for: {service.ideal_for}</p>
-        <a 
+      {/* Bottom row: price + delivery + CTA */}
+      <div className="relative z-10 mt-auto pt-4 border-t border-white/5 flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-mono text-white/60">{service.startingPrice}</span>
+          <span className="text-[10px] text-white/25 font-mono uppercase">{service.deliveryTime}</span>
+        </div>
+        <a
           href="#contact"
-          className="text-xs font-bold shrink-0 hover:underline"
-          style={{ color: accentColor.replace("0.55)", "0.9)") }}
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold text-black transition-colors"
+          style={{ background: "oklch(0.55 0.18 145)" }}
         >
-          {service.cta_label}
+          Get Started
         </a>
       </div>
     </motion.div>
@@ -114,7 +83,7 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
 export const SkillsSection = () => (
   <div className="w-full px-4 sm:px-6 lg:px-8">
     <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 py-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-16">
         {servicesContent.map((service, index) => (
           <ServiceCard key={service.id} service={service} index={index} />
         ))}

@@ -7,7 +7,7 @@ import { heroContent } from '@/lib/content-data';
 import { TextSwap } from '@/components/ui/text-swap';
 
 export default function HeroSection() {
-  const { subheadline, stats, primaryCta } = heroContent;
+  const { eyebrow, primaryHeadline, textSwapPhrases, subheadline, stats, primaryCta, secondaryCta } = heroContent;
   const raysRef = useRef<HTMLDivElement>(null);
   const ambientRef = useRef<HTMLDivElement>(null);
 
@@ -40,21 +40,16 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
 
         {/* Eyebrow — no box */}
-        <p className="text-[11px] sm:text-xs font-medium text-indigo-400/70 uppercase tracking-[0.25em] mb-10">
-          Software Engineering Lab
+        <p className="text-[11px] sm:text-xs font-medium text-white/30 uppercase tracking-[0.25em] mb-10">
+          {eyebrow}
         </p>
 
-        {/* Headline — refined size */}
-        <h1 className="text-3xl sm:text-4xl md:text-[3.25rem] lg:text-[3.75rem] font-semibold leading-[1.15] tracking-tight mb-5">
-          <span className="text-white">We Engineer Systems That</span>
+        {/* Headline — single line */}
+        <h1 className="text-2xl sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-semibold leading-[1.15] tracking-tight mb-5">
+          <span className="text-white sm:whitespace-nowrap">{primaryHeadline}</span>
           <br />
           <TextSwap
-            phrases={[
-              "Print Money.",
-              "Save Time.",
-              "Work While You Sleep.",
-              "Scale Infinitely."
-            ]}
+            phrases={textSwapPhrases}
             interval={3000}
             className="text-white/90"
           />
@@ -71,15 +66,15 @@ export default function HeroSection() {
             href={primaryCta.href}
             className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-[#0A0A0B] rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-gray-100 hover:scale-[1.02]"
           >
-            {primaryCta.text.replace(' →', '')}
+            {primaryCta.label}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
 
           <Link
-            href="#projects"
-            className="group inline-flex items-center gap-2 px-5 py-3.5 text-gray-500 hover:text-gray-300 font-medium text-sm transition-colors"
+            href={secondaryCta.href}
+            className="group inline-flex items-center gap-2 px-5 py-3.5 text-white/40 hover:text-white/60 font-medium text-sm transition-colors"
           >
-            {primaryCta.secondaryText.replace(' ↓', '')}
+            {secondaryCta.label}
             <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
           </Link>
         </div>
@@ -89,9 +84,9 @@ export default function HeroSection() {
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
               <div className="text-xl sm:text-2xl font-semibold text-white tabular-nums">
-                {stat.value}<span className="text-indigo-400/60 text-base font-normal ml-0.5">{stat.suffix}</span>
+                {stat.value}
               </div>
-              <div className="text-[10px] sm:text-xs text-gray-600 uppercase tracking-wider mt-1">
+              <div className="text-[10px] sm:text-xs text-white/25 uppercase tracking-wider mt-1">
                 {stat.label}
               </div>
             </div>

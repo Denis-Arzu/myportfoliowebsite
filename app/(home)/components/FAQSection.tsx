@@ -3,48 +3,9 @@
 import React, { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
-const faqData = [
-  {
-    question: "Where are you based? Can you work with international clients?",
-    answer:
-      "We're headquartered in Nairobi, Kenya (UTC+3). We serve clients globally across 4 continents — Kenya, UK, USA, Singapore, and growing. The timezone difference is an advantage: we deliver working features while you sleep. All communication is in English. Payment via Wise (preferred), PayPal, Payoneer, or USDT.",
-  },
-  {
-    question: "What's your typical project timeline?",
-    answer:
-      "It depends on complexity. Simple scripts/bots: 1-5 days. Full applications: 1-4 weeks. Trading systems: 1-3 weeks. We consistently deliver 30-50% faster than agency estimates because we don't have meetings overhead. You get a dedicated engineer, not a project manager.",
-  },
-  {
-    question: "Do you offer ongoing support after delivery?",
-    answer:
-      "Yes. Every project includes 30 days of post-delivery bug fixes and adjustments at no extra cost. Beyond that, we offer retainer arrangements ($500-$2,000/month) for ongoing development, monitoring, and feature additions. Many clients opt for this because it's cheaper than hiring a full-time developer.",
-  },
-  {
-    question: "How does payment work? Do I pay upfront?",
-    answer:
-      "For projects under $1,000: 100% upfront or 50%/50% (before/after delivery). For projects over $1,000: 40% deposit to start, 30% at midpoint demo, 30% on completion. For ongoing retainers: Monthly invoicing on the 1st of each month. We accept Wise (best rates), PayPal, Payoneer, bank transfer (Kenya), or cryptocurrency.",
-  },
-  {
-    question: "Can I see examples of past work before committing?",
-    answer:
-      "Absolutely. Three live products are showcased on this page: maganji.site (trading platform), tuandike.online (AI study app), and we're building CreatorOS (YouTube intelligence tool). We can also arrange a 15-minute screen-share call to walk through relevant past projects similar to what you need. No cost, no pressure.",
-  },
-  {
-    question: "What if I'm not satisfied with the work?",
-    answer:
-      "We've never had a client refuse final delivery because our process includes check-ins at 25%, 50%, and 75% completion. If something isn't matching expectations, we fix it before moving forward. If after delivery there are issues, the 30-day post-delivery support period covers fixes. We're building long-term relationships, not one-night stands.",
-  },
-  {
-    question: "Are you a one-person team or an agency?",
-    answer:
-      "Currently, Dentrix Apps is a lean engineering operation led by the founder (Denis K.) with selective contractor partnerships for larger projects. This means when you hire Dentrix Apps, you're getting the principal engineer — not a junior dev who was assigned your project. For enterprise engagements requiring larger teams, we scale through a vetted contractor network.",
-  },
-  {
-    question: "Do you sign NDAs?",
-    answer:
-      "Yes, absolutely. We're NDA-friendly by default. Many of our trading system clients require strict confidentiality. We can sign your NDA before any discussion begins, or use ours. Code ownership transfers to you upon final payment. We don't hold your code hostage.",
-  },
-];
+import { faqContent } from "@/lib/content-data";
+
+const faqData = faqContent;
 
 function FAQItem({
   item,
@@ -84,7 +45,7 @@ function FAQItem({
         <motion.span
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base leading-none text-gray-600 group-hover:text-[oklch(0.55_0.18_145)] transition-colors shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center"
+          className="text-base leading-none text-white/20 group-hover:text-[oklch(0.55_0.18_145)] transition-colors shrink-0 mt-0.5 w-5 h-5 flex items-center justify-center"
           aria-hidden="true"
         >
           +
@@ -139,7 +100,7 @@ export function FAQSection() {
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[10px] sm:text-xs text-indigo-400/70 uppercase tracking-widest font-mono mb-3"
+            className="text-[10px] sm:text-xs text-white/25 uppercase tracking-widest font-mono mb-3"
           >
             Common Questions
           </motion.p>
@@ -150,17 +111,17 @@ export function FAQSection() {
             transition={{ delay: 0.1 }}
             className="text-xl sm:text-2xl md:text-4xl font-bold text-white tracking-tight"
           >
-            Before You Reach Out
+            Questions? Answered.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[13px] sm:text-sm text-gray-400 mt-3 max-w-lg mx-auto leading-relaxed"
+            className="text-[13px] sm:text-sm text-white/40 mt-3 max-w-lg mx-auto leading-relaxed"
           >
-            Answers to the 8 questions every enterprise buyer asks. We'd rather
-            be transparent upfront than waste your time on a call.
+            Every question below is an objection handled before it's raised.
+            No surprises. No hidden details.
           </motion.p>
         </div>
 
@@ -182,12 +143,12 @@ export function FAQSection() {
           viewport={{ once: true }}
           className="text-center mt-8 sm:mt-10"
         >
-          <p className="text-[11px] sm:text-xs text-gray-500 font-mono">
+          <p className="text-[11px] sm:text-xs text-white/30 font-mono">
             Still have questions?{" "}
             <a href="#contact" className="text-[oklch(0.55_0.18_145)] hover:underline">
               Send us a message
             </a>{" "}
-            — we respond within 12 hours.
+            — we respond within 1 hour during business hours.
           </p>
         </motion.div>
       </div>
