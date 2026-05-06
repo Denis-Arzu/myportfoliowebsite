@@ -15,8 +15,6 @@ const HeavyFooter = dynamic(() => import('./components/Footer').then((m) => m.Fo
 import Navbar from "./components/navbar";
 const LazyHeroSection = dynamic(() => import('./components/HeroSection'), { ssr: false });
 import { About } from "./components/about";
-import AboutSectitle from "./components/aboutsectitle";
-import Myskillssectitle from "./components/Myskillssectitle";
 import { SkillsSection } from "./components/Myskills";
 import Loader from "./components/loader";
 
@@ -90,7 +88,6 @@ const Page: React.FC = () => {
               transition={{ type: "spring", stiffness: 80, damping: 18 }}
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <Myskillssectitle />
                 <SkillsSection />
               </div>
             </motion.section>
@@ -152,7 +149,6 @@ const Page: React.FC = () => {
               transition={{ type: "spring", stiffness: 90, damping: 22 }}
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <AboutSectitle />
                 <div
                   className="mt-4 p-6 md:p-8 rounded-xl relative z-10 bg-[oklch(0_0_0/0.92)] text-[oklch(1_0_0)]"
                   style={{ border: "1px solid oklch(0.85 0.3 150 / 0.3)" }}

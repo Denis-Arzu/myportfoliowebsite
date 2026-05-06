@@ -6,14 +6,14 @@ const organizationSchema = {
   name: "Dentrix Apps",
   alternateName: "Dentrix Apps AI Voice Studio",
   url: "https://dentrixapps.com",
-  logo: "https://dentrixapps.com/icon.png",
+  logo: "https://dentrixapps.com/icon.webp",
   foundingDate: "2024",
   description: "Professional AI voice studio offering voiceovers, voice cloning, multilingual dubbing, and voice agent development. Built for creators, brands, and businesses who refuse to sound amateur. Same-day delivery. Studio quality.",
   disambiguatingDescription: "An AI audio production and voice engineering studio, distinct from any dental or medical management software.",
-  industry: ["AI Voice Services", "Audio Production", "Voice Cloning", "Software Engineering"],
+  industry: ["AI Voice Services", "Audio Production", "Voice Cloning"],
   founder: {
     "@type": "Person",
-    name: "Denis Kioko",
+    name: "Dennis Kioko",
     jobTitle: "Founder & Voice Engineer",
     url: "https://linkedin.com/in/denis-kioko-743234365"
   },
@@ -43,7 +43,6 @@ const organizationSchema = {
     "SSMLVoiceEnhancement",
     "AudioProduction",
     "VoiceAgents",
-    "SoftwareEngineering",
     "ContentCreation"
   ],
   sameAs: [
@@ -63,23 +62,13 @@ const organizationSchema = {
   }
 };
 
-const softwareApplicationsSchema: unknown[] = [];
-
 export function StructuredData() {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareApplicationsSchema),
-        }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(organizationSchema),
+      }}
+    />
   );
 }

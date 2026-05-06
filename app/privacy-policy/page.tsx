@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Dentrix Apps",
-  description: "Privacy Policy for Dentrix Apps - High-performance software engineering lab.",
+  description: "Privacy Policy for Dentrix Apps - Professional AI voice studio specializing in voiceovers, voice cloning, and multilingual dubbing.",
   robots: "noindex, follow",
 };
 
@@ -70,7 +70,7 @@ export default function PrivacyPolicy() {
                 <span className="text-[oklch(0.85_0.3_150)]">[03]</span> Use of Information
               </h2>
               <p className="leading-relaxed">
-                The information we collect is used solely for the purpose of communicating with you regarding your inquiries, providing our specialized software engineering services, and improving our digital platforms. We do not use your data for automated profiling or targeted advertising without explicit consent.
+                The information we collect is used solely for the purpose of communicating with you regarding your inquiries, providing our AI voice services and audio production solutions, and improving our digital platforms. We do not use your data for automated profiling or targeted advertising without explicit consent.
               </p>
             </section>
 

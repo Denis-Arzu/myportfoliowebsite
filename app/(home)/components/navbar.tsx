@@ -143,7 +143,7 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
             <a href="/" onClick={handleLogoClick} className="flex items-center group shrink-0">
               <div className="relative w-32 h-8 sm:w-36 sm:h-9 transition-transform duration-300 group-hover:scale-105">
                 <Image
-                  src="/images/home/dentrixappslg.png"
+                  src="/images/home/dentrixappslg.webp"
                   alt="Dentrix Apps Logo"
                   width={144}
                   height={36}

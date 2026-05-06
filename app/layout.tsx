@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     alternateLocale: "en_GB",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/images/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Dentrix Apps | AI Voice Studio — Voiceovers, Cloning & Dubbing",
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     description: "Professional AI voiceovers, voice cloning & multilingual dubbing. Same-day delivery. Studio quality. Nairobi-based, globally served.",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/images/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Dentrix Apps - AI Voice Studio",
@@ -101,8 +101,8 @@ export const metadata: Metadata = {
   category: "technology",
   classification: "AI Voice Services, Voice Cloning, Audio Production, Dubbing",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/icon.webp",
+    apple: "/icon.webp",
   },
   manifest: "/manifest.json",
 };
@@ -130,9 +130,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="image" href="/images/og-image.png" />
+        <link rel="preload" as="image" href="/images/og-image.webp" />
       </head>
       <body className={`${geistMono.variable} ${geistSans.variable} font-mono antialiased`}>
         <SmoothScroll>

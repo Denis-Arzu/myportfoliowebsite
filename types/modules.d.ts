@@ -50,3 +50,14 @@ declare module 'clsx' {
 declare module 'tailwind-merge' {
   export function twMerge(...classLists: string[]): string;
 }
+
+declare module 'sharp' {
+  interface Sharp {
+    resize(options?: { width?: number; height?: number; fit?: string; withoutEnlargement?: boolean }): Sharp;
+    webp(options?: { quality?: number; effort?: number }): Sharp;
+    metadata(): Promise<{ width?: number; height?: number; format?: string }>;
+    toFile(outputPath: string): Promise<void>;
+  }
+  function sharp(inputPath: string): Sharp;
+  export = sharp;
+}

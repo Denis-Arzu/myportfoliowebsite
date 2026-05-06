@@ -80,17 +80,6 @@ export const servicesContent = [
     deliveryTime: "3-5 days",
     tags: ["Recurring Revenue", "High Value"],
   },
-  {
-    id: "software",
-    icon: "Code2",
-    title: "Custom Software Engineering",
-    outcomeTitle: "Systems Built to Scale",
-    description: "Beyond voice — we build high-performance software. Algorithmic trading engines, AI automation systems, scalable web applications, and data pipelines. Full-stack engineering from Nairobi to the world.",
-    deliverables: ["Trading engines (C++/Python)", "AI automation workflows", "Full-stack web apps (Next.js)", "Data pipelines & APIs", "Performance audits"],
-    startingPrice: "$500",
-    deliveryTime: "1-4 weeks",
-    tags: ["Enterprise", "Custom"],
-  },
 ];
 
 export const voiceDemosContent = {
@@ -336,7 +325,6 @@ export const contactContent = {
     { value: "cloning", label: "Voice Cloning for my brand" },
     { value: "dubbing", label: "Dubbing / Localization into another language" },
     { value: "agent", label: "Voice Agent for my business" },
-    { value: "software", label: "Custom Software Engineering" },
     { value: "other", label: "Something else" },
   ],
   budgetRanges: [
@@ -359,5 +347,3 @@ export const contactContent = {
   ],
 };
 
-/* Legacy export kept for backward compatibility during transition */
-export const projectsContent = [];

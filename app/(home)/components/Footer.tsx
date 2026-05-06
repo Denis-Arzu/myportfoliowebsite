@@ -20,7 +20,7 @@ export const Footer = () => {
             <div className="flex items-center gap-3 shrink-0">
               <div className="relative w-10 h-10">
                 <Image
-                  src="/images/home/dentrixappslogoicon.png"
+                  src="/images/home/dentrixappslogoicon.webp"
                   alt="Dentrix Logo"
                   width={40}
                   height={40}

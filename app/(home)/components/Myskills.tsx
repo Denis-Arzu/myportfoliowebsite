@@ -83,6 +83,16 @@ function ServiceCard({ service, index }: { service: typeof servicesContent[0]; i
 export const SkillsSection = () => (
   <div className="w-full px-4 sm:px-6 lg:px-8">
     <div className="max-w-7xl mx-auto">
+      {/* Inlined Myskillssectitle */}
+      <div className='mt-3 mb-4 flex flex-col items-center justify-center gap-2'>
+        <h2 className='text-xl font-semibold text-white/60 tracking-wide'>
+          Services
+        </h2>
+        <p className='text-sm text-white/40 max-w-md text-center'>
+          Every voice need, covered. From a single YouTube intro to a multilingual empire.
+        </p>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-16">
         {servicesContent.map((service, index) => (
           <ServiceCard key={service.id} service={service} index={index} />

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service | Dentrix Apps",
-  description: "Terms of Service for Dentrix Apps - High-performance software engineering lab.",
+  description: "Terms of Service for Dentrix Apps - Professional AI voice studio specializing in voiceovers, voice cloning, and multilingual dubbing.",
   robots: "noindex, follow",
 };
 

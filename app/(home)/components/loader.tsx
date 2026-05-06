@@ -49,7 +49,7 @@ const Loader = ({ onDone }: LoaderProps) => {
               {/* Logo Image */}
               <div className="relative w-32 h-32 sm:w-48 sm:h-48 mb-1">
                 <Image
-                  src="/images/home/dentrixappslg.png"
+                  src="/images/home/dentrixappslg.webp"
                   alt="Dentrix Apps Logo"
                   width={128}
                   height={128}
@@ -58,7 +58,7 @@ const Loader = ({ onDone }: LoaderProps) => {
                 />
               </div>
               <p className="mt-1 text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[oklch(0.92_0.02_150)]/90 font-mono">
-                fix(world, code)
+                AI Voice Studio
               </p>
             </motion.div>
 

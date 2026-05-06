@@ -1,10 +1,10 @@
 {
-  "short_name": "Dentrix",
-  "name": "Dentrix Apps | Algorithmic Trading & AI Automation Lab",
-  "description": "High-performance software engineering lab specializing in algorithmic trading engines, AI automation systems, and scalable web infrastructure.",
+  "short_name": "AI Voice Studio",
+  "name": "Dentrix Apps — AI Voice Studio",
+  "description": "Professional AI voice studio specializing in voiceovers, cloning, and dubbing.",
   "icons": [
     {
-      "src": "/icon.png",
+      "src": "/icon.webp",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

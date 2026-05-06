@@ -20,25 +20,39 @@ export type ContactFormState = {
 } | null;
 
 /* ─── In-memory rate limiter (per-deployment, resets on cold start) ─── */
-
-const submissions = new Map<string, { count: number; lastReset: number }>();
+const submissions = new Map<string, number[]>();
 const RATE_LIMIT = 3; // max submissions
-const RATE_WINDOW = 60 * 60 * 1000; // per hour (ms)
+const RATE_WINDOW = 60 * 60 * 1000; // 1 hour window
+
+function cleanupOldEntries(): void {
+  const now = Date.now();
+  for (const [email, timestamps] of submissions.entries()) {
+    const validTimestamps = timestamps.filter(t => now - t < RATE_WINDOW);
+    if (validTimestamps.length === 0) {
+      submissions.delete(email);
+    } else {
+      submissions.set(email, validTimestamps);
+    }
+  }
+}
 
 function isRateLimited(email: string): boolean {
   const now = Date.now();
-  const entry = submissions.get(email);
-
-  if (!entry || now - entry.lastReset > RATE_WINDOW) {
-    submissions.set(email, { count: 1, lastReset: now });
-    return false;
+  
+  // Periodic cleanup
+  if (Math.random() < 0.1) {
+    cleanupOldEntries();
   }
-
-  if (entry.count >= RATE_LIMIT) {
+  
+  const timestamps = submissions.get(email) || [];
+  const validTimestamps = timestamps.filter(t => now - t < RATE_WINDOW);
+  
+  if (validTimestamps.length >= RATE_LIMIT) {
     return true;
   }
-
-  entry.count++;
+  
+  validTimestamps.push(now);
+  submissions.set(email, validTimestamps);
   return false;
 }
 
