@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import dynamic from 'next/dynamic';
-const HeavyVortex = dynamic(() => import('@/components/ui/vortex').then((m) => m.Vortex), { ssr: false });
+const HeavyVoiceAurora = dynamic(() => import('@/components/ui/voice-aurora').then((m) => m.VoiceAurora), { ssr: false });
 const HeavySplashCursor = dynamic(() => import('@/components/ui/splash-cursor').then((m) => m.SplashCursor), { ssr: false });
 const HeavyMethodologySection = dynamic(() => import('./components/MethodologySection').then((m) => m.default), { ssr: false });
 const HeavyEngineeringStandards = dynamic(() => import('./components/EngineeringStandards').then((m) => m.EngineeringStandards), { ssr: false });
@@ -12,6 +12,8 @@ const HeavyContact = dynamic(() => import('./components/ContactSection').then((m
 const HeavyVoiceDemoSection = dynamic(() => import('./components/VoiceDemoSection').then((m) => m.VoiceDemoSection ?? m.default), { ssr: false });
 const HeavyPricingSection = dynamic(() => import('./components/PricingSection').then((m) => m.PricingSection ?? m.default), { ssr: false });
 const HeavyFooter = dynamic(() => import('./components/Footer').then((m) => m.Footer), { ssr: false });
+const HeavyVoiceAgentWidget = dynamic(() => import('./components/VoiceAgentWidget').then(m => m.VoiceAgentWidget), { ssr: false });
+import { ConversationProvider } from "@elevenlabs/react";
 import Navbar from "./components/navbar";
 const LazyHeroSection = dynamic(() => import('./components/HeroSection'), { ssr: false });
 import { About } from "./components/about";
@@ -46,7 +48,7 @@ const Page: React.FC = () => {
             {/* ── Canvas background: solid black + vortex particles ─── */}
             <div className="fixed inset-0 bg-black" />
               <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
-                <HeavyVortex particleCount={isMobile ? 60 : 130} intensity={isMobile ? 0.5 : 0.85} />
+                <HeavyVoiceAurora isMobile={isMobile} />
               </div>
 
             {/* ── Subtle cursor splash ripples (desktop only) ────────── */}
@@ -173,6 +175,10 @@ const Page: React.FC = () => {
 
             {/* ── Footer ───────────────────────────────────────────── */}
             <HeavyFooter />
+
+            <ConversationProvider>
+              <HeavyVoiceAgentWidget />
+            </ConversationProvider>
           </motion.main>
         )}
       </AnimatePresence>

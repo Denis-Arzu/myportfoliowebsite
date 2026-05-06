@@ -3,7 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 // Social icons removed for navbar polish; social links now in footer only
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Mic } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform, Variants } from 'motion/react';
 import { Magnetic } from '@/components/ui/magnetic';
 import Loader from './loader';
@@ -92,11 +92,17 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
     { name: 'Pricing', href: '#pricing' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Talk', href: '#', isExternal: true },
   ];
 
   /* ─── Navigation Handler ─────────────────────────────────────────────── */
   const handleNavigation = useCallback((section: Section) => {
     setMenuOpen(false);
+
+    if (section.name === 'Talk') {
+      window.dispatchEvent(new CustomEvent('open-voice-agent'));
+      return;
+    }
 
     if (section.isExternal) {
       // Products → show loader, then navigate
@@ -162,15 +168,18 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
                   key={section.name}
                   href={section.href}
                   onClick={(e) => {
-                    if (section.isExternal) {
+                    if (section.isExternal || section.name === 'Talk') {
                       e.preventDefault();
                       handleNavigation(section);
                     }
                   }}
-                  className="relative text-gray-400 hover:text-white text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-200 group/link"
+                  className={`relative text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-200 group/link ${section.name === 'Talk' ? 'text-[oklch(0.55_0.18_145)] hover:text-white' : 'text-gray-400 hover:text-white'}`}
                 >
+                  {section.name === 'Talk' && (
+                    <Mic size={12} className="inline-block mr-1.5 -mt-0.5" />
+                  )}
                   {section.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[oklch(0.55_0.18_145)] transition-all duration-300 group-hover/link:w-full" />
+                  <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[oklch(0.55_0.18_145)] transition-all duration-300 group-hover/link:w-full`} />
                 </a>
               ))}
             </div>
@@ -367,12 +376,19 @@ const AnimatedMenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () 
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
   return (
-    <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/5 rounded-t-full overflow-hidden">
-      <motion.div
-        className="h-full bg-gradient-to-r from-indigo-500 via-[oklch(0.55_0.18_145)] to-cyan-400"
-        style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
-      />
+    <div className="absolute top-0 left-0 right-0 h-[4px] bg-white/5 rounded-t-full overflow-hidden">
+      <svg width="100%" height="4" viewBox="0 0 100 4" preserveAspectRatio="none" className="absolute inset-0">
+        <motion.path
+          d="M 0 2 Q 2.5 0, 5 2 T 10 2 T 15 2 T 20 2 T 25 2 T 30 2 T 35 2 T 40 2 T 45 2 T 50 2 T 55 2 T 60 2 T 65 2 T 70 2 T 75 2 T 80 2 T 85 2 T 90 2 T 95 2 T 100 2"
+          fill="none"
+          stroke="oklch(0.55 0.18 145)"
+          strokeWidth="1"
+          style={{ pathLength: scrollYProgress }}
+        />
+      </svg>
     </div>
   );
 }

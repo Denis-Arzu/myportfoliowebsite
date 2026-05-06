@@ -101,10 +101,11 @@ export const Footer = () => {
             <p className="text-white/30 text-xs text-center sm:text-left font-mono">
               /studio/voice-engineering :: © {currentYear} Dentrix Apps. All rights reserved.
             </p>
-            <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-400 font-mono items-center justify-center sm:justify-start">
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-[10px] sm:text-xs text-gray-400 font-mono items-center justify-center sm:justify-start uppercase tracking-wider">
               <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Voice Systems Online</span>
-              <span className="hidden sm:inline">·</span>
-              <span className="text-center sm:text-left">Accepting New Engagements</span>
+              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[oklch(0.55_0.18_145)] animate-pulse"></span> Voice Agent: Active</span>
+              <span className="hidden sm:inline opacity-30">·</span>
+              <span className="text-center sm:text-left opacity-60">Ready for Engagement</span>
             </div>
           </div>
         </div>

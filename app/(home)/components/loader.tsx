@@ -57,25 +57,18 @@ const Loader = ({ onDone }: LoaderProps) => {
                   priority
                 />
               </div>
-              <p className="mt-1 text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[oklch(0.92_0.02_150)]/90 font-mono">
-                AI Voice Studio
-              </p>
             </motion.div>
 
-            {/* Loading bar */}
-            <motion.div
-              className="h-px w-48 overflow-hidden rounded-full bg-white/10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <motion.div
-                className="h-full bg-gradient-to-r from-[oklch(0.52_0.24_264)] via-[oklch(0.55_0.18_145)] to-[oklch(0.60_0.22_300)]"
-                initial={{ x: "-100%" }}
-                animate={{ x: "0%" }}
-                transition={{ duration: 2.2, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
-              />
-            </motion.div>
+            {/* Waveform Equalizer */}
+            <div className="flex items-end gap-1.5 h-10 mb-2">
+              <div className="w-1 rounded-full bg-[oklch(0.55_0.18_145)] animate-waveform" style={{ animationDelay: '0s' }} />
+              <div className="w-1 rounded-full bg-[oklch(0.55_0.18_145)] animate-waveform" style={{ animationDelay: '0.15s' }} />
+              <div className="w-1 rounded-full bg-[oklch(0.55_0.18_145)] animate-waveform" style={{ animationDelay: '0.3s' }} />
+              <div className="w-1 rounded-full bg-[oklch(0.55_0.18_145)] animate-waveform" style={{ animationDelay: '0.45s' }} />
+            </div>
+            <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/40 font-mono">
+              AI Voice Studio
+            </p>
           </div>
         </motion.div>
       )}

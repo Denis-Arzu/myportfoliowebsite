@@ -201,6 +201,23 @@ export function ContactSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col gap-6"
           >
+            {/* AI Agent CTA */}
+            <div 
+              onClick={() => window.dispatchEvent(new CustomEvent('open-voice-agent'))}
+              className="p-5 rounded-xl border border-[oklch(0.55_0.18_145)/0.2] bg-[oklch(0.55_0.18_145/0.05)] hover:bg-[oklch(0.55_0.18_145/0.1)] transition-all cursor-pointer group flex flex-col gap-2"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+                <span className="text-xs font-mono text-brand-green uppercase tracking-widest">Live AI Agent</span>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-white/90 group-hover:text-brand-green transition-colors">
+                  Prefer talking? Chat with our AI instantly.
+                </p>
+                <p className="text-xs text-white/35 mt-1 font-mono uppercase tracking-tight">Zero wait time · Voice enabled</p>
+              </div>
+            </div>
+
             {/* Contact Methods */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {calendlyMethod && (

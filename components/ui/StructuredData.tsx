@@ -50,15 +50,35 @@ const organizationSchema = {
     "https://www.linkedin.com/in/denis-arzu",
     "https://twitter.com/dentrixapps"
   ],
-  hasOffer: {
-    "@type": "Offer",
-    itemOffered: {
-      "@type": "Service",
-      name: "AI Voice Services",
-      description: "Professional AI voiceovers, voice cloning, multilingual dubbing in 29+ languages, and custom voice agent development. Same-day delivery available.",
-      priceCurrency: "USD",
-      price: "25-5000"
-    }
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "AI Voice Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI Voiceovers & Cloning",
+          description: "Professional AI voiceovers and custom voice cloning from 1-minute samples."
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Multilingual Dubbing",
+          description: "Video and audio dubbing into 29+ languages with emotion matching."
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Conversational Voice Agents",
+          description: "Custom AI voice agents for customer service, lead qualification, and interactive brand experiences powered by ElevenLabs."
+        }
+      }
+    ]
   }
 };
 

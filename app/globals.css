@@ -116,14 +116,21 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-geist-mono);
-    background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 2px,
-        oklch(0.85 0.3 150 / 0.04) 3px,
-        transparent 4px
-      );
+    background-color: var(--background);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 9999; /* Over all content for that analog feel */
   }
   h1, h2, h3, h4, h5, h6, p, span, li, a, button, input, textarea {
     font-family: var(--font-geist-mono);
@@ -146,97 +153,6 @@
   will-change: transform, opacity;
 }
 
-/* ─── Hero Light Beams (mouse-reactive, top-center) ────────────────────── */
-.hero-light-rays {
-  --ray-x: 50%;
-  --ray-y: 0deg;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero-light-rays::before {
-  content: '';
-  position: absolute;
-  top: -10%;
-  left: var(--ray-x, 50%);
-  width: 160%;
-  height: 110%;
-  transform: translateX(-50%) rotate(var(--ray-y, 0deg));
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  background: conic-gradient(
-    from 90deg at 50% 0%,
-    transparent 0%,
-    rgba(99, 102, 241, 0.14) 2.5%,
-    transparent 5%,
-    transparent 7%,
-    rgba(59, 130, 246, 0.18) 9%,
-    transparent 12%,
-    transparent 15%,
-    rgba(139, 92, 246, 0.12) 17%,
-    transparent 20%,
-    transparent 24%,
-    rgba(99, 102, 241, 0.15) 26%,
-    transparent 29%,
-    transparent 33%,
-    rgba(59, 130, 246, 0.10) 35%,
-    transparent 38%,
-    transparent 62%,
-    rgba(59, 130, 246, 0.10) 65%,
-    transparent 67%,
-    transparent 71%,
-    rgba(99, 102, 241, 0.15) 74%,
-    transparent 76%,
-    transparent 80%,
-    rgba(139, 92, 246, 0.12) 83%,
-    transparent 85%,
-    transparent 88%,
-    rgba(59, 130, 246, 0.18) 91%,
-    transparent 93%,
-    transparent 95%,
-    rgba(99, 102, 241, 0.14) 97.5%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 0%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 0%, transparent 75%);
-  animation: hero-rays-pulse 5s ease-in-out infinite alternate;
-}
-
-/* Ambient glow — follows mouse */
-.hero-ambient {
-  --glow-x: 50%;
-  --glow-y: 0%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70%;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse 50% 50% at var(--glow-x, 50%) calc(5% + var(--glow-y, 0%)),
-    rgba(99, 102, 241, 0.20) 0%,
-    rgba(59, 130, 246, 0.10) 30%,
-    rgba(139, 92, 246, 0.04) 50%,
-    transparent 70%
-  );
-  transition: background 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  animation: hero-glow-breathe 4s ease-in-out infinite alternate;
-}
-
-@keyframes hero-rays-pulse {
-  0%   { opacity: 0.75; }
-  100% { opacity: 1; }
-}
-
-@keyframes hero-glow-breathe {
-  0%   { opacity: 0.6; filter: blur(0px); }
-  100% { opacity: 1; filter: blur(2px); }
-}
 
 /* ─── Custom utilities (Tailwind v4 @utility) ───────────────────────────── */
 @utility preserve-3d {
@@ -401,14 +317,8 @@ a:hover .glitch::after {
 }
 
 .terminal-scanlines {
-  background-image:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 2px,
-      oklch(0.85 0.3 150 / 0.05) 3px,
-      transparent 4px
-    );
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
 }
 
 .terminal-panel {
@@ -453,3 +363,13 @@ a:hover .glitch::after {
   border-radius: 6px;
 }
 @keyframes skeleton-gradient { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ─── Waveform Equalizer Animation ─────────────────────────────────── */
+@keyframes waveform {
+  0%, 100% { height: 12px; opacity: 0.4; }
+  50% { height: 40px; opacity: 1; }
+}
+
+.animate-waveform {
+  animation: waveform 1.2s ease-in-out infinite;
+}

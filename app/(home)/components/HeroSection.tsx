@@ -2,39 +2,16 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import Link from 'next/link';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, Mic } from 'lucide-react';
 import { heroContent } from '@/lib/content-data';
 import { TextSwap } from '@/components/ui/text-swap';
 
 export default function HeroSection() {
   const { eyebrow, primaryHeadline, textSwapPhrases, subheadline, stats, primaryCta, secondaryCta } = heroContent;
-  const raysRef = useRef<HTMLDivElement>(null);
-  const ambientRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!raysRef.current || !ambientRef.current) return;
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    const x = (clientX / innerWidth - 0.5) * 2;  // -1 to 1
-    const y = (clientY / innerHeight - 0.5) * 2;
-
-    raysRef.current.style.setProperty('--ray-x', `${50 + x * 8}%`);
-    raysRef.current.style.setProperty('--ray-y', `${x * 3}deg`);
-    ambientRef.current.style.setProperty('--glow-x', `${50 + x * 12}%`);
-    ambientRef.current.style.setProperty('--glow-y', `${y * 8}%`);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [handleMouseMove]);
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
 
-      {/* Mouse-reactive light beams */}
-      <div ref={raysRef} className="hero-light-rays" aria-hidden="true" />
-      <div ref={ambientRef} className="hero-ambient" aria-hidden="true" />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
@@ -70,13 +47,13 @@ export default function HeroSection() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
 
-          <Link
-            href={secondaryCta.href}
-            className="group inline-flex items-center gap-2 px-5 py-3.5 text-white/40 hover:text-white/60 font-medium text-sm transition-colors"
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('open-voice-agent'))}
+            className="group inline-flex items-center gap-2 px-5 py-3.5 text-[oklch(0.55_0.18_145)]/60 hover:text-[oklch(0.55_0.18_145)] font-medium text-sm transition-colors cursor-pointer"
           >
-            {secondaryCta.label}
-            <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-          </Link>
+            <Mic className="w-4 h-4" />
+            Talk to Our AI
+          </button>
         </div>
 
         {/* Stats — minimal, no boxes */}
