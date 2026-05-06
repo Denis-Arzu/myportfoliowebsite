@@ -10,7 +10,7 @@ const organizationSchema = {
   foundingDate: "2024",
   description: "Professional AI voice studio offering voiceovers, voice cloning, multilingual dubbing, and voice agent development. Built for creators, brands, and businesses who refuse to sound amateur. Same-day delivery. Studio quality.",
   disambiguatingDescription: "An AI audio production and voice engineering studio, distinct from any dental or medical management software.",
-  industry: ["AI Voice Services", "Audio Production", "Voice Cloning", "Software Engineering"],
+  industry: ["AI Voice Services", "Audio Production", "Voice Cloning", "Voice Over", "Multilingual Dubbing"],
   founder: {
     "@type": "Person",
     name: "Denis Kioko",
@@ -43,7 +43,6 @@ const organizationSchema = {
     "SSMLVoiceEnhancement",
     "AudioProduction",
     "VoiceAgents",
-    "SoftwareEngineering",
     "ContentCreation"
   ],
   sameAs: [
@@ -63,7 +62,7 @@ const organizationSchema = {
   }
 };
 
-const softwareApplicationsSchema: unknown[] = [];
+const softwareApplicationsSchema = null;
 
 export function StructuredData() {
   return (
@@ -72,12 +71,6 @@ export function StructuredData() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(organizationSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(softwareApplicationsSchema),
         }}
       />
     </>

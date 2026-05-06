@@ -24,8 +24,27 @@ export type ContactFormState = {
 const submissions = new Map<string, { count: number; lastReset: number }>();
 const RATE_LIMIT = 3; // max submissions
 const RATE_WINDOW = 60 * 60 * 1000; // per hour (ms)
+const CLEANUP_INTERVAL = 60 * 60 * 1000; // cleanup every hour
+let lastCleanup = Date.now();
+
+function cleanupExpiredEntries() {
+  const now = Date.now();
+  // Only run cleanup once per hour to avoid performance hit
+  if (now - lastCleanup < CLEANUP_INTERVAL) return;
+  
+  lastCleanup = now;
+  const expiry = now - RATE_WINDOW;
+  
+  for (const [email, entry] of submissions.entries()) {
+    if (entry.lastReset < expiry) {
+      submissions.delete(email);
+    }
+  }
+}
 
 function isRateLimited(email: string): boolean {
+  cleanupExpiredEntries();
+  
   const now = Date.now();
   const entry = submissions.get(email);
 
@@ -144,16 +163,17 @@ export async function submitContactForm(
     }
   } else {
     // No Resend key configured — log to server console as fallback
-    console.log("──────────────────────────────────────────");
-    console.log("[Contact Form Submission]");
-    console.log(`  Name:    ${name}`);
-    console.log(`  Email:   ${email}`);
-    console.log(`  Company: ${company || "—"}`);
-    console.log(`  Service: ${serviceType || "—"}`);
-    console.log(`  Budget:  ${budget || "—"}`);
-    console.log(`  Message: ${description}`);
-    console.log(`  Time:    ${new Date().toISOString()}`);
-    console.log("──────────────────────────────────────────");
+    console.warn("──────────────────────────────────────────");
+    console.warn("[Contact Form Submission] - NO RESEND API KEY CONFIGURED");
+    console.warn(`  To enable email delivery, set RESEND_API_KEY environment variable`);
+    console.warn(`  Name:    ${name}`);
+    console.warn(`  Email:   ${email}`);
+    console.warn(`  Company: ${company || "—"}`);
+    console.warn(`  Service: ${serviceType || "—"}`);
+    console.warn(`  Budget:  ${budget || "—"}`);
+    console.warn(`  Message: ${description}`);
+    console.warn(`  Time:    ${new Date().toISOString()}`);
+    console.warn("──────────────────────────────────────────");
   }
 
   return {

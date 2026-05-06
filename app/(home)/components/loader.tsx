@@ -58,7 +58,7 @@ const Loader = ({ onDone }: LoaderProps) => {
                 />
               </div>
               <p className="mt-1 text-[10px] sm:text-xs tracking-[0.28em] uppercase text-[oklch(0.92_0.02_150)]/90 font-mono">
-                fix(world, code)
+                Your Brand's Voice, Engineered
               </p>
             </motion.div>
 

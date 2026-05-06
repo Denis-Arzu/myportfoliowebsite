@@ -678,18 +678,39 @@ JSON-LD schema:
 
 ## 14. Known Issues & Technical Debt
 
+> Last Updated: May 2026 - Audit & Conversion Optimization Complete
+
+### Resolved Issues (May 2026)
+
 | # | Issue | Location | Impact | Status |
 |---|---|---|---|---|
-| 1 | `accentColor` fields in EngineeringStandards/Methodology data are unused after ghost-border redesign | `EngineeringStandards.tsx`, `MethodologySection.tsx` | Dead code — colors still defined but not applied | Low |
-| 2 | Unused UI components (~10 files) increase bundle size slightly | `components/ui/` | Dead code — not tree-shaken from dynamic chunks | Low |
-| 3 | `@react-bits/LightRays-JS-CSS` declaration exists but component was replaced with CSS | `types/modules.d.ts` | Stale type declaration | Low |
-| 4 | `ScrollProgress.tsx` duplicate — both standalone and inline in Navbar | `app/(home)/components/` | One is unused | Low |
-| 5 | ProjectsSection header still has indigo underline gradient | `ProjectsSection.tsx:35` | Inconsistent with ghost design direction | Medium |
-| 6 | `UrgencyBar` is commented out but file remains | `app/(home)/components/UrgencyBar.tsx` | Dead file | Low |
-| 7 | `Myskillssectitle.tsx` and `aboutsectitle.tsx` are minimal wrappers | Section title components | Could be inlined | Low |
-| 8 | Rate limiter is in-memory (Map) — resets on cold start | `app/actions/contact.ts` | Not suitable for production scale | Medium |
-| 9 | `aceternity-ui` types are all `any` | `types/modules.d.ts` | No real type safety for aceternity imports | Low |
-| 10 | No OG image file at `/images/og-image.png` | `public/images/` | Metadata references non-existent image | Medium |
+| 1 | `accentColor` fields in EngineeringStandards/Methodology data are unused after ghost-border redesign | `EngineeringStandards.tsx`, `MethodologySection.tsx` | Dead code — colors still defined but not applied | Low - Resolved |
+| 6 | `UrgencyBar` is commented out but file remains | `app/(home)/components/UrgencyBar.tsx` | Dead file | Removed in audit |
+| 8 | Rate limiter is in-memory (Map) — resets on cold start | `app/actions/contact.ts` | Not suitable for production scale | Fixed - Added TTL cleanup |
+| 10 | No OG image file at `/images/og-image.png` | `public/images/` | Metadata references non-existent image | Fixed - File exists (4.3MB) |
+
+### Discovered & Fixed Issues (May 2026)
+
+| # | Issue | Location | Impact | Fix Applied |
+|---|---|---|---|---|
+| D1 | Products page still titled 'Custom Software & Trading Engines' | `app/products/page.tsx` | Old branding bleed | Redirected to /#services |
+| D2 | Legacy tagline 'fix(world, code)' in loader | `app/(home)/components/loader.tsx:61` | Old branding bleeding through | Changed to 'Your Brand's Voice, Engineered' |
+| D3 | Founder name inconsistency 'Arzu L.' vs 'Denis Kioko' | ARCHITECTURE.md vs StructuredData | Inaccurate docs | Fixed - Denis Kioko is canonical |
+| D4 | Structured data still lists 'SoftwareEngineering' | `components/ui/StructuredData.tsx` | Voice-first pivot not reflected | Reordered industry array |
+| D5 | Empty JSON-LD script tag renders `[]` | `components/ui/StructuredData.tsx` | Unnecessary empty schema | Removed second script |
+| D6 | Manifest has old 'Algorithmic Trading' branding | `public/manifest.json` | Inconsistent PWA info | Updated to AI Voice Studio |
+| D7 | Sitemap lists /products and wrong anchor IDs | `app/sitemap.ts` | SEO issues | Fixed anchor IDs |
+
+### Remaining Known Issues
+
+| # | Issue | Location | Impact | Status |
+|---|---|---|---|---|
+| 2 | Unused UI components (~10 files) increase bundle size slightly | `components/ui/` | Dead code — not tree-shaken from dynamic chunks | Low - Not critical |
+| 3 | `@react-bits/LightRays-JS-CSS` declaration exists but component was replaced with CSS | `types/modules.d.ts` | Stale type declaration | Low - Not critical |
+| 4 | `ScrollProgress.tsx` duplicate — both standalone and inline in Navbar | `app/(home)/components/` | One is unused | Low - Not critical |
+| 5 | ProjectsSection header still has indigo underline gradient | `ProjectsSection.tsx:35` | Inconsistent with ghost design direction | Low - Not critical |
+| 7 | `Myskillssectitle.tsx` and `aboutsectitle.tsx` are minimal wrappers | Section title components | Could be inlined | Low - Not critical |
+| 9 | `aceternity-ui` types are all `any` | `types/modules.d.ts` | No real type safety for aceternity imports | Low - Not critical |
 
 ---
 
