@@ -20,26 +20,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Dentrix Apps | AI Voice Studio — Voiceovers, Cloning & Dubbing",
+    default: "Dentrix Apps | AI Voice Studio & Software Engineering Lab",
     template: "%s | Dentrix Apps"
   },
-  description: "Professional AI voice services: voiceovers, voice cloning, multilingual dubbing, and voice agents. Built for creators, brands, and businesses who refuse to sound amateur. Same-day delivery. Studio quality. Based in Nairobi, serving globally.",
+  description: "Elite AI Voice Studio & Software Engineering Lab. Professional voice cloning, multilingual dubbing, and algorithmic trading engines (C++/Python). Precision-engineered AI automation for global brands and creators. Nairobi-based, excellence-driven.",
   keywords: [
-    "AI voiceover service",
-    "AI voice cloning",
+    "AI voice studio",
+    "voice cloning service",
     "multilingual dubbing",
+    "algorithmic trading engines",
+    "C++ software lab",
+    "Python AI automation",
     "SSML voice enhancement",
-    "YouTube intro voiceover",
-    "podcast ad voice",
-    "professional AI voice",
+    "professional AI voiceovers",
     "voice agent development",
     "ElevenLabs expert",
+    "Next.js engineering lab",
+    "quantitative trading systems",
     "AI audio production",
     "voice localization",
     "brand voice cloning",
-    "AI voice studio",
-    "e-learning narration",
-    "commercial voiceover AI"
   ],
   authors: [{ name: "Denis Kioko", url: "https://linkedin.com/in/denis-kioko-743234365" }],
   creator: "Denis Kioko",
@@ -62,8 +62,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dentrix Apps | AI Voice Studio — Your Brand's Voice, Engineered",
-    description: "Professional AI voiceovers, voice cloning, and multilingual dubbing. Same-day delivery. Studio quality. Built for creators and brands who refuse to sound amateur.",
+    title: "Dentrix Apps | AI Voice Studio & Engineering Lab",
+    description: "Professional AI voiceovers, voice cloning, and high-performance software engineering. Built for creators, brands, and businesses who refuse to sound amateur.",
     url: "https://dentrixapps.com",
     siteName: "Dentrix Apps",
     locale: "en_US",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "Dentrix Apps | AI Voice Studio — Voiceovers, Cloning & Dubbing",
+        alt: "Dentrix Apps | AI Voice Studio & Software Engineering Lab",
       }
     ],
   },
@@ -82,8 +82,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@dentrixapps",
     creator: "@deniskiooko",
-    title: "Dentrix Apps | AI Voice Studio",
-    description: "Professional AI voiceovers, voice cloning & multilingual dubbing. Same-day delivery. Studio quality. Nairobi-based, globally served.",
+    title: "Dentrix Apps | AI Voice Studio & Engineering Lab",
+    description: "Professional AI voiceovers, voice cloning & algorithmic trading systems. Nairobi-based, globally served.",
     images: [
       {
         url: "/images/og-image.webp",
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     yandex: "yandex-verification-code",
   },
   category: "technology",
-  classification: "AI Voice Services, Voice Cloning, Audio Production, Dubbing",
+  classification: "AI Voice Services, Software Engineering, Quantitative Trading, Audio Production",
   icons: {
     icon: "/icon.webp",
     apple: "/icon.webp",

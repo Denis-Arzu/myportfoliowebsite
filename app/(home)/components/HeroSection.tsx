@@ -2,16 +2,15 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import Link from 'next/link';
-import { ArrowRight, ChevronDown, Mic } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { heroContent } from '@/lib/content-data';
 import { TextSwap } from '@/components/ui/text-swap';
 
 export default function HeroSection() {
-  const { eyebrow, primaryHeadline, textSwapPhrases, subheadline, stats, primaryCta, secondaryCta } = heroContent;
+  const { eyebrow, primaryHeadline, textSwapPhrases, subheadline, stats, primaryCta } = heroContent;
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center">
@@ -47,13 +46,13 @@ export default function HeroSection() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
 
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('open-voice-agent'))}
-            className="group inline-flex items-center gap-2 px-5 py-3.5 text-[oklch(0.55_0.18_145)]/60 hover:text-[oklch(0.55_0.18_145)] font-medium text-sm transition-colors cursor-pointer"
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/10 text-white rounded-lg font-semibold text-sm transition-all duration-300 hover:bg-white/5 hover:scale-[1.02]"
           >
-            <Mic className="w-4 h-4" />
-            Talk to Our AI
-          </button>
+            <MessageCircle className="w-4 h-4" />
+            Discuss A Project
+          </a>
         </div>
 
         {/* Stats — minimal, no boxes */}

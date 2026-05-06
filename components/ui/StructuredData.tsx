@@ -4,17 +4,17 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "ProfessionalService"],
   name: "Dentrix Apps",
-  alternateName: "Dentrix Apps AI Voice Studio",
+  alternateName: ["Dentrix Apps AI Voice Studio", "Dentrix Software Engineering Lab"],
   url: "https://dentrixapps.com",
   logo: "https://dentrixapps.com/icon.webp",
   foundingDate: "2024",
-  description: "Professional AI voice studio offering voiceovers, voice cloning, multilingual dubbing, and voice agent development. Built for creators, brands, and businesses who refuse to sound amateur. Same-day delivery. Studio quality.",
-  disambiguatingDescription: "An AI audio production and voice engineering studio, distinct from any dental or medical management software.",
-  industry: ["AI Voice Services", "Audio Production", "Voice Cloning"],
+  description: "Elite AI Voice Studio & Software Engineering Lab. Specialized in professional voice cloning, multilingual dubbing, and high-performance algorithmic trading engines (C++/Python). Precision engineering for the AI era.",
+  disambiguatingDescription: "A specialized AI audio production and software engineering studio, distinct from any dental or medical management software.",
+  industry: ["AI Voice Services", "Software Engineering", "Quantitative Finance", "Audio Production"],
   founder: {
     "@type": "Person",
-    name: "Dennis Kioko",
-    jobTitle: "Founder & Voice Engineer",
+    name: "Denis Kioko",
+    jobTitle: "Founder & Lead Engineer",
     url: "https://linkedin.com/in/denis-kioko-743234365"
   },
   address: {
@@ -39,43 +39,44 @@ const organizationSchema = {
     "AIVoiceSynthesis",
     "VoiceCloning",
     "MultilingualDubbing",
-    "TextToSpeech",
-    "SSMLVoiceEnhancement",
-    "AudioProduction",
+    "AlgorithmicTrading",
+    "CPPSupport",
+    "PythonAutomation",
+    "SoftwareEngineering",
     "VoiceAgents",
-    "ContentCreation"
+    "QuantitativeAnalysis"
   ],
   sameAs: [
     "https://github.com/Denis-Arzu",
-    "https://www.linkedin.com/in/denis-arzu",
+    "https://www.linkedin.com/in/denis-kioko-743234365",
     "https://twitter.com/dentrixapps"
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "AI Voice Services",
+    name: "Engineering & AI Services",
     itemListElement: [
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "AI Voiceovers & Cloning",
-          description: "Professional AI voiceovers and custom voice cloning from 1-minute samples."
+          name: "AI Voice Studio",
+          description: "Professional voiceovers, cloning, and multilingual dubbing."
         }
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Multilingual Dubbing",
-          description: "Video and audio dubbing into 29+ languages with emotion matching."
+          name: "Algorithmic Trading Engines",
+          description: "High-performance C++ and Python trading systems for quantitative finance."
         }
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Conversational Voice Agents",
-          description: "Custom AI voice agents for customer service, lead qualification, and interactive brand experiences powered by ElevenLabs."
+          name: "Conversational AI Agents",
+          description: "Custom WebRTC voice agents for enterprise automation."
         }
       }
     ]

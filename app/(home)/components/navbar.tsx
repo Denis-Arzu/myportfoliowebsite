@@ -92,17 +92,12 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
     { name: 'Pricing', href: '#pricing' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
-    { name: 'Talk', href: '#', isExternal: true },
   ];
 
   /* ─── Navigation Handler ─────────────────────────────────────────────── */
   const handleNavigation = useCallback((section: Section) => {
     setMenuOpen(false);
 
-    if (section.name === 'Talk') {
-      window.dispatchEvent(new CustomEvent('open-voice-agent'));
-      return;
-    }
 
     if (section.isExternal) {
       // Products → show loader, then navigate
@@ -173,11 +168,8 @@ const Navbar: React.FC<{ isBackMode?: boolean; onBack?: () => void }> = ({ isBac
                       handleNavigation(section);
                     }
                   }}
-                  className={`relative text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-200 group/link ${section.name === 'Talk' ? 'text-[oklch(0.55_0.18_145)] hover:text-white' : 'text-gray-400 hover:text-white'}`}
+                  className={`relative text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-200 group/link text-gray-400 hover:text-white`}
                 >
-                  {section.name === 'Talk' && (
-                    <Mic size={12} className="inline-block mr-1.5 -mt-0.5" />
-                  )}
                   {section.name}
                   <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-[oklch(0.55_0.18_145)] transition-all duration-300 group-hover/link:w-full`} />
                 </a>
