@@ -67,7 +67,7 @@ const Loader = ({ onDone }: LoaderProps) => {
               <div className="w-1 rounded-full bg-[oklch(0.55_0.18_145)] animate-waveform" style={{ animationDelay: '0.45s' }} />
             </div>
             <p className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/40 font-mono">
-              AI Voice Studio
+              Real Estate AI Chatbots
             </p>
           </div>
         </motion.div>

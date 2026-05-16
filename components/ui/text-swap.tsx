@@ -14,16 +14,17 @@ export function TextSwap({ phrases, interval = 3000, className = "" }: TextSwapP
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timeout = window.setTimeout(() => setMounted(true), 0);
+    return () => window.clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % phrases.length);
     }, interval);
 
-    return () => clearInterval(timer);
+    return () => window.clearInterval(timer);
   }, [phrases.length, interval, mounted]);
 
   // Show static text on SSR/first render to avoid hydration mismatch
@@ -71,38 +72,43 @@ export function TypewriterSwap({
 
   useEffect(() => {
     const currentPhrase = phrases[currentIndex];
-    
+    let timer: number | undefined;
+
     if (isPaused) {
-      const pauseTimer = setTimeout(() => {
+      timer = window.setTimeout(() => {
         setIsPaused(false);
         setIsDeleting(true);
       }, 1500);
-      return () => clearTimeout(pauseTimer);
+      return () => window.clearTimeout(timer);
     }
 
     if (isDeleting) {
       if (displayText === "") {
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % phrases.length);
-        return;
+        timer = window.setTimeout(() => {
+          setIsDeleting(false);
+          setCurrentIndex((prev) => (prev + 1) % phrases.length);
+        }, 0);
+        return () => window.clearTimeout(timer);
       }
 
-      const deleteTimer = setTimeout(() => {
+      const deleteTimer = window.setTimeout(() => {
         setDisplayText(displayText.slice(0, -1));
       }, typingSpeed / 2);
-      return () => clearTimeout(deleteTimer);
+      return () => window.clearTimeout(deleteTimer);
     }
 
     if (displayText === currentPhrase) {
-      setIsPaused(true);
-      return;
+      timer = window.setTimeout(() => {
+        setIsPaused(true);
+      }, 0);
+      return () => window.clearTimeout(timer);
     }
 
-    const typeTimer = setTimeout(() => {
+    const typeTimer = window.setTimeout(() => {
       setDisplayText(currentPhrase.slice(0, displayText.length + 1));
     }, typingSpeed);
 
-    return () => clearTimeout(typeTimer);
+    return () => window.clearTimeout(typeTimer);
   }, [displayText, isDeleting, isPaused, currentIndex, phrases, typingSpeed]);
 
   return (

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint . --ext .ts,.tsx",
+    "og-image": "node scripts/create-og-image.js",
     "lighthouse:baseline": "lighthouse https://dentrixapps.com --output=baseline.html --output-path=./lighthouse-baseline.html --only-categories=performance,accessibility,best-practices,seo"
   },
   "dependencies": {

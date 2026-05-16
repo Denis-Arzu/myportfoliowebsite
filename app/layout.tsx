@@ -1,9 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Geist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from '@/components/theme-provider';
 import { StructuredData } from "@/components/ui/StructuredData";
 import PrivacyBanner from "@/app/(home)/components/PrivacyBanner";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  KEYWORDS,
+  SITE_NAME,
+  SITE_URL,
+  absoluteUrl,
+  ogImage,
+} from "@/lib/seo";
 
 
 const geistSans = Geist({
@@ -18,32 +27,24 @@ const geistMono = Geist_Mono({
   display: 'swap',
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#050506",
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dentrix Apps | AI Voice Studio & Software Engineering Lab",
-    template: "%s | Dentrix Apps"
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: "Elite AI Voice Studio & Software Engineering Lab. Professional voice cloning, multilingual dubbing, and algorithmic trading engines (C++/Python). Precision-engineered AI automation for global brands and creators. Nairobi-based, excellence-driven.",
-  keywords: [
-    "AI voice studio",
-    "voice cloning service",
-    "multilingual dubbing",
-    "algorithmic trading engines",
-    "C++ software lab",
-    "Python AI automation",
-    "SSML voice enhancement",
-    "professional AI voiceovers",
-    "voice agent development",
-    "ElevenLabs expert",
-    "Next.js engineering lab",
-    "quantitative trading systems",
-    "AI audio production",
-    "voice localization",
-    "brand voice cloning",
-  ],
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [...KEYWORDS],
   authors: [{ name: "Denis Kioko", url: "https://linkedin.com/in/denis-kioko-743234365" }],
   creator: "Denis Kioko",
-  publisher: "Dentrix Apps",
+  publisher: SITE_NAME,
   robots: {
     index: true,
     follow: true,
@@ -56,50 +57,32 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://dentrixapps.com",
+    canonical: SITE_URL,
     languages: {
-      en: "https://dentrixapps.com",
+      en: SITE_URL,
     },
   },
   openGraph: {
-    title: "Dentrix Apps | AI Voice Studio & Engineering Lab",
-    description: "Professional AI voiceovers, voice cloning, and high-performance software engineering. Built for creators, brands, and businesses who refuse to sound amateur.",
-    url: "https://dentrixapps.com",
-    siteName: "Dentrix Apps",
+    title: "Dentrix Apps | AI Chatbots for Real Estate",
+    description:
+      "Turn your real estate website into a 24/7 lead-capturing machine. See your chatbot built on your site before you pay.",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
-    alternateLocale: "en_GB",
-    images: [
-      {
-        url: "/images/og-image.webp",
-        width: 1200,
-        height: 630,
-        alt: "Dentrix Apps | AI Voice Studio & Software Engineering Lab",
-      }
-    ],
+    images: [ogImage],
   },
   twitter: {
     card: "summary_large_image",
     site: "@dentrixapps",
     creator: "@deniskiooko",
-    title: "Dentrix Apps | AI Voice Studio & Engineering Lab",
-    description: "Professional AI voiceovers, voice cloning & algorithmic trading systems. Nairobi-based, globally served.",
-    images: [
-      {
-        url: "/images/og-image.webp",
-        width: 1200,
-        height: 630,
-        alt: "Dentrix Apps - AI Voice Studio",
-      }
-    ],
-  },
-  metadataBase: new URL("https://dentrixapps.com"),
-  verification: {
-    google: "google-site-verification-code",
-    yandex: "yandex-verification-code",
+    title: "Dentrix Apps | Real Estate AI Chatbots",
+    description:
+      "AI chatbots for real estate agents. Lead capture 24/7 — preview on your site before you pay.",
+    images: [ogImage],
   },
   category: "technology",
-  classification: "AI Voice Services, Software Engineering, Quantitative Trading, Audio Production",
+  classification: "Real Estate Technology, AI Chatbots, Lead Generation",
   icons: {
     icon: "/icon.webp",
     apple: "/icon.webp",
@@ -133,7 +116,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="image" href="/images/og-image.webp" />
+        <link rel="preload" as="image" href={absoluteUrl(ogImage.url)} />
       </head>
       <body className={`${geistMono.variable} ${geistSans.variable} font-mono antialiased`}>
         <SmoothScroll>

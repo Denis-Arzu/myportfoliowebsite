@@ -8,6 +8,10 @@ declare module 'resend' {
         subject: string;
         html: string;
         replyTo?: string;
+        attachments?: Array<{
+          filename: string;
+          content: Buffer | string;
+        }>;
       }) => Promise<{ id: string; error?: { message: string } }>;
     };
   }

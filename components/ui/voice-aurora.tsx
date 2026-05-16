@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 
 interface VoiceAuroraProps {
   isMobile?: boolean;
@@ -17,43 +17,46 @@ export const VoiceAurora: React.FC<VoiceAuroraProps> = ({
   const timeRef = useRef(0);
 
   // Band configurations
-  const bands = [
-    {
-      color: "oklch(0.55 0.18 145 / 0.12)", // Brand Green
-      speed: 0.0004,
-      amplitude: isMobile ? 30 : 50,
-      frequency: 0.0015,
-      offset: 0,
-    },
-    {
-      color: "oklch(0.52 0.24 264 / 0.10)", // Brand Indigo
-      speed: 0.0003,
-      amplitude: isMobile ? 25 : 40,
-      frequency: 0.002,
-      offset: Math.PI / 3,
-    },
-    {
-      color: "oklch(0.60 0.22 300 / 0.06)", // Brand Purple
-      speed: 0.0005,
-      amplitude: isMobile ? 35 : 60,
-      frequency: 0.001,
-      offset: Math.PI / 1.5,
-    },
-    {
-      color: "rgba(255, 255, 255, 0.03)", // Shimmer
-      speed: 0.0008,
-      amplitude: isMobile ? 15 : 25,
-      frequency: 0.003,
-      offset: Math.PI,
-    },
-    {
-      color: "oklch(0.55 0.18 145 / 0.08)", // Brand Green 2
-      speed: 0.00035,
-      amplitude: isMobile ? 20 : 35,
-      frequency: 0.0018,
-      offset: Math.PI / 4,
-    },
-  ];
+  const bands = useMemo(
+    () => [
+      {
+        color: "oklch(0.55 0.18 145 / 0.12)", // Brand Green
+        speed: 0.0004,
+        amplitude: isMobile ? 30 : 50,
+        frequency: 0.0015,
+        offset: 0,
+      },
+      {
+        color: "oklch(0.52 0.24 264 / 0.10)", // Brand Indigo
+        speed: 0.0003,
+        amplitude: isMobile ? 25 : 40,
+        frequency: 0.002,
+        offset: Math.PI / 3,
+      },
+      {
+        color: "oklch(0.60 0.22 300 / 0.06)", // Brand Purple
+        speed: 0.0005,
+        amplitude: isMobile ? 35 : 60,
+        frequency: 0.001,
+        offset: Math.PI / 1.5,
+      },
+      {
+        color: "rgba(255, 255, 255, 0.03)", // Shimmer
+        speed: 0.0008,
+        amplitude: isMobile ? 15 : 25,
+        frequency: 0.003,
+        offset: Math.PI,
+      },
+      {
+        color: "oklch(0.55 0.18 145 / 0.08)", // Brand Green 2
+        speed: 0.00035,
+        amplitude: isMobile ? 20 : 35,
+        frequency: 0.0018,
+        offset: Math.PI / 4,
+      },
+    ],
+    [isMobile]
+  );
 
   const draw = useCallback(
     (ctx: CanvasRenderingContext2D, width: number, height: number) => {
@@ -139,7 +142,7 @@ export const VoiceAurora: React.FC<VoiceAuroraProps> = ({
   );
 
   const animate = useCallback(
-    (time: number) => {
+    function animate(time: number) {
       const canvas = canvasRef.current;
       if (!canvas) return;
 

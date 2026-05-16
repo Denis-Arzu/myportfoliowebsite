@@ -8,12 +8,16 @@ const PrivacyBanner: React.FC = () => {
 
   useEffect(() => {
     const dismissed = window.localStorage.getItem("privacy-banner-dismissed") === "true";
-    const gpc = typeof navigator !== "undefined" && "globalPrivacyControl" in navigator
+    const gpc = "globalPrivacyControl" in navigator
       ? Boolean((navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl)
       : false;
 
-    setGpcEnabled(gpc);
-    setVisible(!dismissed);
+    const timeout = window.setTimeout(() => {
+      setVisible(!dismissed);
+      setGpcEnabled(gpc);
+    }, 0);
+
+    return () => window.clearTimeout(timeout);
   }, []);
 
   const dismiss = () => {

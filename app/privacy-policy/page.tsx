@@ -1,9 +1,15 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Dentrix Apps",
-  description: "Privacy Policy for Dentrix Apps - Professional AI voice studio specializing in voiceovers, voice cloning, and multilingual dubbing.",
-  robots: "noindex, follow",
+  title: "Privacy Policy",
+  description:
+    "How Dentrix Apps collects and uses data for real estate AI chatbots, lead capture, and website inquiries.",
+  robots: { index: false, follow: true },
+  alternates: {
+    canonical: absoluteUrl("/privacy-policy"),
+  },
 };
 
 export default function PrivacyPolicy() {
@@ -12,7 +18,6 @@ export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-black text-[oklch(0.8_0_0)] font-mono selection:bg-[oklch(0.85_0.3_150/0.3)] selection:text-[oklch(0.85_0.3_150)]">
       <div className="max-w-4xl mx-auto px-6 py-24">
-        {/* Terminal Header */}
         <div className="mb-12 border-b border-white/10 pb-8">
           <div className="flex items-center gap-2 mb-4 text-[oklch(0.85_0.3_150)] text-xs">
             <span className="animate-pulse">●</span>
@@ -26,21 +31,17 @@ export default function PrivacyPolicy() {
           </p>
         </div>
 
-        {/* Content Box with Terminal Styling */}
         <div className="relative border border-dashed border-white/10 p-6 md:p-10 bg-white/[0.02] backdrop-blur-sm">
           <div className="space-y-12">
-            
-            {/* Introduction */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
                 <span className="text-[oklch(0.85_0.3_150)]">[01]</span> Overview
               </h2>
               <p className="leading-relaxed">
-                Dentrix Apps ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Dentrix Apps. This Privacy Policy applies to our website (dentrixapps.com) and its associated subdomains.
+                Dentrix Apps (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Dentrix Apps. This Privacy Policy applies to our website (dentrixapps.com) and its associated subdomains.
               </p>
             </section>
 
-            {/* Data Collection */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
                 <span className="text-[oklch(0.85_0.3_150)]">[02]</span> Data Collection
@@ -64,17 +65,15 @@ export default function PrivacyPolicy() {
               </ul>
             </section>
 
-            {/* Use of Information */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
                 <span className="text-[oklch(0.85_0.3_150)]">[03]</span> Use of Information
               </h2>
               <p className="leading-relaxed">
-                The information we collect is used solely for the purpose of communicating with you regarding your inquiries, providing our AI voice services and audio production solutions, and improving our digital platforms. We do not use your data for automated profiling or targeted advertising without explicit consent.
+                The information we collect is used solely for the purpose of communicating with you regarding your inquiries, providing our AI chatbot and lead-capture services for real estate agents, and improving our digital platforms. We do not use your data for automated profiling or targeted advertising without explicit consent.
               </p>
             </section>
 
-            {/* Cookie Policy */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
                 <span className="text-[oklch(0.85_0.3_150)]">[04]</span> Cookie Policy
@@ -84,7 +83,6 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            {/* Your CCPA Rights */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
                 <span className="text-[oklch(0.85_0.3_150)]">[05]</span> Your CCPA Rights
@@ -112,7 +110,6 @@ export default function PrivacyPolicy() {
               </ul>
             </section>
 
-            {/* Do Not Sell or Share */}
             <section className="bg-[oklch(0.85_0.3_150/0.05)] border border-[oklch(0.85_0.3_150/0.2)] p-6">
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 uppercase tracking-widest">
                 Do Not Sell or Share My Personal Information
@@ -120,36 +117,36 @@ export default function PrivacyPolicy() {
               <p className="leading-relaxed mb-6">
                 <strong>Dentrix Apps does not sell your personal information.</strong> We do not share your private data with third parties for their own commercial gain. If you wish to formalize a request to ensure your data is never sold or shared, please contact us at:
               </p>
-              <a 
-                href="mailto:ceo@dentrixapps.com" 
+              <a
+                href="mailto:ceo@dentrixapps.com"
                 className="text-[oklch(0.85_0.3_150)] font-bold decoration-2 underline-offset-4 hover:underline"
               >
                 ceo@dentrixapps.com
               </a>
             </section>
 
-            {/* Contact */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
                 <span className="text-[oklch(0.85_0.3_150)]">[06]</span> Contact Procedure
               </h2>
               <p className="leading-relaxed">
-                If you have any questions about this Privacy Policy, please contact our Data Protection Officer at 
-                <a href="mailto:ceo@dentrixapps.com" className="ml-1 text-[oklch(0.85_0.3_150)] hover:underline">ceo@dentrixapps.com</a>.
+                If you have any questions about this Privacy Policy, please contact our Data Protection Officer at{" "}
+                <a href="mailto:ceo@dentrixapps.com" className="text-[oklch(0.85_0.3_150)] hover:underline">
+                  ceo@dentrixapps.com
+                </a>
+                .
               </p>
             </section>
-
           </div>
         </div>
 
-        {/* Footer Navigation */}
         <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 text-center sm:text-left text-xs text-[oklch(0.8_0_0/0.5)]">
-          <a href="/" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
+          <Link href="/" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
             &lt; RETURN_TO_ROOT
-          </a>
-          <a href="/terms-of-service" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
+          </Link>
+          <Link href="/terms-of-service" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
             PROCEED_TO_TERMS_OF_SERVICE &gt;
-          </a>
+          </Link>
         </div>
       </div>
     </main>

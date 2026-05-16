@@ -1,17 +1,18 @@
 {
-  "short_name": "AI Voice Studio",
-  "name": "Dentrix Apps — AI Voice Studio",
-  "description": "Professional AI voice studio specializing in voiceovers, cloning, and dubbing.",
+  "short_name": "Dentrix Apps",
+  "name": "Dentrix Apps — Real Estate AI Chatbots",
+  "description": "AI chatbots that turn real estate agents' websites into 24/7 lead-capturing machines — preview on your site before you pay.",
   "icons": [
     {
       "src": "/icon.webp",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any maskable"
     }
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#000000"
+  "theme_color": "#050506",
+  "background_color": "#050506",
+  "lang": "en-US"
 }

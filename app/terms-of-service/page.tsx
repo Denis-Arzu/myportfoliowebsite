@@ -1,9 +1,15 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { absoluteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Dentrix Apps",
-  description: "Terms of Service for Dentrix Apps - Professional AI voice studio specializing in voiceovers, voice cloning, and multilingual dubbing.",
-  robots: "noindex, follow",
+  title: "Terms of Service",
+  description:
+    "Terms of Service for Dentrix Apps AI chatbots and lead-capture services for real estate agents.",
+  robots: { index: false, follow: true },
+  alternates: {
+    canonical: absoluteUrl("/terms-of-service"),
+  },
 };
 
 export default function TermsOfService() {
@@ -36,7 +42,7 @@ export default function TermsOfService() {
                 <span className="text-[oklch(0.85_0.3_150)]">[01]</span> Agreement
               </h2>
               <p className="leading-relaxed">
-                By accessing or using the services provided by Dentrix Apps ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree to all of these terms, do not use our services or website.
+                By accessing or using the services provided by Dentrix Apps (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), you agree to be bound by these Terms of Service. If you do not agree to all of these terms, do not use our services or website.
               </p>
             </section>
 
@@ -73,7 +79,7 @@ export default function TermsOfService() {
                 To the maximum extent permitted by applicable law, Dentrix Apps shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly.
               </p>
               <div className="bg-white/5 border-l-2 border-[oklch(0.85_0.3_150)] p-4 text-sm italic">
-                "Our maximum aggregate liability for any claim arising out of or relating to these terms or our services shall not exceed the total amount paid by you to us in the six (6) months preceding the claim."
+                &quot;Our maximum aggregate liability for any claim arising out of or relating to these terms or our services shall not exceed the total amount paid by you to us in the six (6) months preceding the claim.&quot;
               </div>
             </section>
 
@@ -112,12 +118,12 @@ export default function TermsOfService() {
 
         {/* Footer Navigation */}
         <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 text-center sm:text-left text-xs text-[oklch(0.8_0_0/0.5)]">
-          <a href="/privacy-policy" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
+          <Link href="/privacy-policy" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
             &lt; RETURN_TO_PRIVACY_POLICY
-          </a>
-          <a href="/" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
+          </Link>
+          <Link href="/" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
             RETURN_TO_ROOT &gt;
-          </a>
+          </Link>
         </div>
       </div>
     </main>

@@ -1,28 +1,21 @@
 import type { MetadataRoute } from "next";
-
-const baseUrl = "https://dentrixapps.com";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   return [
     {
-      url: `${baseUrl}`,
+      url: SITE_URL,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/privacy-policy`,
+      url: `${SITE_URL}/contact`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms-of-service`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.3,
+      priority: 0.9,
     },
   ];
 }
