@@ -45,20 +45,20 @@ export function SiteFooter() {
           </p>
           <div className="space-y-1 text-[11px] text-white/20 font-mono">
             <p>Dentrix Apps LLC</p>
-            <p>1621 Central Ave</p>
-            <p>Cheyenne, WY 82001</p>
+            {/* <p>1621 Central Ave</p>
+            <p>Cheyenne, WY 82001</p> */}
             <a
               href="mailto:support@dentrixapps.com"
               className="block hover:text-white/50 transition-colors"
             >
               support@dentrixapps.com
             </a>
-            <a
+            {/* <a
               href="tel:+13072008300"
               className="block hover:text-white/50 transition-colors"
             >
               +1 (307) 200-8300
-            </a>
+            </a> */}
             <p className="text-white/12 pt-1">Mon–Fri · 9 AM–5 PM MT</p>
           </div>
         </div>
@@ -69,10 +69,10 @@ export function SiteFooter() {
             Product
           </p>
           {[
-            { label: "How It Works", href: "/#how-it-works" },
-            { label: "Pricing — $200 One-Time", href: "/#pricing" },
+            // { label: "How It Works", href: "/#how-it-works" },
+            // { label: "Pricing — $200 One-Time", href: "/#pricing" },
             { label: "Live Demo", href: "/contact" },
-            { label: "FAQ", href: "/#faq" },
+            // { label: "FAQ", href: "/#faq" },
             { label: "Contact Us", href: "/contact" },
           ].map(({ label, href }) => (
             <Link
