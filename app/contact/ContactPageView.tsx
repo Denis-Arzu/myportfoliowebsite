@@ -5,7 +5,15 @@ import { motion, AnimatePresence } from "motion/react";
 import Navbar from "@/app/(home)/components/navbar";
 import { ContactSection } from "@/app/(home)/components/ContactSection";
 import { SiteFooter } from "@/app/(home)/components/SiteFooter";
-import { SpaceChatOverlay } from "@/app/(home)/components/SpaceChatOverlay";
+import dynamic from "next/dynamic";
+
+const SpaceChatOverlay = dynamic(
+  () =>
+    import("@/app/(home)/components/SpaceChatOverlay").then(
+      (m) => m.SpaceChatOverlay,
+    ),
+  { ssr: false },
+);
 
 export function ContactPageView() {
   const [chatOpen, setChatOpen] = useState(false);

@@ -7,11 +7,9 @@ import Navbar from "./components/navbar";
 import HeroSection from "./components/HeroSection";
 import { CursorGradient } from "./components/CursorGradient";
 import { SiteFooter } from "./components/SiteFooter";
-import { SpaceChatOverlay } from "./components/SpaceChatOverlay";
 
-// Keep the panel for /contact page — not used here but exported symbol stays live
-const ChatAgentPanel = dynamic(
-  () => import("./components/ChatAgentPanel").then((m) => m.ChatAgentPanel),
+const SpaceChatOverlay = dynamic(
+  () => import("./components/SpaceChatOverlay").then((m) => m.SpaceChatOverlay),
   { ssr: false },
 );
 
@@ -58,7 +56,7 @@ export default function HomePage() {
         )}
       </AnimatePresence>
 
-      {/* Space chat — mounts over everything */}
+      {/* Space chat — mounts on demand */}
       <AnimatePresence>
         {chatOpen && (
           <motion.div
@@ -73,8 +71,6 @@ export default function HomePage() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <ChatAgentPanel />
     </main>
   );
 }

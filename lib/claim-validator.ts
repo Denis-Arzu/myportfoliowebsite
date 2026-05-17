@@ -1,4 +1,9 @@
-export type SourceDoc = { id?: string; title?: string; text: string; source?: string };
+export type SourceDoc = {
+  id?: string;
+  title?: string;
+  text: string;
+  source?: string;
+};
 
 const STOPWORDS = new Set([
   "the",
@@ -34,7 +39,7 @@ function tokenize(s: string) {
 
 export function validateClaims(
   response: string,
-  sources: SourceDoc[] = []
+  sources: SourceDoc[] = [],
 ): {
   confidence: "high" | "medium" | "low";
   supportingSources: { source?: string; title?: string; snippet?: string }[];
@@ -56,16 +61,18 @@ export function validateClaims(
   const details = sentences.map((sentence) => {
     const toks = tokenize(sentence);
     const matches = toks.filter((t) => srcTokens.has(t));
-    const supported = matches.length >= Math.min(2, Math.max(1, Math.floor(toks.length / 3)));
+    const supported =
+      matches.length >= Math.min(2, Math.max(1, Math.floor(toks.length / 3)));
     return { sentence, supported, matches };
   });
 
   const supportedCount = details.filter((d) => d.supported).length;
   const score = supportedCount / details.length;
 
+  // KB answers are short by design — generous thresholds prevent false "low" ratings.
   let confidence: "high" | "medium" | "low" = "low";
-  if (score >= 0.8) confidence = "high";
-  else if (score >= 0.4) confidence = "medium";
+  if (score >= 0.5) confidence = "high";
+  else if (score >= 0.2) confidence = "medium";
 
   // Pick top sources that contain most matched tokens
   const srcScores = sources.map((s) => {

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Geist } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from "@/components/theme-provider";
 import { StructuredData } from "@/components/ui/StructuredData";
 import PrivacyBanner from "@/app/(home)/components/PrivacyBanner";
 import {
@@ -14,17 +14,16 @@ import {
   ogImage,
 } from "@/lib/seo";
 
-
 const geistSans = Geist({
   subsets: ["latin"],
   variable: "--font-geist-sans",
-  display: 'swap',
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
-  display: 'swap',
+  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -42,8 +41,8 @@ export const metadata: Metadata = {
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [...KEYWORDS],
-  authors: [{ name: "Denis Kioko", url: "https://linkedin.com/in/denis-kioko-743234365" }],
-  creator: "Denis Kioko",
+  authors: [{ name: "Dentrix Apps LLC" }],
+  creator: "Dentrix Apps LLC",
   publisher: SITE_NAME,
   robots: {
     index: true,
@@ -63,9 +62,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Dentrix Apps | AI Chatbots for Real Estate",
-    description:
-      "Turn your real estate website into a 24/7 lead-capturing machine. See your chatbot built on your site before you pay.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_US",
@@ -74,11 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@dentrixapps",
-    creator: "@deniskiooko",
-    title: "Dentrix Apps | Real Estate AI Chatbots",
-    description:
-      "AI chatbots for real estate agents. Lead capture 24/7 — preview on your site before you pay.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     images: [ogImage],
   },
   category: "technology",
@@ -108,17 +103,23 @@ import { SmoothScroll } from "@/components/ui/smooth-scroll";
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="preload" as="image" href={absoluteUrl(ogImage.url)} />
       </head>
-      <body className={`${geistMono.variable} ${geistSans.variable} font-mono antialiased`}>
+      <body
+        className={`${geistMono.variable} ${geistSans.variable} font-mono antialiased`}
+      >
         <SmoothScroll>
           <ThemeWrapper>
             <StructuredData />

@@ -1,7 +1,6 @@
 /** Site copy — Dentrix Apps (real estate AI chatbots) */
 
 export const heroContent = {
-  eyebrow: "Dentrix Apps",
   headline: "Turn your real estate website into a",
   headlineAccent: "24/7 lead-capturing machine.",
   subheadline:
