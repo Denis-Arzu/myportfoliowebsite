@@ -1,8 +1,4 @@
-import {
-  DEFAULT_DESCRIPTION,
-  SITE_NAME,
-  SITE_URL,
-} from "@/lib/seo";
+import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const organizationId = `${SITE_URL}/#organization`;
 const websiteId = `${SITE_URL}/#website`;
@@ -39,7 +35,7 @@ const schemaGraph = {
       ],
       contactPoint: {
         "@type": "ContactPoint",
-        email: "hello@dentrixapps.com",
+        email: "ceo@dentrixapps.com",
         telephone: "+254-111480091",
         contactType: "sales",
         availableLanguage: ["en-US", "en-GB"],

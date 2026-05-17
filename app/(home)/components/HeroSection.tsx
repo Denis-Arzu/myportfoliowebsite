@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { ArrowRight, MessageSquare } from "lucide-react";
 import { heroContent } from "@/lib/content-data";
-import { openChatAgent } from "./ChatAgentPanel";
 
-export default function HeroSection() {
-  const { eyebrow, headline, headlineAccent, subheadline, primaryCta, secondaryCta } =
+interface HeroSectionProps {
+  onOpenChat: () => void;
+}
+
+export default function HeroSection({ onOpenChat }: HeroSectionProps) {
+  const { headline, headlineAccent, subheadline, primaryCta, secondaryCta } =
     heroContent;
 
   return (
     <section className="relative flex flex-col items-center justify-center text-center px-2">
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-semibold leading-[1.08] tracking-tight text-white max-w-3xl">
-        {headline}{" "}
-        <span className="text-white/90">{headlineAccent}</span>
+        {headline} <span className="text-white/90">{headlineAccent}</span>
       </h1>
 
       <p className="mt-6 text-base sm:text-lg text-white/45 max-w-xl leading-relaxed font-sans">
@@ -31,7 +33,7 @@ export default function HeroSection() {
 
         <button
           type="button"
-          onClick={() => openChatAgent()}
+          onClick={onOpenChat}
           className="group inline-flex items-center justify-center gap-2 min-w-[200px] px-8 py-3.5 border border-white/12 text-white rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/[0.06] hover:border-white/20"
         >
           <MessageSquare className="w-4 h-4 text-white/70" />

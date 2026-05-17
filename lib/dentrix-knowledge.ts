@@ -9,7 +9,7 @@ export type KnowledgeTopic = {
   answer: string;
 };
 
-export const DENTRIX_SYSTEM_CONTEXT = `You are the Dentrix Apps website assistant. Dentrix Apps builds AI chatbots that turn real estate agents' websites into 24/7 lead-capturing machines. The company proves value by showing agents their chatbot already built on their site before they pay. Focus: real estate, lead capture, 24/7 availability, website conversion. Be concise, professional, and helpful. If asked about pricing or contracts, encourage booking via the Contact page or hello@dentrixapps.com.`;
+export const DENTRIX_SYSTEM_CONTEXT = `You are the Dentrix Apps website assistant. Dentrix Apps builds AI chatbots that turn real estate agents' websites into 24/7 lead-capturing machines. The company proves value by showing agents their chatbot already built on their site before they pay. Focus: real estate, lead capture, 24/7 availability, website conversion. Be concise, professional, and helpful. If asked about pricing or contracts, encourage booking via the Contact page or ceo@dentrixapps.com.`;
 
 export const knowledgeTopics: KnowledgeTopic[] = [
   {
@@ -116,14 +116,7 @@ export const knowledgeTopics: KnowledgeTopic[] = [
   },
   {
     id: "timeline",
-    keywords: [
-      "how long",
-      "timeline",
-      "when",
-      "fast",
-      "delivery",
-      "launch",
-    ],
+    keywords: ["how long", "timeline", "when", "fast", "delivery", "launch"],
     answer:
       "Most agents see a working preview on their site within days, not weeks. Full launch timing depends on content volume and CRM hooks — we'll give you a realistic date on your discovery call.",
   },
@@ -155,17 +148,11 @@ export const knowledgeTopics: KnowledgeTopic[] = [
       "hello",
     ],
     answer:
-      "Ready to talk to the team? Hit \"Talk to us\" on the homepage or visit our Contact page. Email hello@dentrixapps.com or book a discovery call — we typically respond within an hour.",
+      'Ready to talk to the team? Hit "Talk to us" on the homepage or visit our Contact page. Email ceo@dentrixapps.com or book a discovery call — we typically respond within an hour.',
   },
   {
     id: "different",
-    keywords: [
-      "different",
-      "why you",
-      "competitor",
-      "better",
-      "unique",
-    ],
+    keywords: ["different", "why you", "competitor", "better", "unique"],
     answer:
       "Generic chat widgets don't know real estate. We do — and we prove it by building your bot on your site before you pay. You see real conversations and real leads, not a sales deck.",
   },
@@ -175,4 +162,4 @@ export const CHAT_GREETING =
   "Hi — I'm the Dentrix Apps assistant. Ask me how we turn agent websites into 24/7 lead machines, or how our proof-before-pay model works.";
 
 export const CHAT_FALLBACK =
-  "I'm not sure I have the perfect answer for that. For specifics on your site or pricing, use **Talk to us** on the homepage or email hello@dentrixapps.com — we'll get back to you quickly.";
+  "I'm not sure I have the perfect answer for that. For specifics on your site or pricing, use **Talk to us** on the homepage or email ceo@dentrixapps.com — we'll get back to you quickly.";

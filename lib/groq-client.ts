@@ -1,52 +1,75 @@
-export type GroqDoc = {
-  id?: string;
-  title?: string;
-  text: string;
-  source?: string;
+/**
+ * Groq chat completion client.
+ *
+ * Uses the official groq-sdk which wraps Groq's OpenAI-compatible API.
+ * Model selection: llama-3.3-70b-versatile — best reasoning on free tier.
+ * Fallback model: llama3-8b-8192 — faster, lower latency.
+ *
+ * Requires GROQ_API_KEY env var. Returns null silently when key is absent
+ * so the caller can fall back to the local KB without crashing.
+ */
+
+import Groq from "groq-sdk";
+
+export type GroqMessage = {
+  role: "system" | "user" | "assistant";
+  content: string;
 };
 
-export async function queryGroq(query: string, topK = 5): Promise<GroqDoc[]> {
-  const key = process.env.GROQ_API_KEY;
-  if (!key) return [];
+export type GroqChatResult = {
+  text: string;
+  model: string;
+  usage: { prompt_tokens: number; completion_tokens: number };
+};
 
-  const base = process.env.GROQ_API_URL || "https://api.groq.ai/v1";
-  const url = `${base}/search`;
+let _client: Groq | null = null;
+
+function getClient(): Groq | null {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) return null;
+  if (!_client) _client = new Groq({ apiKey: key });
+  return _client;
+}
+
+export async function groqChat(
+  messages: GroqMessage[],
+  options?: {
+    model?: string;
+    temperature?: number;
+    maxTokens?: number;
+  },
+): Promise<GroqChatResult | null> {
+  const client = getClient();
+  if (!client) return null;
+
+  const model =
+    options?.model ??
+    process.env.GROQ_MODEL ??
+    "llama-3.3-70b-versatile";
 
   try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        query,
-        top_k: topK,
-      }),
+    const completion = await client.chat.completions.create({
+      model,
+      temperature: options?.temperature ?? 0.35,
+      max_tokens: options?.maxTokens ?? 512,
+      messages,
     });
 
-    if (!res.ok) {
-      console.warn("[GROQ] non-ok response", res.status);
-      return [];
-    }
+    const text = completion.choices[0]?.message?.content?.trim() ?? "";
+    if (!text) return null;
 
-    const data = await res.json();
-    // Attempt to normalize common response shapes
-    const hits = data.hits || data.items || data.results || [];
-
-    const docs: GroqDoc[] = hits
-      .slice(0, topK)
-      .map((h: any) => ({
-        id: h.id || h._id || h.document?.id,
-        title: h.title || h.name || h.document?.title,
-        text: (h.text || h.snippet || h.document?.text || h.document?.body || "").toString(),
-        source: h.source || h.document?.source || h.document?.url,
-      }))
-      .filter((d: GroqDoc) => d.text && d.text.length > 0);
-
-    return docs;
-  } catch (e) {
-    console.error("[GROQ] query error", e);
-    return [];
+    return {
+      text,
+      model: completion.model,
+      usage: {
+        prompt_tokens: completion.usage?.prompt_tokens ?? 0,
+        completion_tokens: completion.usage?.completion_tokens ?? 0,
+      },
+    };
+  } catch (err: unknown) {
+    // Log enough context to debug without leaking the key
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[Groq] chat error:", msg);
+    return null;
   }
 }
