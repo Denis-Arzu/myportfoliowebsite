@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { ArrowRight, MessageSquare, ExternalLink } from "lucide-react";
 import { heroContent } from "@/lib/content-data";
 
 interface HeroSectionProps {
@@ -22,13 +22,23 @@ export default function HeroSection({ onOpenChat }: HeroSectionProps) {
         {subheadline}
       </p>
 
-      <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+      <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap">
         <Link
           href={primaryCta.href}
           className="group inline-flex items-center justify-center gap-2 min-w-[200px] px-8 py-3.5 bg-white text-[#0A0A0B] rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/90"
         >
           {primaryCta.label}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </Link>
+
+        <Link
+          href="https://bot.dentrixapps.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center justify-center gap-2 min-w-[200px] px-8 py-3.5 bg-brand-green text-white rounded-lg font-semibold text-sm transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"
+        >
+          <ExternalLink className="w-4 h-4" />
+          View Demo
         </Link>
 
         <button

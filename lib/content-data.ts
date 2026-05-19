@@ -10,7 +10,7 @@ export const heroContent = {
 };
 
 export const contactContent = {
-  heading: "Contact Us",
+  heading: "Drop us your clean thoughts",
   subheading:
     "Tell us about your market and website. We'll scope your chatbot and show you a live preview on your site.",
   serviceTypes: [

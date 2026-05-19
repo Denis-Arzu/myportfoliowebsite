@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ExternalLink, ArrowUpRight } from "lucide-react";
 
 const CALENDLY = "https://calendly.com/dentrixapps/30min";
 
@@ -7,137 +8,181 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative z-10 border-t border-white/[0.06] mt-auto bg-[#050506]">
-      {/* ── Trust bar ───────────────────────────────────────────────── */}
+    <footer className="relative z-10 mt-auto bg-[#050506]">
+      {/* ── Ambient green glow ─────────────────────────────────────────── */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-[oklch(0.55_0.18_145/0.25)] to-transparent" />
+      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-[oklch(0.55_0.18_145/0.04)] blur-[80px] rounded-full pointer-events-none" />
+
+      {/* ── CTA strip ──────────────────────────────────────────────────── */}
+      <div className="relative border-b border-white/[0.04]">
+        <div className="max-w-6xl mx-auto px-6 py-8 sm:py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-semibold text-white/80">
+              See it in action
+            </p>
+            <p className="text-xs text-white/30 mt-1">
+              Watch our AI chatbot respond to real estate inquiries live.
+            </p>
+          </div>
+          <a
+            href="https://bot.dentrixapps.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 bg-brand-green text-white text-sm font-semibold rounded-lg transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"
+          >
+            Live Demo
+            <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+        </div>
+      </div>
+
+      {/* ── Trust bar ──────────────────────────────────────────────────── */}
       <div className="border-b border-white/[0.04]">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <div className="max-w-6xl mx-auto px-6 py-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
           {[
-            { icon: "🔒", label: "256-bit SSL Encrypted" },
-            { icon: "🇺🇸", label: "US-Based LLC" },
-            { icon: "🛡️", label: "CCPA Compliant" },
-            { icon: "💰", label: "$200 One-Time · No Subscriptions" },
-          ].map(({ icon, label }) => (
+            { label: "256-bit SSL Encrypted" },
+            { label: "US-Based LLC" },
+            { label: "CCPA Compliant" },
+            { label: "$200 One-Time · No Subscriptions" },
+          ].map(({ label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-1.5 text-[10px] font-mono text-white/25 uppercase tracking-widest"
+              className="relative inline-flex items-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-[0.18em]"
             >
-              <span>{icon}</span>
+              <span className="w-1 h-1 rounded-full bg-brand-green/70" />
               <span>{label}</span>
             </span>
           ))}
         </div>
       </div>
 
-      {/* ── Main footer grid ─────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {/* Col 1 — Company */}
-        <div className="flex flex-col gap-4">
-          <Image
-            src="/images/home/dentrixappslogoicon.webp"
-            alt="Dentrix Apps LLC"
-            width={32}
-            height={32}
-            className="opacity-70"
-          />
-          <p className="text-xs text-white/35 leading-relaxed max-w-[200px]">
-            AI chatbots for real estate agents — built on your site before you
-            pay.
+      {/* ── Main footer grid ───────────────────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+        {/* Col 1 — Company (spans 2 cols) */}
+        <div className="lg:col-span-2 flex flex-col gap-5">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/images/home/dentrixappslogoicon.webp"
+              alt="Dentrix Apps LLC"
+              width={36}
+              height={36}
+              className="opacity-80"
+            />
+            <span className="text-sm font-semibold text-white/60 tracking-tight">
+              Dentrix Apps
+            </span>
+          </div>
+          <p className="text-xs text-white/30 leading-relaxed max-w-[280px]">
+            AI chatbots for real estate agents — built on your site{" "}
+            <span className="text-white/50">before</span> you pay.
           </p>
-          <div className="space-y-1 text-[11px] text-white/20 font-mono">
-            <p>Dentrix Apps LLC</p>
-            {/* <p>1621 Central Ave</p>
-            <p>Cheyenne, WY 82001</p> */}
+          <div className="space-y-1.5 text-[11px] text-white/25 font-mono">
+            <p>Dentrix Apps LLC · Cheyenne, WY</p>
             <a
               href="mailto:support@dentrixapps.com"
-              className="block hover:text-white/50 transition-colors"
+              className="block text-brand-green/70 hover:text-brand-green transition-colors"
             >
               support@dentrixapps.com
             </a>
-            {/* <a
-              href="tel:+13072008300"
-              className="block hover:text-white/50 transition-colors"
-            >
-              +1 (307) 200-8300
-            </a> */}
-            <p className="text-white/12 pt-1">Mon–Fri · 9 AM–5 PM MT</p>
+            <p className="text-white/12 pt-0.5">Mon–Fri · 9 AM–5 PM MT</p>
           </div>
         </div>
 
         {/* Col 2 — Product */}
-        <div className="flex flex-col gap-3">
-          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em] mb-1">
+        <div className="flex flex-col gap-4">
+          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em]">
             Product
           </p>
-          {[
-            // { label: "How It Works", href: "/#how-it-works" },
-            // { label: "Pricing — $200 One-Time", href: "/#pricing" },
-            { label: "Live Demo", href: "/contact" },
-            // { label: "FAQ", href: "/#faq" },
-            { label: "Contact Us", href: "/contact" },
-          ].map(({ label, href }) => (
+          <div className="flex flex-col gap-2.5">
             <Link
-              key={label}
-              href={href}
-              className="text-xs text-white/30 hover:text-white transition-colors"
+              href="https://bot.dentrixapps.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-brand-green transition-colors w-fit"
             >
-              {label}
+              Live Demo
+              <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
             </Link>
-          ))}
+            {[
+              // { label: "How It Works", href: "/#how-it-works" },
+              // { label: "Pricing", href: "/#pricing" },
+              { label: "Contact Us", href: "/contact" },
+              // { label: "FAQ", href: "/#faq" },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors w-fit"
+              >
+                {label}
+                <span className="w-0 h-px bg-white/50 group-hover:w-full transition-all duration-300" />
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Col 3 — Legal */}
-        <div className="flex flex-col gap-3">
-          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em] mb-1">
+        <div className="flex flex-col gap-4">
+          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em]">
             Legal
           </p>
-          {[
-            { label: "Privacy Policy", href: "/privacy-policy" },
-            { label: "Terms of Service", href: "/terms-of-service" },
-            { label: "Do Not Sell My Info", href: "/do-not-sell" },
-          ].map(({ label, href }) => (
-            <Link
-              key={label}
-              href={href}
-              className="text-xs text-white/30 hover:text-white transition-colors"
-            >
-              {label}
-            </Link>
-          ))}
+          <div className="flex flex-col gap-2.5">
+            {[
+              { label: "Privacy Policy", href: "/privacy-policy" },
+              { label: "Terms of Service", href: "/terms-of-service" },
+              { label: "Do Not Sell My Info", href: "/do-not-sell" },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors w-fit"
+              >
+                {label}
+                <span className="w-0 h-px bg-white/50 group-hover:w-full transition-all duration-300" />
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Col 4 — Get In Touch */}
-        <div className="flex flex-col gap-3">
-          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em] mb-1">
-            Get In Touch
+        <div className="flex flex-col gap-4">
+          <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em]">
+            Connect
           </p>
-          <a
-            href="mailto:support@dentrixapps.com"
-            className="text-xs text-white/30 hover:text-white transition-colors"
-          >
-            support@dentrixapps.com
-          </a>
-          <a
-            href={CALENDLY}
-            target="_blank"
-            rel="noreferrer"
-            className="text-xs text-white/30 hover:text-white transition-colors"
-          >
-            Schedule a Call →
-          </a>
-          <p className="text-[11px] text-white/15 leading-relaxed pt-2">
-            Response within 2 hours on business days.
-          </p>
+          <div className="flex flex-col gap-2.5">
+            <a
+              href="mailto:support@dentrixapps.com"
+              className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-brand-green transition-colors w-fit"
+            >
+              Email Us
+              <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
+            </a>
+            <a
+              href={CALENDLY}
+              target="_blank"
+              rel="noreferrer"
+              className="relative group inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-white/70 border border-white/10 rounded-lg hover:border-brand-green/40 hover:text-brand-green transition-all duration-200 w-fit"
+            >
+              <span>Book a Call</span>
+              <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <p className="text-[10px] text-white/15 leading-relaxed pt-1">
+              Response within 2 hrs · Business days
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* ── Bottom bar ───────────────────────────────────────────────── */}
+      {/* ── Bottom bar ─────────────────────────────────────────────────── */}
       <div className="border-t border-white/[0.04]">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] font-mono text-white/15">
+        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono text-white/20">
           <p>© {year} Dentrix Apps LLC · All rights reserved.</p>
-          <p>
-            Dentrix Apps LLC is a registered business in the State of Wyoming.
-          </p>
-          <p>Built for real estate professionals.</p>
+          <div className="flex items-center gap-4">
+            <span className="w-1 h-1 rounded-full bg-brand-green/50" />
+            <p>Registered in Wyoming</p>
+            <span className="w-1 h-1 rounded-full bg-brand-green/50" />
+            <p>Built for real estate</p>
+          </div>
         </div>
       </div>
     </footer>
