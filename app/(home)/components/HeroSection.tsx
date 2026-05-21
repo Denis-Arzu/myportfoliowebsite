@@ -32,7 +32,7 @@ export default function HeroSection({ onOpenChat }: HeroSectionProps) {
         </Link>
 
         <Link
-          href="https://kiokocb.vercel.app/"
+          href="https://bot.dentrixapps.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center justify-center gap-2 min-w-[200px] px-8 py-3.5 bg-brand-green text-white rounded-lg font-semibold text-sm transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"

@@ -1,6 +1,7 @@
 # PORTFOLIO FULL AUDIT REPORT
 ## dentrixapps.com
 ## Audited: 2026-07-14 (updated — post AI chat integration)
+## Last updated: 2026-05-21 (hero copy + demo link changes)
 ## Analyst: Full Codebase Static Analysis
 
 ---
@@ -489,7 +490,19 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 
 ---
 
-## 16. WHAT WAS BUILT SINCE LAST AUDIT
+## 16. RECENT CHANGES (2026-05-21)
+
+### Hero section — copy updates (`lib/content-data.ts`)
+- `headline` changed from `"Turn your real estate website into a"` → `"Let's turn your real estate website into a"`
+- `subheadline` changed from `"We build AI chatbots for agents — and prove it by showing your chatbot already live on your site before you pay."` → `"We build custom AI assistants for real estate agents and show them live on your site before you ever pay, so it always feels like you."`
+
+### Hero section — demo link updated (`app/(home)/components/HeroSection.tsx`)
+- "View Demo" `<Link>` href changed from `https://kiokocb.vercel.app/` → `https://bot.dentrixapps.com/`
+- Footer "Live Demo" links were already pointing to `https://bot.dentrixapps.com` — no change needed
+
+---
+
+## 17. WHAT WAS BUILT SINCE LAST AUDIT
 
 ### Groq integration (replaced OpenAI)
 - `lib/groq-client.ts` created — `groq-sdk` singleton, `groqChat()` returning typed result or `null`
@@ -530,7 +543,7 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 
 ---
 
-## 17. TOP PRIORITY ACTIONS
+## 18. TOP PRIORITY ACTIONS
 
 **P1 — Delete `ChatAgentPanel.tsx`** (5 min)  
 Dead component. Not triggered from any button or event. Loaded as a dynamic import on every homepage visit — pure bundle waste. Remove it and the `dynamic` import in `page.tsx`.
