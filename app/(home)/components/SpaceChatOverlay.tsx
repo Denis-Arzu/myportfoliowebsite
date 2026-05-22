@@ -188,6 +188,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
 
   const hiddenInputRef = useRef<HTMLInputElement>(null); // desktop
   const mobileInputRef = useRef<HTMLInputElement>(null); // mobile bar
+  const scrollRef = useRef<HTMLDivElement>(null); // long-answer scroll container
 
   const {
     displayed: typedAnswer,
@@ -217,6 +218,13 @@ export function SpaceChatOverlay({ onClose }: Props) {
   useEffect(() => {
     refocus();
   }, [phase, isMobile, refocus]);
+
+  // Auto-scroll to bottom during typewriter to follow long responses
+  useEffect(() => {
+    if ((phase === "answer" || phase === "done") && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [typedAnswer, phase, completedAnswer]);
 
   // Escape to close (desktop)
   useEffect(() => {
@@ -327,20 +335,33 @@ export function SpaceChatOverlay({ onClose }: Props) {
   // ── Whether stage content is interactive (accept clicks to focus) ─────────
   const stageClickable = phase === "done" || phase === "greeting";
 
+  // ── Determine if the current answer is long enough to scroll ─────────
+  const isLongAnswer = (phase === "answer" || phase === "done") && (completedAnswer || pendingAnswer).length > 300;
+
   return (
     <div
-      className="fixed inset-0 z-[600] flex flex-col overflow-hidden"
+      className="fixed inset-0 z-[600] flex flex-col"
       style={{ background: "#050506", ...containerStyle }}
     >
-      {/* Ambient glow */}
+      {/* Premium ambient layers */}
+      {/* Depth gradient — subtle volumetric feel */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,oklch(0.55_0.18_145/0.07),transparent_70%)]" />
+      {/* Secondary warm glow at top for depth */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_0%,oklch(0.6_0.15_145/0.04),transparent_60%)]" />
+      {/* Subtle grid overlay for texture */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 opacity-[0.12]"
         style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 45%, oklch(0.55 0.18 145 / 0.055) 0%, transparent 70%)",
+          backgroundImage: `
+            linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: "48px 48px",
         }}
       />
+      {/* Edge vignette for focus */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_50%_50%,transparent_50%,oklch(0_0_0/0.4)_100%)]" />
 
       {/* ── Top bar: always-visible close + session indicator ── */}
       <div className="relative z-10 flex items-center justify-between px-5 sm:px-8 pt-5 sm:pt-6 flex-shrink-0">
@@ -388,9 +409,13 @@ export function SpaceChatOverlay({ onClose }: Props) {
 
       {/* ── Centre stage — fills all remaining space above mobile input bar ── */}
       <div
-        className="relative flex-1 flex flex-col items-center justify-center px-6 sm:px-10 min-h-0"
+        className={`relative flex-1 flex flex-col px-6 sm:px-10 min-h-0 ${
+          isLongAnswer ? "overflow-y-auto justify-start scroll-smooth" : "overflow-hidden items-center justify-center"
+        }`}
         onClick={stageClickable ? refocus : undefined}
+        ref={isLongAnswer ? scrollRef : undefined}
       >
+        <div className={isLongAnswer ? "w-full py-8 sm:py-10 flex flex-col items-center" : "w-full flex flex-col items-center"}>
         <AnimatePresence mode="wait">
           {/* GREETING */}
           {phase === "greeting" && (
@@ -467,12 +492,13 @@ export function SpaceChatOverlay({ onClose }: Props) {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -12, filter: "blur(6px)" }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="
-                text-[1.2rem] sm:text-2xl md:text-3xl
-                font-light text-white/80
-                leading-relaxed tracking-tight
-                text-center max-w-xl
-              "
+              className={`
+                font-light tracking-tight text-center max-w-xl w-full whitespace-pre-line
+                ${isLongAnswer
+                  ? "text-base sm:text-lg md:text-xl leading-relaxed text-white/85"
+                  : "text-[1.2rem] sm:text-2xl md:text-3xl leading-relaxed text-white/80"
+                }
+              `}
             >
               {/* In "done" phase use completedAnswer so the text never disappears
                   when the typewriter resets its internal displayed state. */}
@@ -518,6 +544,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </div>
 
       {/* ── DESKTOP: hint line + esc label at very bottom ── */}
