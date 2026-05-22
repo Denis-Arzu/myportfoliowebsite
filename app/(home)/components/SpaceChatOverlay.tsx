@@ -25,7 +25,7 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { X, ArrowUp } from "lucide-react";
 import { sendChatMessage, type ChatMessage } from "@/app/actions/chat-agent";
 
@@ -122,11 +122,11 @@ function useIsMobile() {
 
 // ─── Breathing cursor ─────────────────────────────────────────────────────
 
-function Cursor({ dim = false }: { dim?: boolean }) {
+function Cursor({ dim = false, reduced = false }: { dim?: boolean; reduced?: boolean }) {
   return (
     <motion.span
-      animate={{ opacity: [1, 0, 1] }}
-      transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
+      animate={reduced ? {} : { opacity: [1, 0, 1] }}
+      transition={reduced ? {} : { duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
       aria-hidden
       className={`inline-block w-[2px] h-[1em] ml-[3px] align-middle rounded-full ${
         dim ? "bg-white/18" : "bg-white/55"
@@ -183,6 +183,8 @@ export function SpaceChatOverlay({ onClose }: Props) {
 
   const isMobile = useIsMobile();
   const vpHeight = useVisualViewport();
+  const prefersReducedMotion = useReducedMotion();
+  const animEnabled = !prefersReducedMotion;
 
   const hiddenInputRef = useRef<HTMLInputElement>(null); // desktop
   const mobileInputRef = useRef<HTMLInputElement>(null); // mobile bar
@@ -195,7 +197,10 @@ export function SpaceChatOverlay({ onClose }: Props) {
 
   // Typewriter done → move to done phase (answer stays on screen)
   useEffect(() => {
-    if (answerDone && phase === "answer") setPhase("done");
+    if (answerDone && phase === "answer") {
+      const id = requestAnimationFrame(() => setPhase("done"));
+      return () => cancelAnimationFrame(id);
+    }
   }, [answerDone, phase]);
 
   // Focus the right input whenever phase changes
@@ -356,7 +361,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.25, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          whileTap={{ scale: 0.88 }}
+          whileTap={animEnabled ? { scale: 0.88 } : {}}
           aria-label="Close AI assistant"
           className="
             flex items-center justify-center
@@ -404,7 +409,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
               "
             >
               {GREETING}
-              <Cursor dim />
+              <Cursor dim reduced={!animEnabled} />
             </motion.p>
           )}
 
@@ -424,7 +429,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
               "
             >
               {input || <span className="opacity-0">|</span>}
-              <Cursor />
+              <Cursor reduced={!animEnabled} />
             </motion.p>
           )}
 
@@ -442,13 +447,13 @@ export function SpaceChatOverlay({ onClose }: Props) {
                 <motion.span
                   key={i}
                   className="block w-[5px] h-[5px] rounded-full bg-white/35"
-                  animate={{ opacity: [0.15, 1, 0.15], y: [0, -4, 0] }}
-                  transition={{
+                  animate={animEnabled ? { opacity: [0.15, 1, 0.15], y: [0, -4, 0] } : { opacity: 1 }}
+                  transition={animEnabled ? {
                     duration: 1.2,
                     repeat: Infinity,
                     delay: i * 0.15,
                     ease: "easeInOut",
-                  }}
+                  } : { duration: 0 }}
                 />
               ))}
             </motion.div>
@@ -472,17 +477,43 @@ export function SpaceChatOverlay({ onClose }: Props) {
               {/* In "done" phase use completedAnswer so the text never disappears
                   when the typewriter resets its internal displayed state. */}
               {phase === "done" ? completedAnswer : typedAnswer}
-              {phase === "answer" && <Cursor />}
+              {phase === "answer" && <Cursor reduced={!animEnabled} />}
               {/* Subtle "done" indicator — fades in after answer completes */}
               {phase === "done" && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                  className="block mt-6 text-[11px] sm:text-xs font-mono text-white/20 uppercase tracking-[0.22em]"
-                >
-                  — Dentrix AI
-                </motion.span>
+                <>
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4, duration: 0.5 }}
+                    className="block mt-6 text-[11px] sm:text-xs font-mono text-white/20 uppercase tracking-[0.22em]"
+                  >
+                    — Dentrix AI
+                  </motion.span>
+                  {/* CTA after 3+ user messages — guides toward demo or contact */}
+                  {history.filter(m => m.role === "user").length >= 3 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
+                    >
+                      <a
+                        href="https://bot.dentrixapps.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-brand-green text-white text-xs font-semibold rounded-lg hover:brightness-110 transition-all"
+                      >
+                        See Live Demo
+                      </a>
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-4 py-2 border border-white/12 text-white/70 text-xs font-semibold rounded-lg hover:border-white/30 hover:text-white transition-all"
+                      >
+                        Talk to Us
+                      </a>
+                    </motion.div>
+                  )}
+                </>
               )}
             </motion.div>
           )}
@@ -576,7 +607,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
               disabled={
                 !input.trim() || phase === "waiting" || phase === "answer"
               }
-              whileTap={{ scale: 0.85 }}
+              whileTap={animEnabled ? { scale: 0.85 } : {}}
               aria-label="Send message"
               className="
                 flex-shrink-0

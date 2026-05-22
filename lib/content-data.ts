@@ -1,10 +1,10 @@
 /** Site copy — Dentrix Apps (real estate AI chatbots) */
 
 export const heroContent = {
-  headline: "Let's turn your real estate website into a",
-  headlineAccent: "24/7 lead-capturing machine.",
+  headline: "Your real estate website is losing leads right now.",
+  headlineAccent: "Let's fix that with AI.",
   subheadline:
-    "We build custom AI assistants for real estate agents and show them live on your site before you ever pay, so it always feels like you.",
+    "We build custom AI assistants for real estate agents — and prove they work by showing yours live on your site before you pay a dollar. One setup, $29/month, zero risk.",
   primaryCta: { label: "Talk to us", href: "/contact" },
   secondaryCta: { label: "Talk to AI Agent", action: "chat" as const },
 };

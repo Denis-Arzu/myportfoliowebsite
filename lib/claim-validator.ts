@@ -37,23 +37,46 @@ function tokenize(s: string) {
     .filter((t) => !STOPWORDS.has(t) && t.length > 1);
 }
 
-export function validateClaims(
-  response: string,
-  sources: SourceDoc[] = [],
-): {
+export type ValidationResult = {
   confidence: "high" | "medium" | "low";
   supportingSources: { source?: string; title?: string; snippet?: string }[];
   score: number;
   details: { sentence: string; supported: boolean; matches: string[] }[];
-} {
+  sourceType: "kb" | "llm";
+};
+
+const KB_TOPIC_IDS = new Set([
+  "what-is-dentrix",
+  "proof-before-pay",
+  "pricing",
+  "listings",
+  "neighborhood",
+  "scheduling",
+  "mortgage",
+  "lead-capture",
+  "branding",
+  "embed",
+  "contact",
+  "checkout",
+  "competitive-difference",
+  "availability",
+]);
+
+export function validateClaims(
+  response: string,
+  sources: SourceDoc[] = [],
+): ValidationResult {
   const sentences = response
     .split(/(?<=[.?!])\s+/)
     .map((s) => s.trim())
     .filter(Boolean);
 
   if (!sentences.length) {
-    return { confidence: "low", supportingSources: [], score: 0, details: [] };
+    return { confidence: "low", supportingSources: [], score: 0, details: [], sourceType: "llm" };
   }
+
+  // Detect if this response is sourced from KB topics
+  const isKBSourced = sources.some((s) => s.title && KB_TOPIC_IDS.has(s.title));
 
   const sourceText = sources.map((s) => s.text.toLowerCase()).join(" \n\n");
   const srcTokens = new Set(tokenize(sourceText));
@@ -69,10 +92,19 @@ export function validateClaims(
   const supportedCount = details.filter((d) => d.supported).length;
   const score = supportedCount / details.length;
 
-  // KB answers are short by design — generous thresholds prevent false "low" ratings.
+  // Two-tier confidence:
+  // 1. KB-sourced answers start at medium minimum (they came from validated knowledge)
+  // 2. LLM-generated answers use standard token-overlap scoring
   let confidence: "high" | "medium" | "low" = "low";
-  if (score >= 0.5) confidence = "high";
-  else if (score >= 0.2) confidence = "medium";
+  if (isKBSourced) {
+    // KB answers get a floor of medium confidence to avoid embarrassing false "low" ratings
+    if (score >= 0.5) confidence = "high";
+    else if (score >= 0.1) confidence = "medium";
+    else confidence = "medium"; // KB source always at least medium
+  } else {
+    if (score >= 0.5) confidence = "high";
+    else if (score >= 0.2) confidence = "medium";
+  }
 
   // Pick top sources that contain most matched tokens
   const srcScores = sources.map((s) => {
@@ -111,5 +143,11 @@ export function validateClaims(
       return { source: r.s?.source, title: r.s?.title, snippet };
     });
 
-  return { confidence, supportingSources, score, details };
+  return {
+    confidence,
+    supportingSources,
+    score,
+    details,
+    sourceType: isKBSourced ? "kb" : "llm",
+  };
 }

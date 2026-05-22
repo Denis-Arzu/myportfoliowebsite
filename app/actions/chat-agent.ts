@@ -42,10 +42,23 @@ export async function sendChatMessage(
     .map((t) => `[${t.id}]: ${t.answer}`)
     .join("\n");
 
+  // Determine conversation stage for response calibration
+  const userMessageCount = history.filter((m) => m.role === "user").length;
+  let stageHint = "";
+  if (userMessageCount === 0) {
+    stageHint = "CONVERSATION_STAGE: first message — welcome warmly, assess intent.";
+  } else if (userMessageCount <= 2) {
+    stageHint = "CONVERSATION_STAGE: early conversation — provide clear answers, build trust.";
+  } else {
+    stageHint = "CONVERSATION_STAGE: engaged prospect — after this response, consider subtly guiding toward the live demo at bot.dentrixapps.com or contacting the team at ceo@dentrixapps.com.";
+  }
+
   const systemPrompt = `${DENTRIX_SYSTEM_CONTEXT}
 
 KNOWLEDGE BASE (use only these facts — do not invent):
 ${kbBlock}
+
+${stageHint}
 
 RULES:
 - Answer in 2–4 short sentences unless more detail is clearly needed.
@@ -69,8 +82,8 @@ RULES:
 
   // --- Primary: Groq LLM ---
   const groqResult = await groqChat(groqMessages, {
-    temperature: 0.3,
-    maxTokens: 400,
+    temperature: 0.4,
+    maxTokens: 600,
   });
 
   if (groqResult) {
@@ -88,7 +101,12 @@ RULES:
   }
 
   // --- Fallback: local keyword KB (no key set or Groq errored) ---
-  const kbReply = getKnowledgeResponse(trimmed);
+  // Pass last 4 history turns for context-aware fallback scoring
+  const recentHistory = history
+    .slice(-4)
+    .map((m) => m.content)
+    .join("\n");
+  const kbReply = getKnowledgeResponse(trimmed, recentHistory);
   const kbDocs: SourceDoc[] = knowledgeTopics.map((t) => ({
     title: t.id,
     text: t.answer,

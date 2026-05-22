@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dentrix Apps
 
-## Getting Started
+**Custom AI chatbots for real estate agents. Proof-before-pay — agents see their chatbot live on their site before paying a single dollar.**
 
-First, run the development server:
+Built with Next.js 16, deployed on Vercel. Live at [dentrixapps.com](https://dentrixapps.com).
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS v4, shadcn/ui, motion/react |
+| AI Engine | Groq LLM (llama-3.3-70b-versatile) |
+| Database | Turso (libSQL) via Prisma ORM |
+| Payments | PayPal Orders API v2 + Subscriptions API |
+| Email | Resend (React Email) |
+| Deployment | Vercel |
+
+---
+
+## Local Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 1. Install dependencies
+pnpm install
+
+# 2. Copy environment variables
+cp .env.example .env.local
+
+# 3. Edit .env.local with your keys (see .env.example for required variables)
+#    Note: GROQ_API_KEY is optional — the chat agent works in fallback mode without it.
+
+# 4. Start the dev server
 pnpm dev
-# or
-bun dev
+
+# 5. Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Commands
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev         # Development server (Turbopack)
+pnpm build       # Production build
+pnpm start       # Start production server
+pnpm lint        # Lint all TypeScript/TSX files
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+See `.env.example` for the complete reference. Key variables:
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required | Description |
+|---|---|---|
+| `GROQ_API_KEY` | No | Groq LLM API key (fallback mode works without it) |
+| `TURSO_DATABASE_URL` | For DB | Turso database URL |
+| `TURSO_AUTH_TOKEN` | For DB | Turso auth token |
+| `PAYPAL_CLIENT_ID` | For payments | PayPal REST API client ID |
+| `PAYPAL_CLIENT_SECRET` | For payments | PayPal REST API secret |
+| `RESEND_API_KEY` | For email | Resend API key |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  (home)/           — Marketing landing page with AI chat overlay
+  contact/          — Contact page
+  privacy-policy/   — Privacy policy
+  terms-of-service/ — Terms of service
+  do-not-sell/      — CCPA opt-out page
+  actions/          — Server actions (chat, contact)
+  sitemap.ts        — Dynamic sitemap
 
-## Deploy on Vercel
+lib/
+  dentrix-knowledge.ts  — AI agent system prompt + knowledge base
+  claim-validator.ts    — Confidence scoring for AI responses
+  chat-responder.ts     — Fallback keyword responder
+  groq-client.ts        — Groq API client with retry logic
+  content-data.ts       — Site copy (hero, contact form)
+  seo.ts                — SEO constants
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Architecture
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Read [ARCHITECTURE.md](./ARCHITECTURE.md) for a detailed overview of the system architecture, data flow, and key design decisions.
+
+## About
+
+Dentrix Apps was founded by Denis Kioko. The product is a custom AI chat assistant trained on each agent's listings, neighborhood expertise, and brand voice. It operates on a proof-before-pay model — agents see their working chatbot deployed at a private branded subdomain before committing.
+
+- **Website:** https://dentrixapps.com
+- **Live demo:** https://bot.dentrixapps.com
+- **Contact:** ceo@dentrixapps.com

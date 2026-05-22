@@ -17,9 +17,15 @@ function scoreTopic(message: string, topic: KnowledgeTopic): number {
   return score;
 }
 
-export function getKnowledgeResponse(message: string): string {
+export function getKnowledgeResponse(message: string, historyContext?: string): string {
   const trimmed = message.trim();
   if (!trimmed) return CHAT_FALLBACK;
+
+  // Use history context to disambiguate follow-up questions
+  // e.g., "what about the monthly cost?" after a pricing discussion
+  const scoringInput = historyContext
+    ? `${historyContext}\n${trimmed}`
+    : trimmed;
 
   if (GREETING_PATTERNS.test(trimmed) && trimmed.length < 40) {
     return "Hello! I can explain what Dentrix Apps does, how our real estate chatbots work, or how the proof-before-pay preview works. What would you like to know?";
@@ -29,7 +35,7 @@ export function getKnowledgeResponse(message: string): string {
   let bestScore = 0;
 
   for (const topic of knowledgeTopics) {
-    const score = scoreTopic(trimmed, topic);
+    const score = scoreTopic(scoringInput, topic);
     if (score > bestScore) {
       bestScore = score;
       best = topic;

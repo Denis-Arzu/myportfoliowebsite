@@ -1,155 +1,168 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function DoNotSell() {
-  const [opted, setOpted] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.localStorage.getItem("dentrix_do_not_sell") === "true";
+export default function DoNotSellPage() {
+  const [optedOut, setOptedOut] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.localStorage.getItem("dnt-opt-out") === "true";
+    }
+    return false;
   });
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setHydrated(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const handleOptOut = () => {
-    window.localStorage.setItem("dentrix_do_not_sell", "true");
-    // Also set a cookie so server-side reads are possible if needed
-    document.cookie =
-      "dentrix_do_not_sell=true; path=/; max-age=31536000; SameSite=Lax";
-    setOpted(true);
+    window.localStorage.setItem("dnt-opt-out", "true");
+    setOptedOut(true);
   };
 
-  const lastUpdated = "July 14, 2026";
+  const handleRevoke = () => {
+    window.localStorage.removeItem("dnt-opt-out");
+    setOptedOut(false);
+  };
+
+  // Show nothing until we read localStorage (avoid hydration flash)
+  if (!hydrated) return null;
 
   return (
     <main className="min-h-screen bg-black text-[oklch(0.8_0_0)] font-mono selection:bg-[oklch(0.85_0.3_150/0.3)] selection:text-[oklch(0.85_0.3_150)]">
       <div className="max-w-4xl mx-auto px-6 py-24">
-
-        {/* Header */}
         <div className="mb-12 border-b border-white/10 pb-8">
           <div className="flex items-center gap-2 mb-4 text-[oklch(0.85_0.3_150)] text-xs">
             <span className="animate-pulse">●</span>
-            <span>SYSTEM_LEGAL_PROCEDURE // PRIVACY_RIGHTS</span>
+            <span>CCPA_COMPLIANCE // DO_NOT_SELL</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-[oklch(1_0_0)] tracking-tighter">
-            Your Privacy Rights
+            Do Not Sell or Share My Personal Information
           </h1>
           <p className="mt-4 text-sm text-[oklch(0.85_0.3_150/0.6)] font-semibold uppercase tracking-widest">
-            Last Updated: {lastUpdated}
+            California Consumer Privacy Act (CCPA) Request
           </p>
         </div>
 
         <div className="relative border border-dashed border-white/10 p-6 md:p-10 bg-white/[0.02] backdrop-blur-sm">
-          <div className="space-y-12">
-
-            {/* Section 1 — CCPA Explanation */}
+          <div className="space-y-8">
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[01]</span> California Privacy Rights (CCPA)
-              </h2>
-              <p className="leading-relaxed">
-                Under the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA), California residents have the right to opt out of the &quot;sale&quot; or &quot;sharing&quot; of their personal information. This right also extends to consumers in other states with similar privacy laws (Colorado, Connecticut, Virginia, and others).
-              </p>
-            </section>
-
-            {/* Section 2 — Our Position */}
-            <section className="bg-[oklch(0.85_0.3_150/0.05)] border border-[oklch(0.85_0.3_150/0.2)] p-6">
-              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 uppercase tracking-widest">
-                Our Position on Data Sales
+                <span className="text-[oklch(0.85_0.3_150)]">[01]</span> Your Rights Under CCPA
               </h2>
               <p className="leading-relaxed mb-4">
-                <strong className="text-[oklch(1_0_0)]">
-                  Dentrix Apps LLC does not sell your personal information to third parties.
-                </strong>{" "}
-                We do not sell, rent, or trade your name, email address, phone number, or any other personal data to outside companies for their commercial benefit.
+                The California Consumer Privacy Act (CCPA) gives California residents
+                the right to opt out of the &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; of
+                their personal information. While Dentrix Apps does not sell personal
+                information for monetary consideration, we respect your right to
+                ensure your data is never shared in ways that could be considered a
+                &ldquo;sale&rdquo; under California law.
               </p>
               <p className="leading-relaxed">
-                We may use third-party analytics services (such as site traffic measurement) and infrastructure providers (such as our hosting platform) that receive limited technical data as part of delivering our service. These are service providers — not data buyers. We do not receive payment in exchange for your data.
+                By submitting this opt-out request, you instruct Dentrix Apps to:
               </p>
-            </section>
-
-            {/* Section 3 — What data we collect */}
-            <section>
-              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[02]</span> What Data We Collect
-              </h2>
-              <ul className="list-none space-y-2 ml-4">
-                {[
-                  "Contact form submissions (name, email, company, project details)",
-                  "Chat session content (questions you ask our AI assistant)",
-                  "Basic analytics data (page views, referral source — no personal identifiers)",
-                  "Cookies required for site functionality (session preferences)",
-                ].map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="text-[oklch(0.85_0.3_150)] shrink-0">/</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
+              <ul className="list-none space-y-2 ml-4 mt-4">
+                <li className="flex gap-3">
+                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
+                  <span>Not sell or share your personal information to third parties</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
+                  <span>Limit the use of your data for cross-context behavioral advertising</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
+                  <span>Retain this preference for future visits to our website</span>
+                </li>
               </ul>
             </section>
 
-            {/* Section 4 — Opt-out mechanism */}
-            <section>
-              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[03]</span> Opt-Out of Data Sharing
+            <section className="bg-[oklch(0.85_0.3_150/0.05)] border border-[oklch(0.85_0.3_150/0.2)] p-6">
+              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-6 uppercase tracking-widest">
+                Opt-Out Preference
               </h2>
-              <p className="leading-relaxed mb-6">
-                Even though we do not sell your data, you may use the button below to formally record your preference that your data not be shared with any third-party service providers (including analytics and infrastructure providers). This preference will be saved to your browser.
-              </p>
 
-              {opted ? (
-                <div className="border border-[oklch(0.85_0.3_150/0.4)] bg-[oklch(0.85_0.3_150/0.08)] p-6 text-center">
-                  <p className="text-[oklch(0.85_0.3_150)] font-bold text-lg mb-2">
-                    ✓ Opt-Out Recorded
+              {optedOut ? (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[oklch(0.85_0.3_150)] text-2xl">✓</span>
+                    <p className="text-[oklch(0.85_0.3_150)] font-bold">
+                      Your opt-out preference has been saved.
+                    </p>
+                  </div>
+                  <p className="leading-relaxed mb-6">
+                    We have recorded your request to opt out of the sale or sharing
+                    of your personal information. This preference will be honored
+                    on this browser for future visits.
                   </p>
-                  <p className="text-sm text-[oklch(0.8_0_0/0.6)] leading-relaxed">
-                    Your preference has been saved. We will not share your data with third-party analytics or non-essential service providers from this browser. This preference is stored locally and will persist until you clear your browser data.
-                  </p>
+                  <button
+                    onClick={handleRevoke}
+                    className="border border-white/20 px-4 py-2 text-sm text-white/60 hover:text-white hover:border-white/40 transition-all"
+                  >
+                    Revoke Opt-Out
+                  </button>
                 </div>
               ) : (
-                <button
-                  type="button"
-                  onClick={handleOptOut}
-                  className="
-                    px-8 py-4 border border-[oklch(0.85_0.3_150/0.5)]
-                    bg-[oklch(0.85_0.3_150/0.08)]
-                    text-[oklch(0.85_0.3_150)] font-bold uppercase tracking-widest
-                    hover:bg-[oklch(0.85_0.3_150/0.15)] hover:border-[oklch(0.85_0.3_150/0.8)]
-                    transition-all duration-200 w-full sm:w-auto
-                  "
-                >
-                  Opt Out of Data Sharing
-                </button>
+                <div>
+                  <p className="leading-relaxed mb-6">
+                    Click the button below to exercise your right to opt out of the
+                    sale or sharing of your personal information under the CCPA.
+                    This preference will be stored in your browser.
+                  </p>
+                  <button
+                    onClick={handleOptOut}
+                    className="border border-[oklch(0.85_0.3_150/0.5)] px-6 py-3 text-[oklch(0.85_0.3_150)] font-bold hover:bg-[oklch(0.85_0.3_150/0.1)] transition-all"
+                  >
+                    Opt Out of Sale/Sharing
+                  </button>
+                </div>
               )}
             </section>
 
-            {/* Section 5 — Contact for formal requests */}
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[04]</span> Formal Data Requests
+                <span className="text-[oklch(0.85_0.3_150)]">[02]</span> Global Privacy Control (GPC)
               </h2>
-              <p className="leading-relaxed mb-4">
-                To submit a formal request to know, delete, or correct your personal information — or to request a list of all third parties with whom your data has been shared — email us at:
-              </p>
-              <a
-                href="mailto:ceo@dentrixapps.com"
-                className="text-[oklch(0.85_0.3_150)] font-bold decoration-2 underline-offset-4 hover:underline"
-              >
-                ceo@dentrixapps.com
-              </a>
-              <p className="mt-4 text-sm text-[oklch(0.8_0_0/0.5)] leading-relaxed">
-                We will respond to verifiable consumer requests within 45 days as required by CCPA. No fee is charged for submitting a request. Dentrix Apps LLC is operated in the State of Wyoming, United States.
+              <p className="leading-relaxed">
+                If your browser broadcasts a Global Privacy Control (GPC) signal,
+                Dentrix Apps automatically honors it as an opt-out request. You do
+                not need to take additional action if GPC is enabled. The privacy
+                banner on our site will confirm when GPC has been detected.
               </p>
             </section>
 
+            <section>
+              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
+                <span className="text-[oklch(0.85_0.3_150)]">[03]</span> Contact for Questions
+              </h2>
+              <p className="leading-relaxed">
+                If you have any questions about this process or wish to submit a
+                request that cannot be handled via this page, please contact us at:
+              </p>
+              <a
+                href="mailto:ceo@dentrixapps.com"
+                className="text-[oklch(0.85_0.3_150)] font-bold decoration-2 underline-offset-4 hover:underline mt-4 inline-block"
+              >
+                ceo@dentrixapps.com
+              </a>
+            </section>
           </div>
         </div>
 
-        {/* Footer nav */}
-        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 text-xs text-[oklch(0.8_0_0/0.5)]">
-          <Link href="/privacy-policy" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
-            &lt; PRIVACY_POLICY
+        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 text-center sm:text-left text-xs text-[oklch(0.8_0_0/0.5)]">
+          <Link
+            href="/"
+            className="hover:text-[oklch(0.85_0.3_150)] transition-colors"
+          >
+            {"<"} RETURN_TO_ROOT
           </Link>
-          <Link href="/" className="hover:text-[oklch(0.85_0.3_150)] transition-colors">
-            RETURN_TO_ROOT &gt;
+          <Link
+            href="/privacy-policy"
+            className="hover:text-[oklch(0.85_0.3_150)] transition-colors"
+          >
+            VIEW_PRIVACY_POLICY {">"}
           </Link>
         </div>
       </div>
