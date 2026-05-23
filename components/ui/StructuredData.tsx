@@ -72,7 +72,7 @@ const schemaGraph = {
               description:
                 "Custom AI chatbot embedded on real estate agent websites for 24/7 lead capture and qualification.",
             },
-            price: "200",
+            price: "197",
             priceCurrency: "USD",
           },
           {
@@ -141,11 +141,11 @@ const schemaGraph = {
       provider: { "@id": organizationId },
       offers: {
         "@type": "Offer",
-        price: "200",
+        price: "197",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
-        description:
-          "One-time $200 fee. No subscriptions. Proof-before-pay model.",
+          description:
+            "$197 setup, then $29/month. No contracts. Proof-before-pay model.",
       },
       aggregateRating: {
         "@type": "AggregateRating",
@@ -158,7 +158,7 @@ const schemaGraph = {
         "Listing and buyer qualification",
         "Live chatbot preview before payment",
         "CRM-ready lead handoff",
-        "One-time pricing — no subscriptions",
+        "One-time setup + monthly hosting — no contracts",
       ],
     },
 
@@ -179,7 +179,7 @@ const schemaGraph = {
           name: "How much does a real estate AI chatbot cost?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Dentrix Apps charges a one-time fee of $200 per chatbot. No monthly subscriptions, no hidden fees. You own it forever.",
+            text: "Dentrix Apps charges a one-time setup fee of $197, then $29/month for hosting. No hidden fees, no contracts — cancel anytime. We also prove it works before you pay with our proof-before-pay model.",
           },
         },
         {
@@ -187,7 +187,7 @@ const schemaGraph = {
           name: "How does the proof-before-pay model work?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "We build your chatbot first — populated with your real listings and data — and send you a working demo on your actual site. You see it working before you pay anything. If you like it, $200 and it's yours.",
+            text: "We build your chatbot first — populated with your real listings and data — and send you a working demo on your actual site. You see it working before you pay anything. If you like it, the setup is $197 and you're live for $29/month.",
           },
         },
         {

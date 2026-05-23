@@ -43,7 +43,7 @@ export function SiteFooter() {
             { label: "256-bit SSL Encrypted" },
             { label: "US-Based LLC" },
             { label: "CCPA Compliant" },
-            { label: "$200 One-Time · No Subscriptions" },
+            { label: "$197 Setup · $29/mo · No Contracts" },
           ].map(({ label }) => (
             <span
               key={label}
