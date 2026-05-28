@@ -41,9 +41,11 @@ export const metadata: Metadata = {
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [...KEYWORDS],
-  authors: [{ name: "Dentrix Apps LLC" }],
-  creator: "Dentrix Apps LLC",
+  authors: [{ name: "DentrixApps LLC" }],
+  creator: "DentrixApps LLC",
   publisher: SITE_NAME,
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
   robots: {
     index: true,
     follow: true,
@@ -69,6 +71,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     images: [ogImage],
+    countryName: "United States",
+    emails: ["ceo@dentrixapps.com"],
   },
   twitter: {
     card: "summary_large_image",
@@ -77,12 +81,27 @@ export const metadata: Metadata = {
     images: [ogImage],
   },
   category: "technology",
-  classification: "Real Estate Technology, AI Chatbots, Lead Generation",
+  classification: "AI Chatbots, Lead Generation, Salon Technology, Gym Technology, Dental Technology, Small Business Software",
   icons: {
-    icon: "/icon.webp",
-    apple: "/icon.webp",
+    icon: [
+      { url: "/icon.webp", type: "image/webp" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon.webp", type: "image/webp" },
+    ],
   },
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
 };
 
 function ThemeWrapper({ children }: { children: React.ReactNode }) {

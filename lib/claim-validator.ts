@@ -46,20 +46,18 @@ export type ValidationResult = {
 };
 
 const KB_TOPIC_IDS = new Set([
-  "what-is-dentrix",
-  "proof-before-pay",
+  "what-is-dentrixapps",
+  "how-it-works",
   "pricing",
-  "listings",
-  "neighborhood",
-  "scheduling",
-  "mortgage",
+  "salon-benefits",
+  "gym-benefits",
+  "dental-benefits",
   "lead-capture",
-  "branding",
-  "embed",
-  "contact",
-  "checkout",
-  "competitive-difference",
-  "availability",
+  "demo",
+  "setup-time",
+  "no-website",
+  "cancel",
+  "industries",
 ]);
 
 export function validateClaims(

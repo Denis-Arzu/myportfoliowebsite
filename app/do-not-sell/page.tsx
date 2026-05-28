@@ -55,13 +55,13 @@ export default function DoNotSellPage() {
               <p className="leading-relaxed mb-4">
                 The California Consumer Privacy Act (CCPA) gives California residents
                 the right to opt out of the &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; of
-                their personal information. While Dentrix Apps does not sell personal
+                their personal information. While DentrixApps does not sell personal
                 information for monetary consideration, we respect your right to
                 ensure your data is never shared in ways that could be considered a
                 &ldquo;sale&rdquo; under California law.
               </p>
               <p className="leading-relaxed">
-                By submitting this opt-out request, you instruct Dentrix Apps to:
+                By submitting this opt-out request, you instruct DentrixApps to:
               </p>
               <ul className="list-none space-y-2 ml-4 mt-4">
                 <li className="flex gap-3">
@@ -127,7 +127,7 @@ export default function DoNotSellPage() {
               </h2>
               <p className="leading-relaxed">
                 If your browser broadcasts a Global Privacy Control (GPC) signal,
-                Dentrix Apps automatically honors it as an opt-out request. You do
+                DentrixApps automatically honors it as an opt-out request. You do
                 not need to take additional action if GPC is enabled. The privacy
                 banner on our site will confirm when GPC has been detected.
               </p>

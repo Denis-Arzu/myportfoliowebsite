@@ -14,7 +14,7 @@ import { submitContactForm } from "@/app/actions/contact";
 import type { ContactFormState } from "@/app/actions/contact";
 import { CONTACT_UPLOAD } from "@/lib/contact-upload";
 import { ProjectFileUpload } from "@/app/(home)/components/ProjectFileUpload";
-import { Mail, Calendar } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const MAX_MESSAGE = 2000;
 
@@ -98,14 +98,12 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
   const {
     heading,
     subheading,
-    serviceTypes,
-    budgetRanges,
+    industries,
     trustSignals,
     contactMethods,
   } = contactContent;
 
   const emailMethod = contactMethods.find((m) => m.type === "email");
-  const calendlyMethod = contactMethods.find((m) => m.type === "calendly");
 
   return (
     <section
@@ -147,10 +145,10 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
             className="p-6 sm:p-8 rounded-2xl backdrop-blur-xl bg-black/40 border border-white/5 shadow-2xl relative"
           >
             <h3 className="text-xl font-semibold text-white/80 mb-1">
-              Get Started
+              Build Your AI Assistant
             </h3>
             <p className="text-sm text-white/30 mb-6">
-              Tell us what you need and we will respond within 1 hour.
+              Tell us about your business. We&apos;ll build your assistant and send you a live demo link.
             </p>
 
             {state?.success ? (
@@ -251,43 +249,39 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label
-                      htmlFor="serviceType"
+                      htmlFor="industry"
                       className="text-xs font-mono text-white/30 uppercase tracking-wider"
                     >
-                      Service Type
+                      Your Industry <span className="text-red-400">*</span>
                     </label>
                     <select
-                      id="serviceType"
-                      name="serviceType"
+                      required
+                      id="industry"
+                      name="industry"
                       className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[oklch(0.55_0.18_145)] transition-colors appearance-none"
                     >
-                      <option value="">Select a service...</option>
-                      {serviceTypes.map((s) => (
-                        <option key={s.value} value={s.value}>
-                          {s.label}
+                      <option value="">Select your industry...</option>
+                      {industries.map((ind) => (
+                        <option key={ind.value} value={ind.value}>
+                          {ind.label}
                         </option>
                       ))}
                     </select>
                   </div>
                   <div className="space-y-1">
                     <label
-                      htmlFor="budget"
+                      htmlFor="website_url"
                       className="text-xs font-mono text-white/30 uppercase tracking-wider"
                     >
-                      Budget Range
+                      Website URL
                     </label>
-                    <select
-                      id="budget"
-                      name="budget"
-                      className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[oklch(0.55_0.18_145)] transition-colors appearance-none"
-                    >
-                      <option value="">Select a range...</option>
-                      {budgetRanges.map((b) => (
-                        <option key={b.value} value={b.value}>
-                          {b.label}
-                        </option>
-                      ))}
-                    </select>
+                    <input
+                      type="url"
+                      id="website_url"
+                      name="website_url"
+                      className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[oklch(0.55_0.18_145)] transition-colors"
+                      placeholder="https://yourbusiness.com"
+                    />
                   </div>
                 </div>
 
@@ -315,7 +309,7 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
                     className={
                       inputCls("description") + " resize-y min-h-[120px]"
                     }
-                    placeholder="Your market, website URL, listings volume, and what you want the chatbot to handle…"
+                    placeholder="Tell us about your business — services you offer, what you want the AI to handle…"
                     aria-describedby={
                       state?.errors?.description
                         ? "description-error"
@@ -406,30 +400,11 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
                 <p className="text-sm font-bold text-white/90 group-hover:text-brand-green transition-colors">
                   Questions? Chat with our AI assistant.
                 </p>
-                <p className="text-xs text-white/35 mt-1 font-mono uppercase tracking-tight">
-                  Instant answers · Real estate focus
-                </p>
+                  <p className="text-xs text-white/35 mt-1 font-mono uppercase tracking-tight">
+                    Instant answers · AI demo ready
+                  </p>
               </div>
             </div>
-
-            {calendlyMethod && (
-              <a
-                href={calendlyMethod.href}
-                target="_blank"
-                rel="noreferrer"
-                className="p-5 rounded-xl border border-white/5 bg-white/5 hover:bg-white/[0.07] transition-colors group flex flex-col gap-2"
-              >
-                <Calendar className="w-5 h-5 text-white/25" />
-                <div>
-                  <p className="text-sm font-bold text-white/70 group-hover:text-[oklch(0.85_0.3_150)] transition-colors">
-                    {calendlyMethod.label}
-                  </p>
-                  <p className="text-xs text-white/25 mt-1">
-                    Schedule directly via Calendly
-                  </p>
-                </div>
-              </a>
-            )}
 
             {/* Email direct */}
             {emailMethod && (
@@ -439,11 +414,11 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
               >
                 <Mail className="w-5 h-5 text-white/25" />
                 <div>
-                  <p className="text-sm font-bold text-white/70 group-hover:text-[oklch(0.85_0.3_150)] transition-colors">
+                    <p className="text-sm font-bold text-white/70 group-hover:text-[oklch(0.85_0.3_150)] transition-colors">
                     {emailMethod.label}
                   </p>
                   <p className="text-xs text-white/25 mt-1">
-                    Direct email — fastest for complex projects
+                    Direct email — fastest response
                   </p>
                 </div>
               </a>

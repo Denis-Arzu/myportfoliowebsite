@@ -5,7 +5,7 @@ import { absoluteUrl } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Dentrix Apps collects and uses data for real estate AI chatbots, lead capture, and website inquiries.",
+    "How DentrixApps collects and uses data for AI chatbot assistants for salons, gyms, and dental practices.",
   robots: { index: false, follow: true },
   alternates: {
     canonical: absoluteUrl("/privacy-policy"),
@@ -39,12 +39,12 @@ export default function PrivacyPolicy() {
                 Overview
               </h2>
               <p className="leading-relaxed">
-                Dentrix Apps LLC (&quot;we,&quot; &quot;us,&quot; or
+                DentrixApps LLC (&quot;we,&quot; &quot;us,&quot; or
                 &quot;our&quot;) is a limited liability company registered in
                 the State of Wyoming, United States. We are committed to
                 protecting your privacy. This Privacy Policy explains how your
                 personal information is collected, used, and disclosed by
-                Dentrix Apps LLC. This Privacy Policy applies to our website
+                DentrixApps LLC. This Privacy Policy applies to our website
                 (dentrixapps.com) and its associated subdomains.
               </p>
             </section>
@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
               <p className="leading-relaxed">
                 The information we collect is used solely for the purpose of
                 communicating with you regarding your inquiries, providing our
-                AI chatbot and lead-capture services for real estate agents, and
+                AI chatbot and lead-capture services for salons, gyms, and dental practices, and
                 improving our digital platforms. We do not use your data for
                 automated profiling or targeted advertising without explicit
                 consent.
@@ -90,112 +90,84 @@ export default function PrivacyPolicy() {
 
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[04]</span> Cookie
-                Policy
+                <span className="text-[oklch(0.85_0.3_150)]">[04]</span> Data
+                Sharing
               </h2>
               <p className="leading-relaxed">
-                We use essential cookies and similar tracking technologies to
-                track the activity on our service and hold certain information.
-                You can instruct your browser to refuse all cookies or to
-                indicate when a cookie is being sent. However, if you do not
-                accept cookies, you may not be able to use some portions of our
-                service.
+                We do not sell, trade, or otherwise transfer your personally
+                identifiable information to outside parties without your
+                consent, except as required by law or as necessary to provide
+                our services (e.g., processing payments via PayPal, sending
+                emails via Resend). These third parties are bound by
+                confidentiality agreements and are not permitted to use your
+                data for any other purpose.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[05]</span> Your
-                CCPA Rights
+                <span className="text-[oklch(0.85_0.3_150)]">[05]</span> Data
+                Security
               </h2>
-              <p className="leading-relaxed mb-4">
-                Under the California Consumer Privacy Act (CCPA), California
-                residents have specific rights regarding their personal
-                information:
+              <p className="leading-relaxed">
+                We implement industry-standard security measures including
+                256-bit SSL encryption, secure server infrastructure, and
+                access controls to protect your personal information. All
+                AI chat conversations are encrypted in transit and at rest.
               </p>
-              <ul className="list-none space-y-2 ml-4">
-                <li className="flex gap-3">
-                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
-                  <span>
-                    The right to know what personal information is being
-                    collected.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
-                  <span>
-                    The right to request the deletion of personal information.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
-                  <span>
-                    The right to opt-out of the sale of personal information.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="text-[oklch(0.85_0.3_150)]">/</span>
-                  <span>
-                    The right to non-discrimination for exercising privacy
-                    rights.
-                  </span>
-                </li>
-              </ul>
-            </section>
-
-            <section className="bg-[oklch(0.85_0.3_150/0.05)] border border-[oklch(0.85_0.3_150/0.2)] p-6">
-              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 uppercase tracking-widest">
-                Do Not Sell or Share My Personal Information
-              </h2>
-              <p className="leading-relaxed mb-6">
-                <strong>
-                  Dentrix Apps does not sell your personal information.
-                </strong>{" "}
-                We do not share your private data with third parties for their
-                own commercial gain. If you wish to formalize a request to
-                ensure your data is never sold or shared, please contact us at:
-              </p>
-              <a
-                href="mailto:ceo@dentrixapps.com"
-                className="text-[oklch(0.85_0.3_150)] font-bold decoration-2 underline-offset-4 hover:underline"
-              >
-                ceo@dentrixapps.com
-              </a>
             </section>
 
             <section>
               <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
-                <span className="text-[oklch(0.85_0.3_150)]">[06]</span> Contact
-                Procedure
+                <span className="text-[oklch(0.85_0.3_150)]">[06]</span> Your
+                Rights
               </h2>
               <p className="leading-relaxed">
-                If you have any questions about this Privacy Policy, please
-                contact us at{" "}
-                <a
-                  href="mailto:ceo@dentrixapps.com"
-                  className="text-[oklch(0.85_0.3_150)] hover:underline"
-                >
-                  ceo@dentrixapps.com
-                </a>
-                . You may also write to us at: Dentrix Apps LLC, 1621 Central
-                Ave, Cheyenne, WY 82001, United States.
+                You have the right to request access to, correction of, or
+                deletion of your personal data held by us. To exercise these
+                rights, contact us at ceo@dentrixapps.com. We will respond to
+                your request within 30 days as required by applicable law.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
+                <span className="text-[oklch(0.85_0.3_150)]">[07]</span>{" "}
+                Cookies
+              </h2>
+              <p className="leading-relaxed">
+                We use minimal cookies necessary for the operation of our
+                website. We do not use tracking cookies or third-party
+                advertising cookies. You can control cookie settings through
+                your browser preferences.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-bold text-[oklch(1_0_0)] mb-4 flex items-center gap-2">
+                <span className="text-[oklch(0.85_0.3_150)]">[08]</span>{" "}
+                Contact
+              </h2>
+              <p className="leading-relaxed">
+                For privacy-related inquiries, contact us at:
+              </p>
+              <p className="mt-4 text-[oklch(0.85_0.3_150)]">
+                DentrixApps LLC
+                <br />
+                Email: ceo@dentrixapps.com
+                <br />
+                Location: Cheyenne, Wyoming, United States
               </p>
             </section>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 text-center sm:text-left text-xs text-[oklch(0.8_0_0/0.5)]">
+        <div className="mt-12 text-center">
           <Link
             href="/"
-            className="hover:text-[oklch(0.85_0.3_150)] transition-colors"
+            className="text-sm text-white/30 hover:text-[oklch(0.85_0.3_150)] transition-colors"
           >
-            &lt; RETURN_TO_ROOT
-          </Link>
-          <Link
-            href="/terms-of-service"
-            className="hover:text-[oklch(0.85_0.3_150)] transition-colors"
-          >
-            PROCEED_TO_TERMS_OF_SERVICE &gt;
+            ← Back to Home
           </Link>
         </div>
       </div>

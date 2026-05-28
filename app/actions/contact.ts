@@ -17,8 +17,8 @@ const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   company: z.string().optional(),
-  budget: z.string().optional(),
-  serviceType: z.string().optional(),
+  industry: z.string().min(1, "Please select your industry"),
+  website_url: z.string().optional(),
   description: z.string().min(10, "Please provide at least 10 characters"),
 });
 
@@ -157,8 +157,8 @@ export async function submitContactForm(
     name: formData.get("name"),
     email: formData.get("email"),
     company: formData.get("company"),
-    budget: formData.get("budget"),
-    serviceType: formData.get("serviceType"),
+    industry: formData.get("industry"),
+    website_url: formData.get("website_url"),
     description: formData.get("description"),
   };
 
@@ -172,7 +172,7 @@ export async function submitContactForm(
     };
   }
 
-  const { name, email, company, budget, serviceType, description } = result.data;
+  const { name, email, company, industry, website_url, description } = result.data;
 
   const { attachments, error: attachmentError } = await parseAttachments(formData);
   if (attachmentError) {
@@ -206,8 +206,8 @@ export async function submitContactForm(
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);
   const safeCompany = escapeHtml(company || "—");
-  const safeService = escapeHtml(serviceType || "Not specified");
-  const safeBudget = escapeHtml(budget || "Not specified");
+  const safeIndustry = escapeHtml(industry || "Not specified");
+  const safeWebsite = escapeHtml(website_url || "Not provided");
   const safeDescription = escapeHtml(description);
 
   const attachmentListHtml =
@@ -229,23 +229,27 @@ export async function submitContactForm(
         from: fromEmail,
         to: [toEmail],
         replyTo: email,
-        subject: `New Project Inquiry: ${budget || "Budget not specified"} — ${name} (${company || "No company"})`,
+        subject: `New Lead from DentrixApps — ${industry || "Unknown Industry"} — ${name}`,
         html: `
           <div style="font-family: 'SF Mono', 'Fira Code', monospace; background: #0a0a0a; color: #e5e5e5; padding: 32px; border-radius: 12px;">
             <div style="border-bottom: 1px solid #333; padding-bottom: 16px; margin-bottom: 24px;">
-              <h2 style="color: #22c55e; margin: 0 0 4px;">New Project Inquiry</h2>
-              <p style="color: #666; font-size: 12px; margin: 0;">via dentrixapps.com contact form · ${new Date().toISOString()}</p>
+          <h2 style="color: #22c55e; margin: 0 0 4px;">New AI Assistant Lead</h2>
+          <p style="color: #666; font-size: 12px; margin: 0;">via dentrixapps.com contact form · ${new Date().toISOString()}</p>
             </div>
             <table style="width: 100%; border-collapse: collapse;">
               <tr><td style="padding: 8px 0; color: #888; width: 120px;">Name</td><td style="padding: 8px 0; color: #fff;">${safeName}</td></tr>
               <tr><td style="padding: 8px 0; color: #888;">Email</td><td style="padding: 8px 0;"><a href="mailto:${safeEmail}" style="color: #818cf8;">${safeEmail}</a></td></tr>
               <tr><td style="padding: 8px 0; color: #888;">Company</td><td style="padding: 8px 0; color: #fff;">${safeCompany}</td></tr>
-              <tr><td style="padding: 8px 0; color: #888;">Service Type</td><td style="padding: 8px 0; color: #fff;">${safeService}</td></tr>
-              <tr><td style="padding: 8px 0; color: #888;">Budget</td><td style="padding: 8px 0; color: #22c55e; font-weight: bold;">${safeBudget}</td></tr>
+              <tr><td style="padding: 8px 0; color: #888;">Industry</td><td style="padding: 8px 0; color: #22c55e; font-weight: bold;">${safeIndustry}</td></tr>
+              <tr><td style="padding: 8px 0; color: #888;">Website URL</td><td style="padding: 8px 0; color: #fff;">${safeWebsite}</td></tr>
             </table>
             <div style="margin-top: 24px; padding: 16px; background: #111; border: 1px solid #222; border-radius: 8px;">
               <p style="color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 8px;">Project Details</p>
               <p style="white-space: pre-wrap; color: #e5e5e5; margin: 0; line-height: 1.6;">${safeDescription}</p>
+            </div>
+            <div style="margin-top: 12px; padding: 12px 16px; background: #0d1f0d; border: 1px solid #22c55e33; border-radius: 8px;">
+              <p style="color: #22c55e; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 4px;">Action Required</p>
+              <p style="color: #e5e5e5; font-size: 13px; margin: 0;">This business owner is interested in an AI assistant. Their website is <strong>${safeWebsite}</strong> — scrape it and build a demo ASAP.</p>
             </div>
             <div style="margin-top: 16px; padding: 16px; background: #111; border: 1px solid #222; border-radius: 8px;">
               <p style="color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 4px;">Attachments (${attachments.length})</p>
@@ -283,9 +287,9 @@ export async function submitContactForm(
     console.log(`  Name:    ${name}`);
     console.log(`  Email:   ${email}`);
     console.log(`  Company: ${company || "—"}`);
-    console.log(`  Service: ${serviceType || "—"}`);
-    console.log(`  Budget:  ${budget || "—"}`);
-    console.log(`  Message: ${description}`);
+  console.log(`  Industry: ${industry || "—"}`);
+  console.log(`  Website:  ${website_url || "—"}`);
+  console.log(`  Message: ${description}`);
     if (attachments.length > 0) {
       console.log(`  Files:   ${attachments.map((a) => `${a.filename} (${formatFileSize(a.size)})`).join(", ")}`);
     } else {

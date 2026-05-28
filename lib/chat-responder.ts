@@ -21,14 +21,12 @@ export function getKnowledgeResponse(message: string, historyContext?: string): 
   const trimmed = message.trim();
   if (!trimmed) return CHAT_FALLBACK;
 
-  // Use history context to disambiguate follow-up questions
-  // e.g., "what about the monthly cost?" after a pricing discussion
   const scoringInput = historyContext
     ? `${historyContext}\n${trimmed}`
     : trimmed;
 
   if (GREETING_PATTERNS.test(trimmed) && trimmed.length < 40) {
-    return "Hello! I can explain what Dentrix Apps does, how our real estate chatbots work, or how the proof-before-pay preview works. What would you like to know?";
+    return "Hello! I can tell you about DentrixApps — we build AI chatbot assistants for salons, gyms, and dental practices. Want to know how it works or see a live demo?";
   }
 
   let best: KnowledgeTopic | null = null;

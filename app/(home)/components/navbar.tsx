@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { scrollToSection } from "@/lib/smooth-scroll";
 
 type NavbarProps = {
   minimal?: boolean;
@@ -35,9 +36,30 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
     };
   }, [menuOpen]);
 
+  const handleNavClick = useCallback((href: string) => {
+    const hashMatch = href.match(/^\/#(.+)$/);
+    if (hashMatch && pathname === "/") {
+      scrollToSection(hashMatch[1]);
+    } else if (hashMatch) {
+      router.push(href);
+    } else {
+      router.push(href);
+    }
+  }, [pathname, router]);
+
+  const navLinks = [
+    { label: "How It Works", section: "how-it-works" },
+    { label: "Live Demos", section: "demos" },
+    { label: "Pricing", section: "pricing" },
+    { label: "FAQ", section: "faq" },
+  ];
+
   const links = [
-    { name: "Home", href: "/" },
-    { name: "Contact", href: "/contact" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Live Demos", href: "/#demos" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "FAQ", href: "/#faq" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
@@ -61,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
             <div className="relative w-32 h-8 sm:w-36 sm:h-9 transition-transform duration-300 group-hover:scale-[1.02]">
               <Image
                 src="/images/home/dentrixappslg.webp"
-                alt="Dentrix Apps"
+                alt="DentrixApps — AI Assistants for Salons, Gyms & Dental Practices"
                 width={144}
                 height={36}
                 className="w-full h-full object-contain"
@@ -71,17 +93,22 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
           </Link>
 
           <div className="hidden sm:flex items-center gap-8">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-xs font-semibold uppercase tracking-[0.15em] transition-colors ${
-                  pathname === link.href ? "text-white" : "text-white/40 hover:text-white"
-                }`}
+            {navLinks.map((link) => (
+              <button
+                key={link.section}
+                type="button"
+                onClick={() => handleNavClick(`/#${link.section}`)}
+                className="text-xs font-semibold uppercase tracking-[0.15em] transition-colors text-white/40 hover:text-white cursor-pointer"
               >
-                {link.name}
-              </Link>
+                {link.label}
+              </button>
             ))}
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-green text-white text-xs font-semibold uppercase tracking-[0.1em] rounded-lg transition-all duration-200 hover:brightness-110 hover:scale-[1.02]"
+            >
+              Get Your AI Assistant
+            </Link>
           </div>
 
           <div className="flex sm:hidden items-center gap-2">
@@ -119,15 +146,28 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
           </button>
           <nav className="flex flex-col gap-8">
             {links.map((link) => (
-              <Link
+              <button
                 key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="text-3xl font-semibold text-white tracking-tight"
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleNavClick(link.href);
+                }}
+                className="text-3xl font-semibold text-white tracking-tight text-left cursor-pointer"
               >
-                {link.name}
-              </Link>
+                {link.label}
+              </button>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                handleNavClick("/contact");
+              }}
+              className="text-3xl font-semibold text-brand-green tracking-tight text-left cursor-pointer"
+            >
+              Get Your AI Assistant →
+            </button>
           </nav>
         </div>
       )}

@@ -46,11 +46,11 @@ export async function sendChatMessage(
   const userMessageCount = history.filter((m) => m.role === "user").length;
   let stageHint = "";
   if (userMessageCount === 0) {
-    stageHint = "CONVERSATION_STAGE: first message — welcome warmly, assess intent.";
+    stageHint = "CONVERSATION_STAGE: first message — The visitor just started chatting. Be warm and direct. Ask what kind of business they run (salon, gym, dental) to personalize the conversation.";
   } else if (userMessageCount <= 2) {
-    stageHint = "CONVERSATION_STAGE: early conversation — provide clear answers, build trust.";
+    stageHint = "CONVERSATION_STAGE: early conversation — The visitor is exploring. Answer their question clearly, then guide toward trying a live demo or sharing their website URL so we can build them one.";
   } else {
-    stageHint = "CONVERSATION_STAGE: engaged prospect — after this response, consider subtly guiding toward the live demo at bot.dentrixapps.com or contacting the team at ceo@dentrixapps.com.";
+    stageHint = "CONVERSATION_STAGE: engaged prospect — The visitor is interested. Be specific about benefits for their industry. Push toward the demo or contact form. Create urgency: 'Every day without an AI assistant is a day of lost leads.'";
   }
 
   const systemPrompt = `${DENTRIX_SYSTEM_CONTEXT}
@@ -82,7 +82,7 @@ RULES:
 
   // --- Primary: Groq LLM ---
   const groqResult = await groqChat(groqMessages, {
-    temperature: 0.4,
+    temperature: 0.45,
     maxTokens: 600,
   });
 

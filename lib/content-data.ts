@@ -1,42 +1,30 @@
-/** Site copy — Dentrix Apps (real estate AI chatbots) */
+/** Site copy — DentrixApps (AI chatbot assistants for salons, gyms & dental practices) */
 
 export const heroContent = {
-  headline: "Your real estate website is losing leads right now.",
-  headlineAccent: "Let's fix that with AI.",
+  eyebrow: "AI Assistants for Salons, Gyms & Dental Practices",
+  headline: "Your Website Is Losing Customers Right Now. Let's Fix That.",
   subheadline:
-    "We build custom AI assistants for real estate agents — and prove they work by showing yours live on your site before you pay a dollar. One setup, $29/month, zero risk.",
-  primaryCta: { label: "Talk to us", href: "/contact" },
-  secondaryCta: { label: "Talk to AI Agent", action: "chat" as const },
+    "An AI assistant that knows your business, answers questions 24/7, captures leads while you sleep, and books appointments your front desk misses. Built from your website. Live today.",
+  primaryCta: { label: "See It Live", action: "scroll_to_demos" as const },
+  secondaryCta: { label: "Talk to Our AI", action: "open_chat_overlay" as const },
+  tertiaryCta: { label: "Get Yours Built", action: "navigate_to_contact" as const },
 };
 
 export const contactContent = {
-  heading: "Drop us your clean thoughts",
+  heading: "Get Your AI Assistant Built Today",
   subheading:
-    "Tell us about your market and website. We'll scope your chatbot and show you a live preview on your site.",
-  serviceTypes: [
-    { value: "chatbot", label: "AI website chatbot for my listings" },
-    { value: "preview", label: "Proof-before-pay preview on my site" },
-    { value: "crm", label: "Lead capture & CRM integration" },
-    { value: "other", label: "Something else" },
-  ],
-  budgetRanges: [
-    { value: "exploring", label: "Just exploring" },
-    { value: "under-500", label: "Under $500 / month" },
-    { value: "500-1500", label: "$500 – $1,500 / month" },
-    { value: "1500-plus", label: "$1,500+ / month" },
-    { value: "undisclosed", label: "Prefer to discuss on a call" },
+    "Tell us about your business. We'll build your assistant from your website and send you a live demo link within 24 hours. No commitment. No credit card. Just proof.",
+  industries: [
+    { value: "salon", label: "Salon & Spa" },
+    { value: "gym", label: "Gym & Fitness" },
+    { value: "dental", label: "Dental Practice" },
   ],
   trustSignals: [
-    "Preview your chatbot on your site before you commit",
-    "Built for real estate — listings, buyers, and lead qualification",
-    "Typical response within 1 hour on business days",
+    "Same-day build — we use your website data",
+    "Live demo before you pay a cent",
+    "One line of code to go live",
   ],
   contactMethods: [
     { type: "email" as const, label: "ceo@dentrixapps.com" },
-    {
-      type: "calendly" as const,
-      label: "Book a discovery call",
-      href: "https://calendly.com/dentrixapps/30min",
-    },
   ],
 };

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ContactPageView } from "./ContactPageView";
 import { SITE_NAME, absoluteUrl, ogImage } from "@/lib/seo";
 
-const title = "Contact";
+const title = "Get Your Free AI Assistant Demo";
 const description =
-  "Book a discovery call or message Dentrix Apps. We scope your real estate AI chatbot and show a live preview on your website before you pay.";
+  "Tell us about your salon, gym, or dental practice. We'll build your AI assistant from your website and send you a free live demo — same day. No credit card required.";
 
 export const metadata: Metadata = {
   title,

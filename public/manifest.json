@@ -1,7 +1,7 @@
 {
-  "short_name": "Dentrix Apps",
-  "name": "Dentrix Apps — Real Estate AI Chatbots",
-  "description": "AI chatbots that turn real estate agents' websites into 24/7 lead-capturing machines — preview on your site before you pay.",
+  "short_name": "DentrixApps",
+  "name": "DentrixApps — AI Assistants for Salons, Gyms & Dental",
+  "description": "AI chatbot assistants for salons, gyms, and dental practices that capture leads 24/7 and book appointments. Free demo.",
   "icons": [
     {
       "src": "/icon.webp",

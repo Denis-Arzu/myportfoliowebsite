@@ -163,7 +163,7 @@ function HistoryStrip({ exchange }: { exchange: Exchange | null }) {
 
 // ─── Main ─────────────────────────────────────────────────────────────────
 
-const GREETING = "Hi, this is Dentrix Apps AI Assistant.\nHow can I help you?";
+const GREETING = "Hi, this is the DentrixApps AI assistant. I can tell you about our AI chatbot service for salons, gyms, and dental practices. Want to know how it works or see a live demo?";
 
 interface Props {
   onClose: () => void;

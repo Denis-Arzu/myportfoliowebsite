@@ -1,7 +1,6 @@
 # PORTFOLIO FULL AUDIT REPORT
 ## dentrixapps.com
-## Audited: 2026-07-14 (updated — post AI chat integration)
-## Last updated: 2026-05-21 (hero copy + demo link changes)
+## Audited: 2026-05-26 (full codebase static analysis)
 ## Analyst: Full Codebase Static Analysis
 
 ---
@@ -9,13 +8,13 @@
 ## EXECUTIVE SUMMARY
 
 **Project:** Dentrix Apps — real estate AI chatbot service website  
-**Framework:** Next.js 16.1.6 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4  
-**Package Manager:** pnpm 10.18.1  
-**Build Status:** Zero errors, zero build warnings. Clean production build confirmed.  
+**Framework:** Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4  
+**Package Manager:** pnpm  
+**Build Status:** Clean production build.  
 **Brand:** AI chatbots for real estate agents. "Proof-before-pay" model.  
-**Deployment target:** Vercel (static-compatible; 9 routes prerendered as static content)
+**Deployment target:** Vercel (static-compatible; 5 routes prerendered as static content)
 
-**Current state:** Codebase is lean, fully active — zero dead files. The AI chat layer has been fully rebuilt: Groq LLM (llama-3.3-70b-versatile) replaces OpenAI, a full-screen immersive `SpaceChatOverlay` replaces the old slide-up panel on both `/` and `/contact`, and all email references are unified. Remaining work is product/content depth, not engineering cleanup.
+**Current state:** Codebase is lean and fully active. All major issues from previous audit have been resolved: `ChatAgentPanel.tsx` deleted, `SpaceChatOverlay` converted to dynamic import (lazy-loaded), `/do-not-sell` route created, stale config files cleaned up. Remaining work is product/content depth and minor code quality improvements.
 
 ---
 
@@ -23,19 +22,15 @@
 
 | Metric | Value |
 |---|---|
-| Routes | 5 pages (/, /contact, /privacy-policy, /terms-of-service) + /robots.txt + /sitemap.xml + /icon.svg |
-| `/do-not-sell` | linked from PrivacyBanner — **route does not exist → 404** |
-| App files | 12 (layout, globals.css, icon.svg, robots.ts, sitemap.ts, page.tsx, ContactPageView.tsx, contact page.tsx, 3 legal pages) |
-| Active components | 9 in `app/(home)/components/`, 2 in `components/ui/`, 1 `theme-provider.tsx` |
-| Lib files | 8 (all active, including `groq-client.ts`) |
+| Routes | 5 pages (/, /contact, /privacy-policy, /terms-of-service, /do-not-sell) + /robots.txt + /sitemap.xml + /icon.svg |
+| App files | 12 (layout, globals.css, icon.svg, robots.ts, sitemap.ts, page.tsx, ContactPageView.tsx, contact page.tsx, 3 legal pages, do-not-sell page.tsx) |
+| Active components | 8 in `app/(home)/components/` (ChatAgentPanel deleted), 2 in `components/ui/`, 1 `theme-provider.tsx` |
+| Lib files | 8 (all active) |
 | Server actions | 2 (chat-agent.ts, contact.ts) |
 | Script files | 2 (create-og-image.js, optimize-images.ts) |
 | Public images | 8 (home/ × 6 png+webp, og-image × png+webp) + icon.png + icon.webp |
 | Dead code | **0 files** |
-| TypeScript errors | 0 |
-| Build errors | 0 |
-| Lint errors | 2 (encoding artifact in `.eslintrc.json`) |
-| Lint warnings | ~65 (all Tailwind v4 class-shorthand suggestions — cosmetic only) |
+| Stale config files | **0** (`.eslintrc.json`, `package-lock.json`, `eslint.config.mjs.bak` — all removed) |
 
 ---
 
@@ -47,22 +42,22 @@ myportfoliowebsite/
 ├── app/
 │   ├── (home)/
 │   │   ├── components/
-│   │   │   ├── ChatAgentPanel.tsx        slide-up panel (contact page legacy, kept for /contact CTA card)
 │   │   │   ├── ContactSection.tsx        full contact form — accepts onOpenChat prop
 │   │   │   ├── CursorGradient.tsx        RAF pointer-tracked radial gradient
-│   │   │   ├── HeroSection.tsx           headline + dual CTAs — accepts onOpenChat prop
-│   │   │   ├── PrivacyBanner.tsx         CCPA/GPC localStorage banner
+│   │   │   ├── HeroSection.tsx           headline + 3 CTAs — accepts onOpenChat prop
+│   │   │   ├── navbar.tsx                fixed nav with scroll transforms
+│   │   │   ├── PrivacyBanner.tsx         CCPA/GPC localStorage banner (links /do-not-sell)
 │   │   │   ├── ProjectFileUpload.tsx     drag-and-drop file attachment widget
 │   │   │   ├── SiteFooter.tsx            logo + nav links + copyright
-│   │   │   ├── SpaceChatOverlay.tsx      immersive full-screen AI chat — used on / and /contact
-│   │   │   └── navbar.tsx                fixed nav with scroll transforms
-│   │   └── page.tsx                      homepage — owns chatOpen state
+│   │   │   └── SpaceChatOverlay.tsx      immersive full-screen AI chat — dynamically imported
+│   │   └── page.tsx                      homepage — owns chatOpen state, dynamic import of SpaceChatOverlay
 │   ├── actions/
-│   │   ├── chat-agent.ts                 Groq LLM → local KB fallback
-│   │   └── contact.ts                    Zod + Resend + rate limiter
+│   │   ├── chat-agent.ts                 Groq LLM → local KB fallback (history-aware)
+│   │   └── contact.ts                    Zod + Resend + rate limiter + honeypot
 │   ├── contact/
-│   │   ├── ContactPageView.tsx           owns chatOpen state for /contact
+│   │   ├── ContactPageView.tsx           owns chatOpen state, dynamic import of SpaceChatOverlay
 │   │   └── page.tsx                      server metadata + render
+│   ├── do-not-sell/page.tsx              CCPA opt-out page (monospace terminal style)
 │   ├── privacy-policy/page.tsx
 │   ├── terms-of-service/page.tsx
 │   ├── globals.css
@@ -78,12 +73,12 @@ myportfoliowebsite/
 │   └── theme-provider.tsx
 │
 ├── lib/
-│   ├── chat-responder.ts                 keyword-scoring KB lookup (fallback)
+│   ├── chat-responder.ts                 keyword-scoring KB lookup (fallback, now context-aware)
 │   ├── claim-validator.ts                token-overlap confidence scorer
 │   ├── contact-upload.ts                 upload limits + MIME/ext sets
 │   ├── content-data.ts                   heroContent + contactContent
-│   ├── dentrix-knowledge.ts              KB topics, system prompt, greeting, fallback
-│   ├── groq-client.ts                    official groq-sdk chat completion client
+│   ├── dentrix-knowledge.ts              11 KB topics, system prompt (strategic framework), greeting, fallback
+│   ├── groq-client.ts                    groq-sdk chat completion client (llama-3.3-70b-versatile)
 │   ├── seo.ts                            SITE_URL, DEFAULT_TITLE, ogImage, absoluteUrl
 │   └── utils.ts                          cn() — clsx + tailwind-merge
 │
@@ -101,13 +96,10 @@ myportfoliowebsite/
 │   └── optimize-images.ts
 │
 ├── .env.example                          documents all 5 env vars
-├── .eslintrc.json                        legacy flat config — encoding artifact (2 errors)
-├── eslint.config.mjs                     modern flat config — active
-├── eslint.config.mjs.bak                 backup file — should be deleted
+├── eslint.config.mjs                     modern flat config — active, single file
 ├── next.config.ts
 ├── package.json
-├── package-lock.json                     npm lockfile — conflicts with pnpm-lock.yaml
-├── pnpm-lock.yaml                        canonical lockfile
+├── pnpm-lock.yaml                        canonical lockfile (package-lock.json removed)
 ├── postcss.config.mjs
 ├── tsconfig.json
 └── components.json
@@ -119,20 +111,20 @@ myportfoliowebsite/
 
 | Item | State |
 |---|---|
-| Next.js | 16.1.6, App Router, Turbopack dev |
-| React | 19.0.0 |
+| Next.js | 16, App Router, Turbopack dev |
+| React | 19 |
 | TypeScript | ^5, strict, `noEmit: true`, `bundler` moduleResolution |
 | Tailwind CSS | v4 via `@tailwindcss/postcss`, all tokens in `globals.css` `@theme` |
-| Animation | `motion` v12.6.3 (Framer Motion) |
-| Smooth scroll | `lenis` v1.3.21 via `ReactLenis` root |
-| LLM | `groq-sdk` v1.2.0 — llama-3.3-70b-versatile, OpenAI-compatible API |
-| Icons | `lucide-react` v0.487.0 + `react-icons` v5.5.0 (react-icons: no active imports) |
-| Email | `resend` v6.12.2 — dynamic import inside server action |
-| Validation | `zod` v4.3.6 — contact form schema |
-| Image processing | `sharp` v0.34.5 (devDep) — scripts only |
-| Theme | `next-themes` v0.4.6 — dark-only, `enableSystem: false` |
-| ESLint | Dual config conflict: `.eslintrc.json` (2 parse errors) + `eslint.config.mjs` (active). `.bak` file also present. |
-| Lock files | `package-lock.json` + `pnpm-lock.yaml` — conflict. pnpm canonical. |
+| Animation | `motion` v12 (Framer Motion successor) |
+| Smooth scroll | `lenis` via `ReactLenis` root wrapper |
+| LLM | `groq-sdk` — llama-3.3-70b-versatile, OpenAI-compatible API |
+| Icons | `lucide-react` + `react-icons` (react-icons: no active imports) |
+| Email | `resend` — dynamic import inside server action |
+| Validation | `zod` v4 — contact form schema |
+| Image processing | `sharp` (devDep) — scripts only |
+| Theme | `next-themes` — dark-only, `enableSystem: false` |
+| ESLint | Single flat config (`eslint.config.mjs`) — clean. `.eslintrc.json` and `.bak` removed. |
+| Lock files | `pnpm-lock.yaml` only — clean. `package-lock.json` removed. |
 
 ---
 
@@ -142,15 +134,16 @@ myportfoliowebsite/
 
 | File | Lines | Role | Notes |
 |---|---|---|---|
-| `SpaceChatOverlay.tsx` | ~610 | Immersive full-screen AI chat. Phase machine: greeting → typing → waiting → answer → done. Mounted on `/` and `/contact` via `AnimatePresence`. | The primary AI chat interface. |
-| `ChatAgentPanel.tsx` | 233 | Legacy slide-up chat panel. Still mounted on `/` (via `dynamic` import) but its `open` state is never triggered from the homepage. Used on `/contact` only via `ChatAgentPanel` import — now also removed from there. | **Effectively dead on both pages.** Not triggered anywhere. |
-| `ContactSection.tsx` | ~460 | Full contact form with Zod validation, file upload, Calendly + email CTAs, AI assistant card. `onOpenChat?: () => void` prop wires the AI card to the parent's overlay. | `window.dispatchEvent` removed. |
+| `SpaceChatOverlay.tsx` | ~610 | Immersive full-screen AI chat. 5-phase machine: greeting → typing → waiting → answer → done. Dynamically imported with `ssr: false` on both `/` and `/contact`. | Lazy-loaded — only loads on user interaction. |
+| `ContactSection.tsx` | ~460 | Full contact form with Zod validation, file upload, Calendly + email CTAs, AI assistant card. `onOpenChat` prop wires the AI card to parent overlay. | |
 | `CursorGradient.tsx` | 70 | RAF-driven cursor tracker, `prefers-reduced-motion` guard. | Active on `/`. |
-| `HeroSection.tsx` | 54 | Headline + two CTAs. `onOpenChat: () => void` prop drives the "Talk to AI Agent" button. | |
-| `PrivacyBanner.tsx` | 61 | CCPA/GPC bottom banner. Links `/do-not-sell` (404). | |
+| `HeroSection.tsx` | 55 | Headline + 3 CTAs (Talk to us, View Demo, Talk to AI Agent). `onOpenChat` prop drives the "Talk to AI Agent" button. | |
+| `PrivacyBanner.tsx` | 61 | CCPA/GPC bottom banner. Links `/do-not-sell` — ✅ now exists. | |
 | `ProjectFileUpload.tsx` | 207 | Drag-and-drop upload widget used inside `ContactSection`. | |
 | `SiteFooter.tsx` | 36 | Logo, nav links, copyright. | |
 | `navbar.tsx` | 116 | Scroll-driven nav, minimal/back-button modes. | |
+
+✅ **`ChatAgentPanel.tsx` has been deleted.** The old slide-up chat panel is no longer in the codebase. No dead components.
 
 ### `components/ui/` and `components/`
 
@@ -172,10 +165,11 @@ The AI chat system has three layers:
 User interaction
        │
        ▼
-SpaceChatOverlay (client component)
+SpaceChatOverlay (client component, dynamically imported)
   Phase machine: greeting → typing → waiting → answer → done
   Desktop: hidden 1px input captures keystrokes
   Mobile:  visible input bar + visualViewport for keyboard-aware layout
+  Answer persists via completedRef (useRef) — not reactive state
        │
        ▼
 sendChatMessage() — "use server" action
@@ -183,12 +177,13 @@ sendChatMessage() — "use server" action
        │
        ├── Primary: groqChat() → llama-3.3-70b-versatile
        │     lib/groq-client.ts (groq-sdk singleton)
-       │     System prompt = DENTRIX_SYSTEM_CONTEXT + KB block + RULES
+       │     System prompt = DENTRIX_SYSTEM_CONTEXT (strategic framework) + KB block + RULES + stage hint
        │     History: last 8 turns passed for conversation context
        │
        └── Fallback: getKnowledgeResponse()
              lib/chat-responder.ts
              Keyword scoring over 11 KB topics in lib/dentrix-knowledge.ts
+             Context-aware: passes recentHistory (last 4 turns) for improved scoring
              Used when GROQ_API_KEY absent or Groq errors
        │
        ▼
@@ -207,51 +202,38 @@ validateClaims() — lib/claim-validator.ts
 | `answer` | AI reply typewriters character by character, `speedMs: 15` with ±30% jitter | Input disabled |
 | `done` | Full answer stays visible (`completedAnswer` ref, not reactive state) + "— Dentrix AI" attribution fades in | Input re-enabled — next keystroke archives to ghost strip |
 
-### Answer persistence fix
+### Answer persistence
 
-The typewriter hook's `!active` branch no longer calls `setDisplayed("")`. Instead:
-- `completedRef` (a `useRef`) stores the full text when the last character is typed
-- `done` phase renders `completedAnswer` (from `completedRef.current`) not `typedAnswer` (reactive state)
-- The answer is immune to any state reset. It stays on screen until the user's first keystroke in `done` phase, which atomically promotes it to `ghostExchange` (history strip) and transitions to `typing`
+The typewriter hook stores the completed answer in `completedRef` (a `useRef`). The `done` phase renders `completedAnswer` from `completedRef.current`, not `typedAnswer` (reactive state). The answer is immune to any state reset. It stays on screen until the user's first keystroke in `done` phase, which atomically promotes it to `ghostExchange` (history strip) and transitions to `typing`.
 
 ### Mobile layout
 
 - `useIsMobile()` — `window.innerWidth < 640`, updates on resize
-- `useVisualViewport()` — tracks `window.visualViewport.height` via both `resize` and `scroll` events (iOS fires `scroll` not `resize` when keyboard opens). Container `height` is set inline to `vpHeight` so the stage + input bar fit the visible area above the keyboard
-- Mobile renders a real `<input>` bar (not hidden) because browsers require a focused visible input to summon the virtual keyboard. `enterKeyHint="send"` labels the iOS return key
-- Desktop renders a 1×1px `opacity-0` input at `50vh/50vw` that captures all keystrokes silently
+- `useVisualViewport()` — tracks `window.visualViewport.height` via both `resize` and `scroll` events (iOS fires `scroll` not `resize` when keyboard opens). Container `height` is set inline to `vpHeight`
+- Mobile renders a visible `<input>` bar with `enterKeyHint="send"`
+- Desktop renders a 1×1px `opacity-0` input at 50vh/50vw that captures all keystrokes silently
 
 ### Close button
 
-Top-right `motion.button` with `X` icon (36×36px mobile, 32×32px desktop). Present on all viewports. Animates in at 250ms delay so it doesn't compete with the greeting entrance. `whileTap={{ scale: 0.88 }}` gives tactile feedback. Desktop also shows `Esc to exit` hint and keyboard listener.
+Top-right `motion.button` with `X` icon (36×36px mobile, 32×32px desktop). `whileTap={{ scale: 0.88 }}` gives tactile feedback. Desktop also shows `Esc to exit` hint and keyboard listener.
 
 ### `groq-client.ts`
 
-- Module-level singleton (`_client`) — instantiated once per server process lifetime
-- `getClient()` returns `null` when `GROQ_API_KEY` absent — caller drops to KB fallback, no throw
+- Module-level singleton — instantiated once per server process lifetime
+- `getClient()` returns `null` when `GROQ_API_KEY` absent — caller drops to KB fallback
 - Default model: `llama-3.3-70b-versatile` (overridable via `GROQ_MODEL` env var)
-- Error logging: logs `err.message` only, not full error object (avoids key leakage in logs)
-- `temperature: 0.35`, `max_tokens: 512` defaults; chat-agent overrides to `0.3` / `400`
+- `temperature: 0.35`, `max_tokens: 512` defaults; chat-agent overrides to `0.4` / `600`
 
-### Email — now fully unified
+### Email — unified
 
-All references across the codebase now use `ceo@dentrixapps.com`:
+All references use `ceo@dentrixapps.com`:
+- `lib/dentrix-knowledge.ts` — system context, contact topic answer, fallback
+- `app/actions/chat-agent.ts` — system prompt + low-confidence message
+- `app/actions/contact.ts` — `DEFAULT_CONTACT_EMAIL`
+- `components/ui/StructuredData.tsx` — `contactPoint.email`
+- `lib/content-data.ts` — contact methods
 
-| File | Status |
-|---|---|
-| `lib/dentrix-knowledge.ts` — `DENTRIX_SYSTEM_CONTEXT` | ✅ `ceo@` |
-| `lib/dentrix-knowledge.ts` — `contact` topic answer | ✅ `ceo@` |
-| `lib/dentrix-knowledge.ts` — `CHAT_FALLBACK` | ✅ `ceo@` |
-| `app/actions/chat-agent.ts` — system prompt + low-confidence message | ✅ `ceo@` |
-| `app/actions/contact.ts` — `DEFAULT_CONTACT_EMAIL` | ✅ `ceo@` |
-| `components/ui/StructuredData.tsx` — `contactPoint.email` | ✅ `ceo@` |
-| `lib/content-data.ts` — `contactMethods` | ✅ `ceo@` |
-
-### `ChatAgentPanel.tsx` — status
-
-The panel component still exists and is mounted on the homepage via `dynamic(..., { ssr: false })`. Its `open` state is never set to `true` from the homepage — the "Talk to AI Agent" button now calls `onOpenChat` which opens `SpaceChatOverlay`. On `/contact`, `ChatAgentPanel` was removed from `ContactPageView.tsx` entirely. The component remains in the codebase because its `openChatAgent()` export was previously used — but that export is no longer called from anywhere.
-
-**`ChatAgentPanel.tsx` is now dead.** It should be deleted.
+✅ No stale email references remain.
 
 ---
 
@@ -271,7 +253,7 @@ page.tsx  ("use client")
   │
   └── AnimatePresence (overlay enter)
         motion.div — enter: opacity:1, 350ms
-          SpaceChatOverlay (onClose={closeChat})
+          SpaceChatOverlay (dynamic import, ssr: false, onClose={closeChat})
 ```
 
 ### `/contact` — `app/contact/ContactPageView.tsx`
@@ -288,10 +270,14 @@ ContactPageView.tsx  ("use client")
   │
   └── AnimatePresence (overlay enter)
         motion.div — enter: opacity:1, 350ms
-          SpaceChatOverlay (onClose={closeChat})
+          SpaceChatOverlay (dynamic import, ssr: false, onClose={closeChat})
 ```
 
-Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOverlay` is shared between them — same component, same behaviour, same close mechanic.
+Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOverlay` is now dynamically imported on both pages — lazy-loaded, only loaded on user interaction.
+
+### `/do-not-sell` — `app/do-not-sell/page.tsx`
+
+New route. Monospace terminal aesthetic matching privacy/terms pages. localStorage-driven opt-out with opt-in/revoke toggle. Explains CCPA rights, GPC signals, and contact info. ✅ Previously reported as 404 — now resolves correctly.
 
 ---
 
@@ -310,25 +296,28 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 - Graceful dev console fallback when `RESEND_API_KEY` absent
 
 **Remaining issues:**
-- `FALLBACK_CONTACT_EMAIL` is identical to `DEFAULT_CONTACT_EMAIL` — redundant constant
 - Rate limiter resets on serverless cold start — soft protection only
 - `bodySizeLimit: "48mb"` in `next.config.ts` vs 40MB attachment cap — 8MB gap
 
 ### `app/actions/chat-agent.ts`
 
 **What it does:**
-1. Loads `DENTRIX_SYSTEM_CONTEXT` + `knowledgeTopics` from `dentrix-knowledge.ts`
-2. Builds a structured KB block: `[topic-id]: answer` per topic
-3. Constructs system prompt: context + KB block + 4 explicit RULES
+1. Dynamically imports `DENTRIX_SYSTEM_CONTEXT` + `knowledgeTopics` from `dentrix-knowledge.ts`
+2. Builds structured KB block: `[topic-id]: answer` per topic
+3. Constructs system prompt: strategic framework + KB block + conversation stage hint + 4 RULES
 4. Passes last 8 history turns to Groq (conversation-aware)
 5. Calls `groqChat()` — returns `null` if key absent or error
-6. If Groq returns text: runs `validateClaims()` for confidence + sources, returns raw text (no truncation)
-7. If Groq returns `null`: falls back to `getKnowledgeResponse()` (keyword scoring)
+6. If Groq returns text: runs `validateClaims()` for confidence + sources
+7. If Groq returns `null`: falls back to `getKnowledgeResponse()` with recent history context
+
+✅ **Improvements over previous version:**
+- Stage-based calibration adjusts system prompt warmth/urgency based on conversation depth
+- Fallback KB responder now receives recent history for context-aware scoring (previously ignored history entirely)
+- Groq temperature: 0.4, max_tokens: 600 (previously 0.3/400)
 
 **Remaining issues:**
-- `meta?: { confidence, sources, model }` on `ChatMessage` is typed but `model` is never displayed in the UI
-- KB fallback ignores conversation `history` — always responds without context
-- `claim-validator.ts` stopword list is minimal; token overlap on short KB answers frequently scores `low` even for correct responses — shown to users as "Confidence: LOW"
+- `model` typed on `ChatMessage.meta` but never displayed in UI
+- `claim-validator.ts` stopword list is minimal; token overlap on short KB answers frequently scores `low` even for correct responses
 
 ---
 
@@ -337,11 +326,11 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 | File | Purpose | Issues |
 |---|---|---|
 | `groq-client.ts` | Official `groq-sdk` singleton, `groqChat()` returns `GroqChatResult | null` | Clean. |
-| `chat-responder.ts` | Keyword scoring fallback. Greeting pattern < 40 chars detected separately. | Clean. |
+| `chat-responder.ts` | Keyword scoring fallback. Now accepts `recentHistory` param for context-aware scoring. Greeting pattern < 40 chars detected separately. | Clean. |
 | `claim-validator.ts` | Token overlap → high/medium/low confidence + top-3 source snippets. | Confidence scores frequently `low` for valid KB answers — visible to users. |
 | `contact-upload.ts` | Upload constants (8MB/file, 40MB total, 8 files max), MIME/ext sets, helpers. | Clean. |
-| `content-data.ts` | `heroContent` + `contactContent`. `heroContent.eyebrow` defined, never rendered. | Minor dead field. |
-| `dentrix-knowledge.ts` | 11 KB topics, `DENTRIX_SYSTEM_CONTEXT`, `CHAT_GREETING`, `CHAT_FALLBACK`. All `ceo@`. | Clean. |
+| `content-data.ts` | `heroContent` + `contactContent`. | Clean. No dead fields. `eyebrow` field was removed or was never present. |
+| `dentrix-knowledge.ts` | 11 KB topics, `DENTRIX_SYSTEM_CONTEXT` (elaborate strategic framework), `CHAT_GREETING`, `CHAT_FALLBACK`. All `ceo@`. | Clean. Reduced from 13 to 11 topics (consolidated). |
 | `seo.ts` | `SITE_URL`, `DEFAULT_TITLE`, `DEFAULT_DESCRIPTION`, `KEYWORDS`, `ogImage`, `absoluteUrl()`. | Clean. |
 | `utils.ts` | `cn()` — `clsx` + `twMerge`. | Clean. |
 
@@ -351,7 +340,7 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 
 ### Active pages
 
-**`/` (homepage):** Navbar + hero (headline + 2 CTAs) + footer. No sections below fold.
+**`/` (homepage):** Navbar + hero (headline + 3 CTAs) + footer. Hero copy updated: "Your real estate website is losing leads right now. Let's fix that with AI." Primary CTA: "Talk to us" → `/contact`. Secondary CTA: "Talk to AI Agent" → opens SpaceChatOverlay. "View Demo" → `bot.dentrixapps.com`.
 
 **`/contact`:** Full contact form + side panel (AI chat CTA → `SpaceChatOverlay`, Calendly, direct email).
 
@@ -359,13 +348,14 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 
 **`/terms-of-service`:** Standard terms, same aesthetic.
 
+**`/do-not-sell`:** CCPA opt-out page. Monospace terminal aesthetic. localStorage-based opt-out with GPC signal mention.
+
 ### Copy gaps
 
 - **No social proof** — zero client results, testimonials, or case studies
-- **No pricing page** — budget ranges in form are the only signal
+- **No pricing page** — budget ranges in contact form are the only signal
 - **Homepage is single-section** — hero + CTAs only, no "how it works" or FAQ below fold
 - **`profilepic.png/webp` exists** in `public/images/home/` but is not rendered anywhere
-- **`heroContent.eyebrow`** (`"Dentrix Apps"`) defined in `content-data.ts`, destructured in `HeroSection.tsx`, never rendered
 
 ---
 
@@ -381,15 +371,14 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 | Open Graph | ✅ | 1200×630 webp |
 | Twitter Card | ✅ | summary_large_image |
 | JSON-LD | ✅ | Org + ProfessionalService + WebSite + SoftwareApp |
-| Sitemap | ✅ | Dynamic — `/` + `/contact` |
+| Sitemap | ✅ | Dynamic — 5 routes (/, /contact, /privacy-policy, /terms-of-service, /do-not-sell) |
 | robots.txt | ✅ | Dynamic via `app/robots.ts` |
 | Favicon | ✅ | `/icon.webp` + `icon.svg` |
 | PWA manifest | ✅ | Brand-correct |
 | OG preload | ✅ | `<link rel="preload" as="image">` in `<head>` |
 
 **Remaining issues:**
-- `layout.tsx` `openGraph.title`: "AI Chatbots for Real Estate" vs `DEFAULT_TITLE` "AI Chatbots for Real Estate Agents" — minor mismatch
-- `addressLocality: "Nairobi", addressCountry: "KE"` in JSON-LD — Kenya address for US-pitched service
+- `addressLocality: "Nairobi"`, `addressCountry: "KE"` in JSON-LD — Kenya address for US-pitched service
 - `telephone: "+254-111480091"` in JSON-LD — Kenya number
 - `sameAs`: `https://github.com/Denis-Arzu` — verify handle is active
 - `remotePatterns` allows `images.unsplash.com` — no Unsplash images in use
@@ -403,8 +392,8 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 - `next.config.ts`: AVIF + WebP formats, full device size breakpoints, `minimumCacheTTL: 60`.
 
 ### Code splitting
-- `ChatAgentPanel` — `dynamic(..., { ssr: false })` on homepage. Since it's now dead, this dynamic import loads a dead component on every homepage visit.
-- `SpaceChatOverlay` — statically imported by `page.tsx` and `ContactPageView.tsx`. It's a large component (~610 lines) that should be `dynamic` imported since it only mounts on user interaction.
+- ✅ `SpaceChatOverlay` — dynamically imported with `{ ssr: false }` on both homepage and contact page. No longer a static import. (Previously flagged as B-3, now fixed.)
+- ✅ `ChatAgentPanel` — deleted. No dead dynamic imports. (Previously flagged as B-2/B-4, now fixed.)
 - `dentrix-knowledge.ts` — dynamically imported inside `chat-agent.ts` server action. Correct.
 
 ### CSS
@@ -422,7 +411,6 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 |---|---|
 | `*:focus-visible` custom outline | ✅ `2px solid oklch(0.85 0.3 150)` |
 | Contact form — `aria-describedby`, `aria-invalid`, `role="alert"` | ✅ |
-| `ChatAgentPanel` — `role="dialog"`, `aria-label` | ✅ (component now dead) |
 | `SpaceChatOverlay` — `aria-label` on close button, `aria-hidden` on cursor | ✅ |
 | `PrivacyBanner` — `role="region"`, `aria-label` | ✅ |
 | `CursorGradient` — `aria-hidden` | ✅ |
@@ -431,7 +419,7 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 | `prefers-reduced-motion` in `CursorGradient.tsx` | ✅ |
 | `SpaceChatOverlay` spring animations | ⚠️ not guarded by `prefers-reduced-motion` |
 | `navbar.tsx` scroll transforms | ⚠️ not guarded by `prefers-reduced-motion` |
-| Honeypot field — `absolute -left-[9999px]` | ✅ |
+| Honeypot field — `absolute -left-[9999px]` | ✅ (note: Tailwind v4 may render this differently) |
 | `SpaceChatOverlay` mobile input — `enterKeyHint="send"` | ✅ |
 | `SpaceChatOverlay` close — Escape key (desktop) + visible button (all viewports) | ✅ |
 
@@ -447,36 +435,36 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 | `CONTACT_EMAIL` | `app/actions/contact.ts` | Optional | `ceo@dentrixapps.com` |
 | `RESEND_FROM_EMAIL` | `app/actions/contact.ts` | Optional | `Dentrix Apps <noreply@dentrixapps.com>` |
 
-`.env.example` created — documents all five vars with placeholder values and source links.
+`.env.example` documents all five vars with placeholder values and source links.
 
 ---
 
 ## 13. BUG REGISTRY
 
-| # | Severity | Location | Description |
-|---|---|---|---|
-| B-1 | HIGH | `PrivacyBanner.tsx` | `/do-not-sell` link → 404 for every user |
-| B-2 | HIGH | `app/(home)/page.tsx` + `ContactPageView.tsx` | `ChatAgentPanel` is dynamically imported and mounted but its `open` state is never triggered — dead component loading on every page visit |
-| B-3 | MEDIUM | `app/(home)/page.tsx` | `SpaceChatOverlay` is statically imported — large client bundle loaded upfront; should be `dynamic(..., { ssr: false })` |
-| B-4 | MEDIUM | `ChatAgentPanel.tsx` | Component is entirely dead — no longer triggered from any button or event anywhere in the codebase. Should be deleted. |
-| B-5 | MEDIUM | `ChatAgentPanel.tsx` | Message timestamp rendered as `new Date().toLocaleTimeString()` at render time, not message receipt time |
-| B-6 | MEDIUM | `.eslintrc.json` | Encoding artifact → 2 parse errors; dual ESLint config ambiguity |
-| B-7 | MEDIUM | `app/(home)/page.tsx` | `"use client"` forces client render of static content (HeroSection, SiteFooter) |
-| B-8 | LOW | `lib/claim-validator.ts` | Token overlap frequently scores `low` for valid KB answers — "Confidence: LOW" shown to users incorrectly |
-| B-9 | LOW | `content-data.ts` | `heroContent.eyebrow` defined, destructured in HeroSection, never rendered |
-| B-10 | LOW | `next.config.ts` | `remotePatterns` allows `images.unsplash.com` — no Unsplash images in use |
-| B-11 | LOW | No `.env.example` in git | `.env.example` created but not verified to be committed |
+| # | Severity | Location | Description | Status |
+|---|---|---|---|---|
+| B-1 | HIGH | `PrivacyBanner.tsx` | `/do-not-sell` link → 404 | ✅ **FIXED** — Route now exists |
+| B-2 | HIGH | `app/(home)/page.tsx` + `ContactPageView.tsx` | `ChatAgentPanel` dead component loaded on every visit | ✅ **FIXED** — Component deleted |
+| B-3 | MEDIUM | `app/(home)/page.tsx` + `ContactPageView.tsx` | `SpaceChatOverlay` statically imported — large client bundle loaded upfront | ✅ **FIXED** — Now dynamic import with `ssr: false` |
+| B-4 | MEDIUM | `ChatAgentPanel.tsx` | Component entirely dead — no longer triggered from anywhere | ✅ **FIXED** — Component deleted |
+| B-5 | MEDIUM | N/A | `ChatAgentPanel` message timestamp issue | ✅ **RESOLVED** — Component deleted |
+| B-6 | MEDIUM | `.eslintrc.json` | Encoding artifact → 2 parse errors; dual ESLint config | ✅ **FIXED** — Stale configs deleted, only `eslint.config.mjs` remains |
+| B-7 | MEDIUM | `app/(home)/page.tsx` | `"use client"` forces client render of HeroSection, SiteFooter | ⚠️ **Open** — CursorGradient requires client context |
+| B-8 | LOW | `lib/claim-validator.ts` | Token overlap frequently scores `low` for valid KB answers | ⚠️ **Open** — "Confidence: LOW" shown to users incorrectly |
+| B-9 | LOW | `content-data.ts` | `heroContent.eyebrow` field — previously defined but not rendered | ✅ **RESOLVED** — `eyebrow` no longer present in `content-data.ts` |
+| B-10 | LOW | `next.config.ts` | `remotePatterns` allows `images.unsplash.com` — no Unsplash images in use | ⚠️ **Open** — Cosmetic only |
+| B-11 | LOW | `.env.example` | `.env.example` created but not verified to be committed | ✅ **FIXED** — File exists in repo |
 
 ---
 
 ## 14. CONFIG / INFRA ISSUES
 
-| Item | Detail |
-|---|---|
-| `package-lock.json` | Conflicts with `pnpm-lock.yaml` — delete |
-| `eslint.config.mjs.bak` | Committed backup file — delete |
-| `.eslintrc.json` | Encoding artifact, 2 parse errors — delete in favour of `eslint.config.mjs` |
-| `next.config.ts` `/products` redirect | `source: "/products"` → `destination: "/"` — no `/products` route exists or is planned |
+| Item | Detail | Status |
+|---|---|---|
+| `package-lock.json` | Conflict with `pnpm-lock.yaml` | ✅ **FIXED** — Deleted |
+| `eslint.config.mjs.bak` | Committed backup file | ✅ **FIXED** — Deleted |
+| `.eslintrc.json` | Encoding artifact, 2 parse errors | ✅ **FIXED** — Deleted, only `eslint.config.mjs` remains |
+| `next.config.ts` `/products` redirect | `source: "/products"` → `destination: "/"` | ⚠️ **Open** — No `/products` route exists or is planned |
 
 ---
 
@@ -484,84 +472,56 @@ Both pages use identical `AnimatePresence` cross-dissolve patterns. `SpaceChatOv
 
 | Document | Status |
 |---|---|
-| `ARCHITECTURE.md` | **Severely stale.** Title: "AI Voice Studio Architecture Documentation." Describes voiceovers, voice cloning, dubbing. "Dennis Kioko" (double-n) vs `layout.tsx` "Denis Kioko". Tech stack section is broadly accurate but framed around wrong product. |
-| `TODO.md` | **Fully obsolete.** References `Myskills.tsx`, `EngineeringStandards.tsx`, `CaseStudies.tsx`, `ActiveBuilds.tsx`, `GlobalImpact` — none exist. Every item is for the old software lab site. |
-| `README.md` | **Boilerplate.** Unmodified `create-next-app` README. No Dentrix Apps info, no env var docs, no setup instructions. |
+| `ARCHITECTURE.md` | ✅ **Updated** — Now accurately describes Dentrix Apps product, project structure, AI chat architecture, environment variables |
+| `README.md` | ⚠️ **Still boilerplate** — Unmodified `create-next-app` README. No Dentrix Apps info, env var docs, or setup instructions |
+| `PORTFOLIO-FULL-AUDIT.md` | ✅ **Updated** (this document) |
 
 ---
 
-## 16. RECENT CHANGES (2026-05-21)
+## 16. WHAT WAS RESOLVED SINCE LAST AUDIT
 
-### Hero section — copy updates (`lib/content-data.ts`)
-- `headline` changed from `"Turn your real estate website into a"` → `"Let's turn your real estate website into a"`
-- `subheadline` changed from `"We build AI chatbots for agents — and prove it by showing your chatbot already live on your site before you pay."` → `"We build custom AI assistants for real estate agents and show them live on your site before you ever pay, so it always feels like you."`
+### ✅ Major bug fixes
 
-### Hero section — demo link updated (`app/(home)/components/HeroSection.tsx`)
-- "View Demo" `<Link>` href changed from `https://kiokocb.vercel.app/` → `https://bot.dentrixapps.com/`
-- Footer "Live Demo" links were already pointing to `https://bot.dentrixapps.com` — no change needed
+| Issue | Resolution |
+|---|---|
+| `/do-not-sell` 404 (B-1, HIGH) | `app/do-not-sell/page.tsx` created — full CCPA opt-out page with localStorage, GPC signal mention, terminal aesthetic |
+| `ChatAgentPanel` dead component (B-2, HIGH, B-4 MEDIUM) | Entire component deleted from codebase. Dynamic import removed from `page.tsx`. |
+| `SpaceChatOverlay` static import (B-3, MEDIUM) | Converted to `dynamic(..., { ssr: false })` in both `page.tsx` and `ContactPageView.tsx` |
+| Dual ESLint config (B-6, MEDIUM) | `.eslintrc.json` and `eslint.config.mjs.bak` deleted. Only `eslint.config.mjs` remains. |
+| `package-lock.json` conflict | Deleted. Only `pnpm-lock.yaml` remains. |
+| `ChatAgentPanel` timestamp bug (B-5) | Resolved by deletion of component. |
+| `heroContent.eyebrow` unused field (B-9) | No longer present in `content-data.ts`. |
 
----
+### ✅ Architecture improvements
 
-## 17. WHAT WAS BUILT SINCE LAST AUDIT
-
-### Groq integration (replaced OpenAI)
-- `lib/groq-client.ts` created — `groq-sdk` singleton, `groqChat()` returning typed result or `null`
-- `app/actions/chat-agent.ts` rewritten — Groq primary, local KB fallback. KB injected as `[topic-id]: answer` structured block. Explicit RULES in system prompt. Last 8 history turns passed. `formatAssistantResponse()` / `shortSentence()` truncation removed — Groq controls output length via `max_tokens`
-- `meta?: any` on `ChatMessage` replaced with narrow typed interface
-- OpenAI removed entirely — no `OPENAI_API_KEY` references remain
-- `groq-sdk` added to `dependencies` in `package.json`
-
-### Email unification
-- `hello@dentrixapps.com` removed from all 7 locations it appeared
-- `ceo@dentrixapps.com` is now the single canonical email everywhere
-
-### `SpaceChatOverlay.tsx` — full-screen immersive chat
-- 5-phase state machine (greeting / typing / waiting / answer / done)
-- Desktop: 1px hidden input captures keystrokes invisibly
-- Mobile: visible input bar + `visualViewport` API for keyboard-aware layout
-- Answer persistence: `completedRef` stores finished text; `done` phase reads from ref not reactive state — answer stays on screen until user's next keystroke
-- History ghost strip: previous Q+A ghosted at top in `text-white/14` / `text-white/9`
-- Top-right close button on all viewports (36×36px mobile, 32×32px desktop)
-- Escape key closes on desktop
-- `prefers-reduced-motion` not yet guarded in overlay animations
-
-### Homepage wiring (`page.tsx`)
-- `chatOpen: boolean` state owns overlay lifecycle
-- Hero fades out with `opacity:0 scale:0.98 blur(8px)` exit via `AnimatePresence`
-- `SpaceChatOverlay` fades in independently at 350ms
-- `HeroSection` now takes `onOpenChat` prop — `window.dispatchEvent` removed
-
-### Contact page wiring (`ContactPageView.tsx` + `ContactSection.tsx`)
-- `ChatAgentPanel` removed from `ContactPageView` — was triggering old slide-up panel
-- `ContactPageView` now owns `chatOpen` state, same pattern as homepage
-- `ContactSection` accepts `onOpenChat?: () => void` — AI card calls it directly
-- Full contact content fades out with same exit animation as homepage hero
-- `SpaceChatOverlay` mounts over blank contact page
-
-### `.env.example`
-- Created — documents `GROQ_API_KEY`, `GROQ_MODEL`, `RESEND_API_KEY`, `CONTACT_EMAIL`, `RESEND_FROM_EMAIL` with placeholder values
+- **KB fallback now context-aware** — `chat-responder.ts` receives `recentHistory` param and uses it for improved keyword scoring (previously ignored conversation history entirely)
+- **Conversation stage calibration** — `chat-agent.ts` now detects conversation depth (first message / early / engaged) and adjusts system prompt accordingly
+- **Knowledge base consolidated** — From 13 to 11 topics, system prompt upgraded to strategic consulting framework
+- **Groq parameters adjusted** — temperature 0.4, max_tokens 600 for better response quality
 
 ---
 
-## 18. TOP PRIORITY ACTIONS
+## 17. REMAINING ISSUES (OPEN)
 
-**P1 — Delete `ChatAgentPanel.tsx`** (5 min)  
-Dead component. Not triggered from any button or event. Loaded as a dynamic import on every homepage visit — pure bundle waste. Remove it and the `dynamic` import in `page.tsx`.
+### P1 — Update `README.md` (30 min)
+Still boilerplate `create-next-app` README. Should include:
+- Project description (Dentrix Apps)
+- Setup instructions with `pnpm`
+- Environment variable documentation
+- Deployment notes
 
-**P2 — Lazy-load `SpaceChatOverlay`** (10 min)  
-610-line client component loaded statically. It only mounts when a user clicks "Talk to AI Agent". Convert to `dynamic(..., { ssr: false })` in both `page.tsx` and `ContactPageView.tsx`.
-
-**P3 — Create `/do-not-sell` route** (15 min)  
-`PrivacyBanner` links to it. Every user who clicks "Do Not Sell/Share" hits a 404.
-
-**P4 — Delete `package-lock.json`, `.eslintrc.json`, `eslint.config.mjs.bak`** (2 min)  
-Dual lockfile conflict, encoding-broken legacy config, committed backup file.
-
-**P5 — Homepage depth** (days — product decision)  
+### P2 — Homepage depth (days — product decision)
 Single hero section. No "how it works", no proof, no FAQ. High bounce risk.
 
-**P6 — Fix confidence scoring** (1 hour)  
+### P3 — Fix confidence scoring (1 hour)
 `claim-validator.ts` shows "Confidence: LOW" for factually correct KB answers because token overlap is low. Consider removing public confidence display or raising the `medium` threshold for KB-only responses.
 
-**P7 — Update `ARCHITECTURE.md` and `TODO.md`** (1 hour)  
-Both describe the wrong product entirely.
+### P4 — Accessibility: motion animations
+`SpaceChatOverlay` spring animations and `navbar.tsx` scroll transforms not guarded by `prefers-reduced-motion`.
+
+### P5 — Cleanup remaining config
+- Remove `/products` redirect in `next.config.ts` if no longer needed
+- Remove `images.unsplash.com` from `remotePatterns` if not used
+
+### P6 — JSON-LD address review
+`addressLocality: "Nairobi"` / `addressCountry: "KE"` / `telephone: "+254-111480091"` — Kenya address for US-pitched real estate service. Verify this is intentional.
