@@ -31,8 +31,7 @@ const OPTIMIZATION_CONFIGS: Record<string, OptimizationConfig> = {
   "dentrixappslg.png": { quality: 70, maxWidth: 400, maxHeight: 120 },
   // OG image
   "og-image.png": { quality: 75, maxWidth: 1200, maxHeight: 630 },
-  // Profile photo
-  "profilepic.png": { quality: 75, maxWidth: 400, maxHeight: 400 },
+  // Profile photo (removed — no longer rendered)
 };
 
 async function optimizeImage(

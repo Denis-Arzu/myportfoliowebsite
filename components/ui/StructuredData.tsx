@@ -34,6 +34,9 @@ const schemaGraph = {
         "Fitness Technology",
         "Dental Technology",
       ],
+      sameAs: [
+        ORG_URL,
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         email: ORG_EMAIL,
@@ -47,15 +50,21 @@ const schemaGraph = {
           closes: "17:00",
         },
       },
-      areaServed: { "@type": "Country", name: "US" },
+      areaServed: [
+        { "@type": "Country", name: "US" },
+        { "@type": "Country", name: "CA" },
+        { "@type": "Country", name: "GB" },
+        { "@type": "Country", name: "AU" },
+      ],
       knowsAbout: [
         "AI Chatbots for Salons",
         "AI Chatbots for Gyms",
         "AI Chatbots for Dental",
-        "Lead Capture",
+        "Lead Capture Automation",
         "Conversational AI",
         "Website Automation",
-        "Appointment Booking",
+        "Appointment Booking AI",
+        "Small Business AI Software",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -65,9 +74,31 @@ const schemaGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI Chatbot Setup",
+              name: "AI Chatbot Setup — Salon",
               description:
-                "One-time setup — we build your AI assistant from your website data.",
+                "Custom AI chatbot assistant for salons and spas. Trained on your services, pricing, and team.",
+            },
+            price: "299",
+            priceCurrency: "USD",
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "AI Chatbot Setup — Gym",
+              description:
+                "Custom AI chatbot assistant for gyms and fitness centers. Handles memberships, tours, and objections.",
+            },
+            price: "299",
+            priceCurrency: "USD",
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "AI Chatbot Setup — Dental",
+              description:
+                "Custom AI chatbot assistant for dental practices. Anxiety-aware, handles insurance and scheduling.",
             },
             price: "299",
             priceCurrency: "USD",
@@ -78,7 +109,7 @@ const schemaGraph = {
               "@type": "Service",
               name: "AI Chatbot Monthly Hosting",
               description:
-                "Monthly hosting including AI, lead notifications, analytics dashboard.",
+                "Monthly hosting including AI, lead notifications, analytics dashboard, and updates.",
             },
             price: "97",
             priceCurrency: "USD",
@@ -115,28 +146,45 @@ const schemaGraph = {
       operatingSystem: "Web",
       url: ORG_URL,
       description:
-        "Multi-tenant AI chatbot platform for salons, gyms, and dental practices.",
+        "Multi-tenant AI chatbot platform for salons, gyms, and dental practices. Builds and hosts custom AI assistants using business website data.",
       provider: { "@id": organizationId },
-      offers: [
-        {
-          "@type": "Offer",
-          price: "299",
-          priceCurrency: "USD",
-          description: "$299 setup + $97/month. No contracts. Free demo.",
-          availability: "https://schema.org/InStock",
-        },
-      ],
+      offers: {
+        "@type": "AggregateOffer",
+        lowPrice: "97",
+        highPrice: "499",
+        priceCurrency: "USD",
+        offerCount: "2",
+        offers: [
+          {
+            "@type": "Offer",
+            price: "299",
+            priceCurrency: "USD",
+            description: "$299 one-time setup",
+            eligibility: "All businesses with a website",
+          },
+          {
+            "@type": "Offer",
+            price: "97",
+            priceCurrency: "USD",
+            description: "$97/month hosting",
+          },
+        ],
+      },
       featureList: [
         "24/7 lead capture on business websites",
-        "Industry-specific AI personalities",
-        "Built from your website data",
-        "Instant email notifications for leads",
-        "One line of code to install",
-        "Free demo before you pay",
+        "Industry-specific AI personalities (salon, gym, dental)",
+        "Built from your website data — no configuration needed",
+        "Instant email notifications for captured leads",
+        "Reply-to-lead directly from your inbox",
+        "One line of code to install on any website",
+        "Free live demo before any payment",
         "Analytics dashboard",
         "Cancel anytime — no contracts",
       ],
       screenshot: `${SITE_URL}/images/og-image.webp`,
+      applicationSubCategory: "AI Chatbot",
+      downloadUrl: ORG_URL,
+      softwareVersion: "4.0.0",
     },
 
     // ── BreadcrumbList ────────────────────────────────────────────────────
@@ -152,7 +200,7 @@ const schemaGraph = {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Contact",
+          name: "Get Your Free AI Assistant Demo",
           item: `${SITE_URL}/contact`,
         },
       ],
@@ -167,7 +215,7 @@ const schemaGraph = {
           name: "What is DentrixApps?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "DentrixApps builds AI chatbot assistants for salons, gyms, and dental practices. Each assistant lives on your website, answers visitor questions 24/7 using your actual business data, captures leads, and emails them to you instantly.",
+            text: "DentrixApps builds AI chatbot assistants for salons, gyms, and dental practices. Each assistant lives on your website, answers visitor questions 24/7 using your actual business data, captures leads, and emails them to you instantly. You don't build anything — we build it for you from your website.",
           },
         },
         {
@@ -175,7 +223,7 @@ const schemaGraph = {
           name: "How much does an AI chatbot assistant cost?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "DentrixApps charges a one-time setup fee of $299, then $97/month for hosting. No hidden fees, no contracts — cancel anytime. We also build a free demo before you pay.",
+            text: "$299 one-time setup fee. $97/month for hosting. No hidden fees, no contracts — cancel anytime. We also build a free live demo before you pay anything. The demo is free with no credit card required.",
           },
         },
         {
@@ -183,7 +231,7 @@ const schemaGraph = {
           name: "How does the free demo work?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "You give us your website URL. We build your AI assistant from your site data and send you a live demo link. You chat with it and see how it handles real questions about your business. No credit card needed.",
+            text: "You give us your website URL. We build your AI assistant from your site data and send you a live demo link within hours. You chat with it, see how it handles real questions about your business, and decide if it's worth it. No credit card. No commitment.",
           },
         },
         {
@@ -191,7 +239,7 @@ const schemaGraph = {
           name: "How long does it take to get an AI assistant?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Same day. You give us your website URL, we build the assistant and send you a demo link within hours. If you decide to go live, adding the widget to your website takes 2 minutes.",
+            text: "Same day. You give us your website URL, we build the assistant and send you a demo link within hours. If you decide to go live, adding the widget to your website takes 2 minutes — one line of HTML code.",
           },
         },
         {
@@ -199,7 +247,7 @@ const schemaGraph = {
           name: "What can the AI assistant do for a salon?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Your salon's AI assistant knows every service, price, and stylist. It recommends treatments, highlights new client specials, pushes visitors toward booking, and captures leads after hours when your front desk is closed.",
+            text: "Your salon's AI assistant knows every service, every price, every stylist. It recommends treatments based on client needs, highlights new client specials, pushes visitors toward booking, and captures leads from after-hours browsers. While your front desk is closed, your AI is still booking appointments.",
           },
         },
         {
@@ -207,7 +255,7 @@ const schemaGraph = {
           name: "What can the AI assistant do for a gym?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Your gym's AI assistant works like your best membership advisor 24/7. It focuses on visitor goals, handles objections, pushes for free tours, and captures leads from evening browsers who would never call during business hours.",
+            text: "Your gym's AI assistant works like your best membership advisor — 24/7. It focuses on the visitor's fitness goals, handles pricing objections, promotes free trials and tours, and captures membership leads from evening website visitors who would never call during business hours.",
           },
         },
         {
@@ -215,7 +263,7 @@ const schemaGraph = {
           name: "What can the AI assistant do for a dental practice?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Your dental practice's AI assistant is warm, professional, and anxiety-aware. It acknowledges fear of the dentist, explains procedures clearly, handles insurance questions, and pushes for appointments.",
+            text: "Your dental practice's AI assistant is warm, professional, and anxiety-aware. It acknowledges dental fear, explains procedures clearly, highlights your technology and comfort options, handles insurance questions, and pushes for appointment scheduling.",
           },
         },
         {
@@ -223,7 +271,7 @@ const schemaGraph = {
           name: "Do I need a website to use DentrixApps?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No. We can create a simple landing page with the AI assistant as the core feature. Visitors land on your page, chat with the assistant, and book directly. Landing page setup is $499 one-time + $97/month.",
+            text: "No. We can build you a simple landing page with the AI assistant as the core feature. Visitors land on your page, chat with the assistant, and book directly. Landing page setup is $499 one-time + $97/month.",
           },
         },
         {
@@ -231,7 +279,31 @@ const schemaGraph = {
           name: "Can I cancel anytime?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. No contracts, no cancellation fees. Cancel and we take your assistant offline. You keep any leads you've already received.",
+            text: "Yes. No contracts, no cancellation fees. Cancel and we take your assistant offline. You keep any leads you've already captured. We're confident you won't cancel, but the option is there.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Do I need technical skills to set it up?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. We build everything for you. You don't configure prompts, write responses, or set up conversation flows. We use your website data to create an assistant that already knows your business. You just add one line of code to your website.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does it work on WordPress, Shopify, or Wix?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. We give you a single line of HTML that works on WordPress, Shopify, Wix, Squarespace, Webflow, and any platform that lets you add custom HTML. If you're not sure, just ask us and we'll help with installation.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How does the AI know about my business?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "We scrape your website — services, pricing, hours, team, location, FAQs — and feed it into the AI. It only answers based on your real data. It's trained to never make things up. If it doesn't know the answer, it offers to connect the visitor with your team.",
           },
         },
       ],

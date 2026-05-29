@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { scrollToSection } from "@/lib/smooth-scroll";
 
 type NavbarProps = {
@@ -18,10 +18,11 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollY } = useScroll();
 
-  const navWidth = useTransform(scrollY, [0, 100], ["95%", "90%"]);
-  const navOpacity = useTransform(scrollY, [0, 100], [1, 0.95]);
+  const navWidth = useTransform(scrollY, [0, 100], prefersReducedMotion ? ["100%", "100%"] : ["95%", "90%"]);
+  const navOpacity = useTransform(scrollY, [0, 100], prefersReducedMotion ? [1, 1] : [1, 0.95]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -76,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
           border: scrolled ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(255, 255, 255, 0.03)",
           borderRadius: minimal ? "0" : scrolled ? "2rem" : "1rem",
         }}
-        className={`${minimal ? "relative mb-8" : "fixed top-4 left-1/2 -translate-x-1/2 max-w-5xl"} z-[200] w-full transition-all duration-500`}
+        className={`${minimal ? "relative mb-8" : "fixed top-4 left-1/2 -translate-x-1/2 max-w-5xl"} z-[200] w-full ${prefersReducedMotion ? "" : "transition-all duration-500"}`}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
           <Link href="/" className="flex items-center group shrink-0">

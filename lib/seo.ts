@@ -4,33 +4,37 @@ export const SITE_URL = "https://dentrixapps.com";
 export const SITE_NAME = "DentrixApps";
 
 export const DEFAULT_TITLE =
-  "DentrixApps | AI Assistants for Salons, Gyms & Dental";
+  "AI Chatbot Assistant for Salons, Gyms & Dental | DentrixApps";
 
 export const DEFAULT_DESCRIPTION =
-  "AI assistant for salons, gyms & dental practices. Answers questions 24/7, captures leads, books appointments. Built from your website in 60 seconds. Free live demo.";
+  "Stop losing customers. AI chatbot assistant for salons, gyms & dental — answers 24/7, captures leads, books appointments. Built from your website. Free live demo.";
 
 export const OG_IMAGE_PATH = "/images/og-image.webp";
 
 export const KEYWORDS = [
-  // Primary — industry-specific
+  // Primary — industry + service combination
   "AI chatbot for salons",
   "AI assistant for gyms",
   "AI chatbot for dental practices",
   "salon chatbot",
   "gym chatbot",
   "dental chatbot",
-  // Secondary — capabilities
+  "salon AI booking assistant",
+  // Secondary — capability-based
   "lead capture chatbot",
-  "AI booking assistant",
   "24/7 website assistant",
   "automated lead capture",
-  "website chatbot for small business",
+  "small business AI chatbot",
+  "website chatbot no code",
   // Long-tail — intent-driven
   "AI assistant built from your website",
-  "try chatbot before you buy",
-  "no code chatbot for salon",
-  "free AI demo for business",
+  "free AI demo for salon business",
   "increase salon bookings with AI",
+  "no code chatbot for small business",
+  "try chatbot before you buy",
+  "gym membership chatbot",
+  "dental appointment chatbot",
+  "AI chat widget for website",
 ];
 
 export function absoluteUrl(path = ""): string {
@@ -42,5 +46,5 @@ export const ogImage = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "DentrixApps — AI chatbot assistants for salons, gyms, and dental practices. 24/7 lead capture. Free demo.",
+  alt: "DentrixApps — AI chatbot assistant for salons, gyms, and dental practices. Answers 24/7, captures leads, books appointments. Free live demo.",
 } as const;

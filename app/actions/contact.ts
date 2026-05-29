@@ -201,7 +201,7 @@ export async function submitContactForm(
   const resendKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.CONTACT_EMAIL || DEFAULT_CONTACT_EMAIL;
   const fromEmail =
-    process.env.RESEND_FROM_EMAIL || "Dentrix Apps <noreply@dentrixapps.com>";
+    process.env.RESEND_FROM_EMAIL || "DentrixApps <noreply@dentrixapps.com>";
 
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);

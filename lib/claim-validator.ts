@@ -28,13 +28,18 @@ const STOPWORDS = new Set([
   "that",
 ]);
 
-function tokenize(s: string) {
-  return s
+function stem(t: string): string {
+  return t.slice(0, 4);
+}
+
+function tokenize(s: string, stemmed = false) {
+  const tokens = s
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter(Boolean)
     .filter((t) => !STOPWORDS.has(t) && t.length > 1);
+  return stemmed ? tokens.map((t) => stem(t)) : tokens;
 }
 
 export type ValidationResult = {
@@ -77,10 +82,10 @@ export function validateClaims(
   const isKBSourced = sources.some((s) => s.title && KB_TOPIC_IDS.has(s.title));
 
   const sourceText = sources.map((s) => s.text.toLowerCase()).join(" \n\n");
-  const srcTokens = new Set(tokenize(sourceText));
+  const srcTokens = new Set(tokenize(sourceText, true));
 
   const details = sentences.map((sentence) => {
-    const toks = tokenize(sentence);
+    const toks = tokenize(sentence, true);
     const matches = toks.filter((t) => srcTokens.has(t));
     const supported =
       matches.length >= Math.min(2, Math.max(1, Math.floor(toks.length / 3)));
@@ -106,7 +111,7 @@ export function validateClaims(
 
   // Pick top sources that contain most matched tokens
   const srcScores = sources.map((s) => {
-    const toks = new Set(tokenize(s.text));
+    const toks = new Set(tokenize(s.text, true));
     let matched = 0;
     for (const d of details) {
       for (const m of d.matches) if (toks.has(m)) matched++;
@@ -127,9 +132,9 @@ export function validateClaims(
         .filter(Boolean);
       let best = "";
       let bestScore = -1;
-      const globalTokens = new Set(tokenize((response || "").toLowerCase()));
+      const globalTokens = new Set(tokenize(response || "", true));
       for (const s of sentences) {
-        const toks = tokenize(s);
+        const toks = tokenize(s, true);
         let matched = 0;
         for (const t of toks) if (globalTokens.has(t)) matched++;
         if (matched > bestScore) {

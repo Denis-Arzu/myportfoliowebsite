@@ -64,7 +64,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: DEFAULT_TITLE,
+    title: {
+      default: DEFAULT_TITLE,
+      template: `%s | ${SITE_NAME}`,
+    },
     description: DEFAULT_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -76,7 +79,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: DEFAULT_TITLE,
+    title: {
+      default: DEFAULT_TITLE,
+      template: `%s | ${SITE_NAME}`,
+    },
     description: DEFAULT_DESCRIPTION,
     images: [ogImage],
   },
