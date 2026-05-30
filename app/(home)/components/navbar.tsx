@@ -84,7 +84,7 @@ const Navbar: React.FC<NavbarProps> = ({ minimal = false, isBackMode = false }) 
             <div className="relative w-32 h-8 sm:w-36 sm:h-9 transition-transform duration-300 group-hover:scale-[1.02]">
               <Image
                 src="/images/home/dentrixappslg.webp"
-                alt="DentrixApps — AI Assistants for Salons, Gyms & Dental Practices"
+                alt="DentrixApps - AI Assistants for Salons, Gyms & Dental Practices"
                 width={144}
                 height={36}
                 className="w-full h-full object-contain"

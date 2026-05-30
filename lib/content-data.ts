@@ -1,8 +1,8 @@
-/** Site copy — DentrixApps (AI chatbot assistants for salons, gyms & dental practices) */
+/** Site copy - DentrixApps (AI chatbot assistants for salons, gyms & dental practices) */
 
 export const heroContent = {
   eyebrow: "AI Assistants for Salons, Gyms & Dental Practices",
-  headline: "AI Chatbot Assistants for Salons, Gyms & Dental — Stop Losing Customers",
+  headline: "AI Chatbot Assistants for Salons, Gyms & Dental - Stop Losing Customers",
   subheadline:
     "An AI assistant that knows your business, answers questions 24/7, captures leads while you sleep, and books appointments your front desk misses. Built from your website. Live today.",
   primaryCta: { label: "See It Live", action: "scroll_to_demos" as const },
@@ -20,7 +20,7 @@ export const contactContent = {
     { value: "dental", label: "Dental Practice" },
   ],
   trustSignals: [
-    "Same-day build — we use your website data",
+    "Same-day build - we use your website data",
     "Live demo before you pay a cent",
     "One line of code to go live",
   ],

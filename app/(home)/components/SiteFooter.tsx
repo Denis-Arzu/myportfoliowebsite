@@ -84,12 +84,12 @@ export function SiteFooter() {
 
       {/* ── Main footer grid ───────────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
-        {/* Col 1 — Company (spans 2 cols) */}
+        {/* Col 1 - Company (spans 2 cols) */}
         <div className="lg:col-span-2 flex flex-col gap-5">
           <div className="flex items-center gap-3">
             <Image
               src="/images/home/dentrixappslogoicon.webp"
-              alt="DentrixApps — AI Assistants for Salons, Gyms & Dental Practices"
+              alt="DentrixApps - AI Assistants for Salons, Gyms & Dental Practices"
               width={36}
               height={36}
               className="opacity-80"
@@ -113,7 +113,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Col 2 — Product */}
+        {/* Col 2 - Product */}
         <div className="flex flex-col gap-4">
           <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em]">
             Product
@@ -133,7 +133,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Col 3 — Industries */}
+        {/* Col 3 - Industries */}
         <div className="flex flex-col gap-4">
           <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em]">
             Industries
@@ -145,7 +145,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Col 4 — Legal & Connect */}
+        {/* Col 4 - Legal & Connect */}
         <div className="flex flex-col gap-4">
           <p className="text-[10px] font-mono text-white/20 uppercase tracking-[0.18em]">
             Legal

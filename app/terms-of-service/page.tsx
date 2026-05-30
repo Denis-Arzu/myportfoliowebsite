@@ -62,7 +62,7 @@ export default function TermsOfService() {
               hosting fee is $97/month. Landing page setup is $499 (one-time).
               All fees are in USD. By subscribing, you authorize us to charge
               the applicable fees on a recurring basis. You may cancel at any
-              time — upon cancellation, your AI assistant will be taken offline
+              time - upon cancellation, your AI assistant will be taken offline
               and no further charges will be incurred.
             </p>
           </section>
@@ -120,7 +120,7 @@ export default function TermsOfService() {
             </h2>
             <p>
               You may cancel your subscription at any time. Cancellation takes
-              effect immediately — your AI assistant is taken offline and no
+              effect immediately - your AI assistant is taken offline and no
               further charges are incurred. You retain any lead data captured
               prior to cancellation.
             </p>

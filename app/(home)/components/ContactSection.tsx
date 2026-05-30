@@ -237,7 +237,7 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
                     id="company"
                     name="company"
                     className={inputCls("company")}
-                    placeholder="Dentrix Realty"
+                    placeholder="Acme Salon"
                     aria-describedby={
                       state?.errors?.company ? "company-error" : undefined
                     }
@@ -309,7 +309,7 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
                     className={
                       inputCls("description") + " resize-y min-h-[120px]"
                     }
-                    placeholder="Tell us about your business — services you offer, what you want the AI to handle…"
+                    placeholder="Tell us about your business - services you offer, what you want the AI to handle…"
                     aria-describedby={
                       state?.errors?.description
                         ? "description-error"
@@ -418,7 +418,7 @@ export function ContactSection({ onOpenChat }: ContactSectionProps) {
                     {emailMethod.label}
                   </p>
                   <p className="text-xs text-white/25 mt-1">
-                    Direct email — fastest response
+                    Direct email - fastest response
                   </p>
                 </div>
               </a>

@@ -7,7 +7,7 @@ const features = [
   {
     icon: MessageCircle,
     title: "Answers Questions 24/7",
-    description: "Your assistant never sleeps. Visitors get instant, accurate answers about your services, pricing, hours, and policies — even at 2 AM when your front desk is closed.",
+    description: "Your assistant never sleeps. Visitors get instant, accurate answers about your services, pricing, hours, and policies - even at 2 AM when your front desk is closed.",
   },
   {
     icon: UserPlus,
@@ -17,17 +17,17 @@ const features = [
   {
     icon: Calendar,
     title: "Drives Bookings",
-    description: "Your assistant doesn't just answer questions — it actively encourages visitors to book appointments, schedule tours, or come in for consultations. Every conversation is a conversion opportunity.",
+    description: "Your assistant doesn't just answer questions - it actively encourages visitors to book appointments, schedule tours, or come in for consultations. Every conversation is a conversion opportunity.",
   },
   {
     icon: Palette,
     title: "Branded to Your Business",
-    description: "Your assistant matches your brand — your colors, your logo, your voice. A salon assistant sounds warm and luxurious. A gym assistant sounds energetic and motivating. A dental assistant sounds professional and reassuring.",
+    description: "Your assistant matches your brand - your colors, your logo, your voice. A salon assistant sounds warm and luxurious. A gym assistant sounds energetic and motivating. A dental assistant sounds professional and reassuring.",
   },
   {
     icon: Brain,
     title: "Knows Your Business",
-    description: "We train the AI on your actual website data — your services, pricing, team, hours, location, and FAQs. It doesn't guess. It knows. And it never makes up information.",
+    description: "We train the AI on your actual website data - your services, pricing, team, hours, location, and FAQs. It doesn't guess. It knows. And it never makes up information.",
   },
   {
     icon: Code,

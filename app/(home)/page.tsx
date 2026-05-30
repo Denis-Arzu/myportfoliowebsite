@@ -13,6 +13,7 @@ import FAQSection from "./components/FAQSection";
 import CTASection from "./components/CTASection";
 import { CursorGradient } from "./components/CursorGradient";
 import { SiteFooter } from "./components/SiteFooter";
+import { LoadingScreen } from "./components/LoadingScreen";
 import { initHashScroll } from "@/lib/smooth-scroll";
 
 const SpaceChatOverlay = dynamic(
@@ -41,6 +42,9 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-[100dvh] flex flex-col bg-[#050506] text-foreground overflow-hidden">
+      {/* Loading screen */}
+      <LoadingScreen />
+
       {/* Grid + vignette */}
       <div
         className="fixed inset-0 pointer-events-none opacity-[0.35] -z-10"

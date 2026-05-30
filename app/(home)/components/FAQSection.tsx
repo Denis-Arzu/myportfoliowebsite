@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "How does the AI know about my business?",
-    a: "We scrape your website — services, pricing, hours, team, location, FAQs — and feed it into the AI. It only answers based on your real data. It never makes things up.",
+    a: "We scrape your website - services, pricing, hours, team, location, FAQs - and feed it into the AI. It only answers based on your real data. It never makes things up.",
   },
   {
     q: "What happens when a lead is captured?",
@@ -35,7 +35,7 @@ const faqs = [
   },
   {
     q: "Does it work on my website platform?",
-    a: "Yes. We give you a single line of HTML that works on WordPress, Shopify, Wix, Squarespace, Webflow, and any platform that lets you add custom HTML. If you're not sure, just ask us — we'll help.",
+    a: "Yes. We give you a single line of HTML that works on WordPress, Shopify, Wix, Squarespace, Webflow, and any platform that lets you add custom HTML. If you're not sure, just ask us - we'll help.",
   },
 ];
 

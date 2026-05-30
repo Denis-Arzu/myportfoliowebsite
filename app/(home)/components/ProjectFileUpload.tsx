@@ -41,7 +41,7 @@ function validateIncoming(
     if (accepted.length + existing.length >= CONTACT_UPLOAD.maxFiles) {
       return {
         accepted,
-        error: `Only ${CONTACT_UPLOAD.maxFiles} files allowed — extra files were skipped.`,
+        error: `Only ${CONTACT_UPLOAD.maxFiles} files allowed - extra files were skipped.`,
       };
     }
 
@@ -213,7 +213,7 @@ export function ProjectFileUpload({ files, onChange, disabled, error }: ProjectF
             <span className="text-white/80">Drop files here</span> or click to browse
           </p>
           <p className="text-[10px] font-mono text-white/25 max-w-xs leading-relaxed">
-            Images · PDF · Word · Excel · TXT — up to {CONTACT_UPLOAD.maxFiles} files,{" "}
+            Images · PDF · Word · Excel · TXT - up to {CONTACT_UPLOAD.maxFiles} files,{" "}
             {formatFileSize(CONTACT_UPLOAD.maxFileBytes)} each
           </p>
         </motion.div>

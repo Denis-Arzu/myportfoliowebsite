@@ -1,5 +1,5 @@
 /**
- * DentrixApps knowledge base — used by the site chat agent.
+ * DentrixApps knowledge base - used by the site chat agent.
  * Optimized system prompt, knowledge topics, greeting, and fallback.
  * Positioning: AI chatbot assistants for salons, gyms, and dental practices.
  */
@@ -17,10 +17,10 @@ YOUR PERSONALITY: You are confident but not pushy. You speak like a knowledgeabl
 WHAT DENTRIXAPPS DOES:
 - We build AI chatbot assistants specifically for salons, gyms, and dental practices
 - The bot lives on the business's website as a small chat widget
-- It answers visitor questions 24/7 — services, pricing, hours, booking, anything the business wants
+- It answers visitor questions 24/7 - services, pricing, hours, booking, anything the business wants
 - It captures leads (name, email, phone) and emails them to the business owner instantly
 - The owner can reply directly to the lead from their email inbox
-- Each bot is customized with the business's actual data — scraped from their website
+- Each bot is customized with the business's actual data - scraped from their website
 - The bot has an industry-specific personality: warm and pampering for salons, energetic and motivating for gyms, professional and reassuring for dental
 
 PRICING:
@@ -32,7 +32,7 @@ PRICING:
 HOW IT WORKS:
 1. You give us your website URL
 2. We scrape your site and build your AI assistant (same day)
-3. We send you a live demo link — you try it, no commitment
+3. We send you a live demo link - you try it, no commitment
 4. If you love it, we give you a single line of code to add to your website
 5. Your AI assistant is live. Leads start coming in.
 
@@ -51,13 +51,13 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     id: "what-is-dentrixapps",
     keywords: ["what is dentrixapps", "what do you do", "tell me about", "overview", "about", "what are you", "who are you"],
     answer:
-      "DentrixApps builds AI chatbot assistants for salons, gyms, and dental practices. Each assistant lives on your website, answers visitor questions 24/7 using your actual business data, captures leads, and emails them to you instantly. You don't build anything — we build it for you from your website.",
+      "DentrixApps builds AI chatbot assistants for salons, gyms, and dental practices. Each assistant lives on your website, answers visitor questions 24/7 using your actual business data, captures leads, and emails them to you instantly. You don't build anything - we build it for you from your website.",
   },
   {
     id: "how-it-works",
     keywords: ["how it works", "how does it work", "how do you work", "process", "steps", "setup process", "get started"],
     answer:
-      "Three steps: (1) You give us your website URL. (2) We scrape your site, build your AI assistant, and send you a live demo link — same day. (3) If you love it, you add one line of code to your website and your assistant is live. That's it. No technical skills needed.",
+      "Three steps: (1) You give us your website URL. (2) We scrape your site, build your AI assistant, and send you a live demo link - same day. (3) If you love it, you add one line of code to your website and your assistant is live. That's it. No technical skills needed.",
   },
   {
     id: "pricing",
@@ -69,7 +69,7 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     id: "salon-benefits",
     keywords: ["salon", "spa", "hair", "nails", "beauty", "barber", "stylist", "cosmetology", "lash", "aesthetic"],
     answer:
-      "Your salon's AI assistant knows every service, every price, every stylist. It recommends treatments, highlights new client specials, and pushes visitors toward booking. It captures leads who browse after hours — people who would never fill out a contact form but will chat with a friendly assistant. While your front desk is closed, your AI is still booking.",
+      "Your salon's AI assistant knows every service, every price, every stylist. It recommends treatments, highlights new client specials, and pushes visitors toward booking. It captures leads who browse after hours - people who would never fill out a contact form but will chat with a friendly assistant. While your front desk is closed, your AI is still booking.",
   },
   {
     id: "gym-benefits",
@@ -99,7 +99,7 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     id: "setup-time",
     keywords: ["how long", "setup time", "timeline", "when", "how fast", "quick", "same day", "turnaround", "deploy"],
     answer:
-      "For you? 30 seconds — you give us your website URL. For us? Same day. We scrape your site, build the assistant, configure the industry-specific personality, and send you a demo link. If you decide to go live, adding the widget to your website takes 2 minutes — one line of code.",
+      "For you? 30 seconds - you give us your website URL. For us? Same day. We scrape your site, build the assistant, configure the industry-specific personality, and send you a demo link. If you decide to go live, adding the widget to your website takes 2 minutes - one line of code.",
   },
   {
     id: "no-website",
@@ -111,7 +111,7 @@ export const knowledgeTopics: KnowledgeTopic[] = [
     id: "cancel",
     keywords: ["cancel", "cancel anytime", "contract", "commitment", "billing", "stop", "quit", "unsubscribe"],
     answer:
-      "Yes. No contracts. No cancellation fees. Cancel and we take your assistant offline. You keep any leads you've already received. We're confident you won't cancel — but the option is there.",
+      "Yes. No contracts. No cancellation fees. Cancel and we take your assistant offline. You keep any leads you've already received. We're confident you won't cancel - but the option is there.",
   },
   {
     id: "industries",

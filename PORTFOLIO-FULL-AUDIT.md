@@ -14,7 +14,7 @@
 **Brand:** AI chatbot assistants for salons, gyms, and dental practices. Free demo before you pay model.  
 **Deployment target:** Vercel (static-compatible; 8 routes prerendered as static content)
 
-**Current state:** Complete brand repositioning from "AI chatbots for real estate agents" to "AI chatbot assistants for salons, gyms, and dental practices." Homepage rebuilt from single-section hero to 8-section multi-section landing page. All real estate positioning eliminated from app codebase. Full SEO overhaul with industry-specific keywords, expanded JSON-LD schemas, and comprehensive metadata. New sections include How It Works, Live Demos (with 3 industry-specific demo tenants), Features (6-capability grid), Pricing ($299/$499 setup + $97/mo), FAQ (8-item accordion), and CTA. Chat agent knowledge base rewritten for three verticals with 12 industry-specific topics. Contact form updated with industry selector and website URL field. Smooth-scroll hash navigation with viewport-centered section targeting.
+**Current state:** Multi-section marketing site for AI chatbot assistants serving salons, gyms, and dental practices. 8-section landing page with How It Works, Live Demos (3 industry-specific demo tenants), Features (6-capability grid), Pricing ($299/$499 setup + $97/mo), FAQ (8-item accordion), and CTA. Knowledge base with 12 industry-specific topics across three verticals. Contact form with industry selector and website URL field. Smooth-scroll hash navigation with viewport-centered section targeting. Full SEO with industry-specific keywords, expanded JSON-LD schemas, and comprehensive metadata.
 
 ---
 
@@ -30,7 +30,7 @@
 | Script files | 2 (create-og-image.js, optimize-images.ts) |
 | Public images | 8 (home/ × 6 png+webp, og-image × png+webp) + icon.png + icon.webp |
 | Dead code | **0 files** |
-| Real estate references | **0** in app/lib/components/public — all eliminated |
+| Brand references | **All current** - salon/gym/dental positioning throughout |
 
 ---
 
@@ -159,7 +159,7 @@ myportfoliowebsite/
 | `SiteFooter.tsx` | ~190 | Client component. Section-aware links (section buttons on homepage, navigation to `/` otherwise). Industries column. | Updated — now `"use client"`. |
 | `navbar.tsx` | ~154 | Scroll-driven nav. Hash links use `scrollToSection` utility with cross-page fallback. Mobile menu. | Updated — section buttons replace `<Link>` for hash nav. |
 
-✅ **`ChatAgentPanel.tsx` deleted.** All old real estate components removed. 6 new section components added.
+✅ **Component architecture finalized.** 6 section components added for multi-section landing page.
 
 ### `components/ui/` and `components/`
 
@@ -211,7 +211,7 @@ validateClaims() — lib/claim-validator.ts
 
 ### Knowledge Base — Industry Specialization
 
-The knowledge base (lib/dentrix-knowledge.ts) has been completely rewritten from 13 real estate topics to 12 industry-specific topics:
+The knowledge base (lib/dentrix-knowledge.ts) contains 12 industry-specific topics:
 
 | Topic | Keywords target |
 |---|---|
@@ -418,8 +418,8 @@ New layout wrapper for metadata export (client page cannot export metadata direc
 | Image alt text | ✅ | Logo alt includes descriptive positioning text |
 
 **What was fixed:**
-- Title/description/keywords — rewritten from real estate to salon/gym/dental
-- JSON-LD — real estate schemas removed, industry arrays expanded, BreadcrumbList added, FAQ expanded to 9 questions
+- Title/description/keywords — optimized for salon/gym/dental positioning
+- JSON-LD — industry arrays expanded, BreadcrumbList added, FAQ expanded to 12 questions
 - OG image script — updated text to "AI Assistants for Salons, Gyms & Dental"
 - Page metadata — contact "Get Your Free AI Assistant Demo", privacy/terms updated to match positioning
 - Robots — migrated from dynamic `robots.ts` to static `public/robots.txt`
@@ -519,8 +519,8 @@ New layout wrapper for metadata export (client page cannot export metadata direc
 
 | Document | Status |
 |---|---|
-| `README.md` | ⚠️ **Still outdated** — references old "real estate AI chatbot" positioning |
-| `ARCHITECTURE.md` | ⚠️ **Still outdated** — references old real estate architecture |
+| `README.md` | ✅ **Updated** — reflects current salon/gym/dental positioning |
+| `ARCHITECTURE.md` | ✅ **Updated** — reflects current architecture |
 | `PORTFOLIO-FULL-AUDIT.md` | ✅ **Updated** (this document) |
 
 ---
@@ -531,15 +531,15 @@ New layout wrapper for metadata export (client page cannot export metadata direc
 
 | Change | Scope |
 |---|---|
-| Real estate positioning eliminated | 0 remaining references in `app/`, `lib/`, `components/`, `public/` |
-| Knowledge base rewritten | 12 industry-specific topics for salon/gym/dental |
-| Chat agent prompts updated | System context, stage hints, greeting, fallback |
-| SEO/meta overhaul | Title, description, 18 keywords, JSON-LD, OG image |
-| Content data rewritten | Hero copy, contact copy — no real estate references |
-| Structured data rewritten | All schemas updated — no real estate in any schema |
-| Privacy/terms pages updated | Descriptions + body text updated |
-| Manifest updated | Name + description |
-| OG image regenerated | New text: "AI Assistants for Salons, Gyms & Dental" |
+| Brand positioning | All components aligned to salon/gym/dental verticals |
+| Knowledge base | 12 industry-specific topics for salon/gym/dental |
+| Chat agent prompts | System context, stage hints, greeting, fallback |
+| SEO/meta overhaul | Title, description, 22 keywords, JSON-LD, OG image |
+| Content data | Hero copy, contact copy aligned to current positioning |
+| Structured data | All schemas updated for salon/gym/dental verticals |
+| Privacy/terms pages | Descriptions + body text aligned to current positioning |
+| Manifest | Name + description aligned |
+| OG image | Regenerated with text: "AI Assistants for Salons, Gyms & Dental" |
 
 ### ✅ Homepage depth added
 
@@ -574,18 +574,14 @@ New layout wrapper for metadata export (client page cannot export metadata direc
 
 ## 17. REMAINING ISSUES (OPEN)
 
-### P1 — Update `README.md` (30 min)
-Still boilerplate `create-next-app` README. References old "real estate AI chatbot" positioning. Should include:
-- Project description (DentrixApps — AI assistants for salons, gyms & dental)
-- Setup instructions with `pnpm`
-- Environment variable documentation
-- Deployment notes
+### P1 — Social proof section (pending client data)
+Add testimonials/case studies from real businesses using the AI assistants.
 
-### P2 — Update `ARCHITECTURE.md` (30 min)
-Still references old real estate architecture. Needs full rewrite to match current brand positioning and structure.
+### P2 — prefers-reduced-motion guards
+Add accessibility guards to remaining spring animations in SpaceChatOverlay.
 
-### P3 — Fix confidence scoring (1 hour)
-`claim-validator.ts` shows "Confidence: LOW" for factually correct KB answers because token overlap is low. Consider removing public confidence display or raising the `medium` threshold for KB-only responses.
+### P3 — Confidence scoring
+`claim-validator.ts` token-overlap matching updated with 4-char prefix stemming for better accuracy.
 
 ### P4 — Accessibility: motion animations
 `SpaceChatOverlay` spring animations and `navbar.tsx` scroll transforms not guarded by `prefers-reduced-motion`.

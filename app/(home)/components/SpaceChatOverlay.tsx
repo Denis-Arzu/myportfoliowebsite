@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * SpaceChatOverlay — immersive full-screen chat.
+ * SpaceChatOverlay - immersive full-screen chat.
  *
  * Desktop:  hidden 1px input captures keystrokes. Text mirrors at centre.
  *           Escape closes. Hint bar at bottom.
@@ -14,7 +14,7 @@
  * Phase machine:
  *   greeting → typing → waiting → answer → done
  *
- * Answer stays on screen in "done" until the user begins their NEXT message —
+ * Answer stays on screen in "done" until the user begins their NEXT message -
  * only then does it archive to the history ghost strip at the top.
  */
 
@@ -54,7 +54,7 @@ function useTypewriter(text: string, active: boolean, speedMs = 16) {
 
   useEffect(() => {
     if (!active || !text) {
-      // Do NOT wipe displayed here — callers in "done" phase still need it.
+      // Do NOT wipe displayed here - callers in "done" phase still need it.
       // Only reset finished so a new run starts clean.
       setFinished(false);
       return;
@@ -176,7 +176,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
   const [history, setHistory] = useState<ChatMessage[]>([]);
 
   // The exchange that gets ghosted to the history strip.
-  // Only set when the user begins typing after "done" — not when typewriter ends.
+  // Only set when the user begins typing after "done" - not when typewriter ends.
   const [ghostExchange, setGhostExchange] = useState<Exchange | null>(null);
   // Holds the last finished exchange so we can promote it to ghost when needed
   const lastExchangeRef = useRef<Exchange | null>(null);
@@ -235,7 +235,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  // ── Input change — shared by both hidden and mobile inputs ───────────────
+  // ── Input change - shared by both hidden and mobile inputs ───────────────
 
   const handleInputChange = useCallback(
     (val: string) => {
@@ -248,7 +248,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
         setPhase("greeting");
       }
       if (phase === "done" && val.length > 0) {
-        // Archive the last answer to the ghost strip NOW — when user starts typing
+        // Archive the last answer to the ghost strip NOW - when user starts typing
         if (lastExchangeRef.current) {
           setGhostExchange(lastExchangeRef.current);
         }
@@ -344,7 +344,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
       style={{ background: "#050506", ...containerStyle }}
     >
       {/* Premium ambient layers */}
-      {/* Depth gradient — subtle volumetric feel */}
+      {/* Depth gradient - subtle volumetric feel */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,oklch(0.55_0.18_145/0.07),transparent_70%)]" />
       {/* Secondary warm glow at top for depth */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_0%,oklch(0.6_0.15_145/0.04),transparent_60%)]" />
@@ -375,7 +375,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
           Dentrix AI
         </motion.span>
 
-        {/* Close button — always present, prominent on mobile */}
+        {/* Close button - always present, prominent on mobile */}
         <motion.button
           type="button"
           onClick={onClose}
@@ -407,7 +407,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
         <HistoryStrip exchange={ghostExchange} />
       </div>
 
-      {/* ── Centre stage — fills all remaining space above mobile input bar ── */}
+      {/* ── Centre stage - fills all remaining space above mobile input bar ── */}
       <div
         className={`relative flex-1 flex flex-col px-6 sm:px-10 min-h-0 ${
           isLongAnswer ? "overflow-y-auto justify-start scroll-smooth" : "overflow-hidden items-center justify-center"
@@ -438,7 +438,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
             </motion.p>
           )}
 
-          {/* TYPING — live mirror */}
+          {/* TYPING - live mirror */}
           {phase === "typing" && (
             <motion.p
               key="typing"
@@ -458,7 +458,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
             </motion.p>
           )}
 
-          {/* WAITING — staggered dots */}
+          {/* WAITING - staggered dots */}
           {phase === "waiting" && (
             <motion.div
               key="waiting"
@@ -484,7 +484,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
             </motion.div>
           )}
 
-          {/* ANSWER + DONE — answer stays until next typing cycle */}
+          {/* ANSWER + DONE - answer stays until next typing cycle */}
           {(phase === "answer" || phase === "done") && (
             <motion.div
               key="answer"
@@ -504,7 +504,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
                   when the typewriter resets its internal displayed state. */}
               {phase === "done" ? completedAnswer : typedAnswer}
               {phase === "answer" && <Cursor reduced={!animEnabled} />}
-              {/* Subtle "done" indicator — fades in after answer completes */}
+              {/* Subtle "done" indicator - fades in after answer completes */}
               {phase === "done" && (
                 <>
                   <motion.span
@@ -513,9 +513,9 @@ export function SpaceChatOverlay({ onClose }: Props) {
                     transition={{ delay: 0.4, duration: 0.5 }}
                     className="block mt-6 text-[11px] sm:text-xs font-mono text-white/20 uppercase tracking-[0.22em]"
                   >
-                    — Dentrix AI
+                    - Dentrix AI
                   </motion.span>
-                  {/* CTA after 3+ user messages — guides toward demo or contact */}
+                  {/* CTA after 3+ user messages - guides toward demo or contact */}
                   {history.filter(m => m.role === "user").length >= 3 && (
                     <motion.div
                       initial={{ opacity: 0, y: 8 }}

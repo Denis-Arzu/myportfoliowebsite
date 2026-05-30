@@ -74,7 +74,7 @@ const schemaGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI Chatbot Setup — Salon",
+              name: "AI Chatbot Setup - Salon",
               description:
                 "Custom AI chatbot assistant for salons and spas. Trained on your services, pricing, and team.",
             },
@@ -85,7 +85,7 @@ const schemaGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI Chatbot Setup — Gym",
+              name: "AI Chatbot Setup - Gym",
               description:
                 "Custom AI chatbot assistant for gyms and fitness centers. Handles memberships, tours, and objections.",
             },
@@ -96,7 +96,7 @@ const schemaGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI Chatbot Setup — Dental",
+              name: "AI Chatbot Setup - Dental",
               description:
                 "Custom AI chatbot assistant for dental practices. Anxiety-aware, handles insurance and scheduling.",
             },
@@ -173,13 +173,13 @@ const schemaGraph = {
       featureList: [
         "24/7 lead capture on business websites",
         "Industry-specific AI personalities (salon, gym, dental)",
-        "Built from your website data — no configuration needed",
+        "Built from your website data - no configuration needed",
         "Instant email notifications for captured leads",
         "Reply-to-lead directly from your inbox",
         "One line of code to install on any website",
         "Free live demo before any payment",
         "Analytics dashboard",
-        "Cancel anytime — no contracts",
+        "Cancel anytime - no contracts",
       ],
       screenshot: `${SITE_URL}/images/og-image.webp`,
       applicationSubCategory: "AI Chatbot",
@@ -206,7 +206,7 @@ const schemaGraph = {
       ],
     },
 
-    // ── FAQPage — rich snippets in Google search results ──────────────────
+    // ── FAQPage - rich snippets in Google search results ──────────────────
     {
       "@type": "FAQPage",
       mainEntity: [
@@ -215,7 +215,7 @@ const schemaGraph = {
           name: "What is DentrixApps?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "DentrixApps builds AI chatbot assistants for salons, gyms, and dental practices. Each assistant lives on your website, answers visitor questions 24/7 using your actual business data, captures leads, and emails them to you instantly. You don't build anything — we build it for you from your website.",
+            text: "DentrixApps builds AI chatbot assistants for salons, gyms, and dental practices. Each assistant lives on your website, answers visitor questions 24/7 using your actual business data, captures leads, and emails them to you instantly. You don't build anything - we build it for you from your website.",
           },
         },
         {
@@ -223,7 +223,7 @@ const schemaGraph = {
           name: "How much does an AI chatbot assistant cost?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "$299 one-time setup fee. $97/month for hosting. No hidden fees, no contracts — cancel anytime. We also build a free live demo before you pay anything. The demo is free with no credit card required.",
+            text: "$299 one-time setup fee. $97/month for hosting. No hidden fees, no contracts - cancel anytime. We also build a free live demo before you pay anything. The demo is free with no credit card required.",
           },
         },
         {
@@ -239,7 +239,7 @@ const schemaGraph = {
           name: "How long does it take to get an AI assistant?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Same day. You give us your website URL, we build the assistant and send you a demo link within hours. If you decide to go live, adding the widget to your website takes 2 minutes — one line of HTML code.",
+            text: "Same day. You give us your website URL, we build the assistant and send you a demo link within hours. If you decide to go live, adding the widget to your website takes 2 minutes - one line of HTML code.",
           },
         },
         {
@@ -255,7 +255,7 @@ const schemaGraph = {
           name: "What can the AI assistant do for a gym?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Your gym's AI assistant works like your best membership advisor — 24/7. It focuses on the visitor's fitness goals, handles pricing objections, promotes free trials and tours, and captures membership leads from evening website visitors who would never call during business hours.",
+            text: "Your gym's AI assistant works like your best membership advisor - 24/7. It focuses on the visitor's fitness goals, handles pricing objections, promotes free trials and tours, and captures membership leads from evening website visitors who would never call during business hours.",
           },
         },
         {
@@ -303,7 +303,7 @@ const schemaGraph = {
           name: "How does the AI know about my business?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "We scrape your website — services, pricing, hours, team, location, FAQs — and feed it into the AI. It only answers based on your real data. It's trained to never make things up. If it doesn't know the answer, it offers to connect the visitor with your team.",
+            text: "We scrape your website - services, pricing, hours, team, location, FAQs - and feed it into the AI. It only answers based on your real data. It's trained to never make things up. If it doesn't know the answer, it offers to connect the visitor with your team.",
           },
         },
       ],
