@@ -2,9 +2,9 @@
 
 export const heroContent = {
   eyebrow: "AI Assistants for Salons, Gyms & Dental Practices",
-  headline: "AI Chatbot Assistants for Salons, Gyms & Dental - Stop Losing Customers",
+  headline: "Your Competitor Just Answered a Call You Missed. We Make Sure That Never Happens Again.",
   subheadline:
-    "An AI assistant that knows your business, answers questions 24/7, captures leads while you sleep, and books appointments your front desk misses. Built from your website. Live today.",
+    "Every missed call is a client walking to your competitor. We build an AI assistant that knows your services, your pricing, your team - and answers every question before they even think about calling someone else. Built from your website. Live today.",
   primaryCta: { label: "See It Live", action: "scroll_to_demos" as const },
   secondaryCta: { label: "Talk to Our AI", action: "open_chat_overlay" as const },
   tertiaryCta: { label: "Get Yours Built", action: "navigate_to_contact" as const },
