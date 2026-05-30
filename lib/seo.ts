@@ -7,7 +7,7 @@ export const DEFAULT_TITLE =
   "AI Chatbot Assistant for Salons, Gyms & Dental | DentrixApps";
 
 export const DEFAULT_DESCRIPTION =
-  "Stop losing customers. AI chatbot assistant for salons, gyms & dental — answers 24/7, captures leads, books appointments. Built from your website. Free live demo.";
+  "AI chatbot assistants for salons, gyms & dental - built from your website, live same day. 24/7 lead capture. Free live demo, no credit card.";
 
 export const OG_IMAGE_PATH = "/images/og-image.webp";
 
@@ -46,5 +46,5 @@ export const ogImage = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "DentrixApps — AI chatbot assistant for salons, gyms, and dental practices. Answers 24/7, captures leads, books appointments. Free live demo.",
+  alt: "DentrixApps - AI chatbot assistant for salons, gyms, and dental practices. Answers 24/7, captures leads, books appointments. Free live demo.",
 } as const;

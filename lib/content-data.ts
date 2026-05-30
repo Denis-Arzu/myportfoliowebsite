@@ -2,7 +2,7 @@
 
 export const heroContent = {
   eyebrow: "AI Assistants for Salons, Gyms & Dental Practices",
-  headline: "Your Website Is Losing Customers Right Now. Let's Fix That.",
+  headline: "AI Chatbot Assistants for Salons, Gyms & Dental — Stop Losing Customers",
   subheadline:
     "An AI assistant that knows your business, answers questions 24/7, captures leads while you sleep, and books appointments your front desk misses. Built from your website. Live today.",
   primaryCta: { label: "See It Live", action: "scroll_to_demos" as const },

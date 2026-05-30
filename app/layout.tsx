@@ -60,7 +60,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
     languages: {
-      en: SITE_URL,
+      "en": SITE_URL,
+      "x-default": SITE_URL,
     },
   },
   openGraph: {
@@ -79,6 +80,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@dentrixapps",
+    creator: "@dentrixapps",
     title: {
       default: DEFAULT_TITLE,
       template: `%s | ${SITE_NAME}`,
