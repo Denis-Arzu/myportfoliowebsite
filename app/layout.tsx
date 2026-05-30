@@ -64,6 +64,14 @@ export const metadata: Metadata = {
       "x-default": SITE_URL,
     },
   },
+  other: {
+    "google-site-verification": "YOUR_VERIFICATION_CODE_HERE",
+    "msvalidate.01": "YOUR_BING_VERIFICATION_CODE_HERE",
+    "theme-color": "#050506",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    "format-detection": "telephone=yes, email=yes, address=yes",
+  },
   openGraph: {
     title: {
       default: DEFAULT_TITLE,

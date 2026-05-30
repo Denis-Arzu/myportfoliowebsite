@@ -163,7 +163,7 @@ function HistoryStrip({ exchange }: { exchange: Exchange | null }) {
 
 // ─── Main ─────────────────────────────────────────────────────────────────
 
-const GREETING = "Hi, this is the DentrixApps AI assistant. I can tell you about our AI chatbot service for salons, gyms, and dental practices. Want to know how it works or see a live demo?";
+const GREETING = "Hey there! I'm Maya from DentrixApps. I can tell you about our AI assistant platform for salons, gyms, and dental practices - or if you want, I can show you a live demo right now. What sounds good?";
 
 interface Props {
   onClose: () => void;
@@ -372,7 +372,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
           transition={{ delay: 0.4, duration: 0.5 }}
           className="text-[10px] font-mono text-white/18 uppercase tracking-[0.2em] select-none"
         >
-          Dentrix AI
+          Maya
         </motion.span>
 
         {/* Close button - always present, prominent on mobile */}
@@ -513,7 +513,7 @@ export function SpaceChatOverlay({ onClose }: Props) {
                     transition={{ delay: 0.4, duration: 0.5 }}
                     className="block mt-6 text-[11px] sm:text-xs font-mono text-white/20 uppercase tracking-[0.22em]"
                   >
-                    - Dentrix AI
+                    - Maya
                   </motion.span>
                   {/* CTA after 3+ user messages - guides toward demo or contact */}
                   {history.filter(m => m.role === "user").length >= 3 && (

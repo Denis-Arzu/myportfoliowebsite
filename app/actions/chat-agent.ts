@@ -2,6 +2,7 @@
 
 import { getKnowledgeResponse } from "@/lib/chat-responder";
 import { validateClaims, type SourceDoc } from "@/lib/claim-validator";
+import { openrouterChat, type ORMessage } from "@/lib/openrouter-client";
 import { groqChat, type GroqMessage } from "@/lib/groq-client";
 
 export type ChatMessage = {
@@ -28,61 +29,93 @@ export async function sendChatMessage(
   const trimmed = message.trim().slice(0, 2000);
   if (!trimmed) {
     return {
-      reply: "Please type a question and I'll do my best to help.",
-      confidence: "low",
+      reply: "Hey! What can I help you with?",
+      confidence: "high",
     };
   }
 
   const { DENTRIX_SYSTEM_CONTEXT, knowledgeTopics } =
     await import("@/lib/dentrix-knowledge");
 
-  // Build KB context block injected into every Groq system prompt.
-  // Structured so the model can cite specific answers without hallucinating.
+  // Build KB context block injected into every system prompt.
   const kbBlock = knowledgeTopics
     .map((t) => `[${t.id}]: ${t.answer}`)
     .join("\n");
 
-  // Determine conversation stage for response calibration
+  // Conversation stage detection
   const userMessageCount = history.filter((m) => m.role === "user").length;
   let stageHint = "";
   if (userMessageCount === 0) {
-    stageHint = "CONVERSATION_STAGE: first message — The visitor just started chatting. Be warm and direct. Ask what kind of business they run (salon, gym, dental) to personalize the conversation.";
+    stageHint =
+      "STAGE: First message. Be warm and natural. Do not introduce yourself with a title - just be helpful. If their question is vague, ask a clarifying question about their business type.";
   } else if (userMessageCount <= 2) {
-    stageHint = "CONVERSATION_STAGE: early conversation — The visitor is exploring. Answer their question clearly, then guide toward trying a live demo or sharing their website URL so we can build them one.";
+    stageHint =
+      "STAGE: Early conversation. They are exploring. Answer their question well, then naturally mention the live demo or ask about their business so you can personalize the conversation.";
+  } else if (userMessageCount <= 5) {
+    stageHint =
+      "STAGE: Engaged. They're interested. Be specific about benefits for their industry. Reference real use cases. Create gentle urgency without being pushy.";
   } else {
-    stageHint = "CONVERSATION_STAGE: engaged prospect — The visitor is interested. Be specific about benefits for their industry. Push toward the demo or contact form. Create urgency: 'Every day without an AI assistant is a day of lost leads.'";
+    stageHint =
+      "STAGE: Deep conversation. They are seriously considering. Address any remaining objections. Push toward the demo link or contact form. Be direct: 'Want me to set you up with a free demo?'";
   }
 
   const systemPrompt = `${DENTRIX_SYSTEM_CONTEXT}
 
-KNOWLEDGE BASE (use only these facts — do not invent):
+KNOWLEDGE BASE (your factual reference - use these facts, do not invent):
 ${kbBlock}
 
 ${stageHint}
 
-RULES:
-- Answer in 2–4 short sentences unless more detail is clearly needed.
-- If the question is outside the knowledge base, say so and direct the user to ceo@dentrixapps.com or the Contact page.
-- Never fabricate pricing, timelines, or feature claims not listed above.
-- Do not repeat the question back to the user.`;
+RESPONSE STYLE:
+- Sound like a real person texting a friend who asked for business advice
+- Use contractions (you're, we've, don't, it's)
+- Short sentences. Punchy. No corporate fluff.
+- If they make a joke, acknowledge it naturally
+- Match their formality level
+- Never start with "Great question!" or "I'd be happy to help!" - just answer
+- End with a question or CTA only when it feels natural, not forced`;
 
-  // Build conversation messages for Groq.
-  // Keep last 8 turns (4 exchanges) to stay within token budget.
-  const conversationMessages: GroqMessage[] = history
-    .slice(-8)
+  // Build conversation - last 12 turns for better context
+  const conversationMessages: ORMessage[] = history
+    .slice(-12)
     .filter((m) => m.role === "user" || m.role === "assistant")
     .map((m) => ({ role: m.role, content: m.content }));
 
   conversationMessages.push({ role: "user", content: trimmed });
 
-  const groqMessages: GroqMessage[] = [
+  const orMessages: ORMessage[] = [
     { role: "system", content: systemPrompt },
     ...conversationMessages,
   ];
 
-  // --- Primary: Groq LLM ---
+  // --- PRIMARY: OpenRouter (best reasoning) ---
+  const orResult = await openrouterChat(orMessages, {
+    temperature: 0.7,
+    maxTokens: 800,
+  });
+
+  if (orResult) {
+    const kbDocs: SourceDoc[] = knowledgeTopics.map((t) => ({
+      title: t.id,
+      text: t.answer,
+    }));
+    const v = validateClaims(orResult.text, kbDocs);
+    return {
+      reply: orResult.text,
+      confidence: v.confidence,
+      sources: v.supportingSources,
+      model: orResult.model,
+    };
+  }
+
+  // --- FALLBACK: Groq (free, good) ---
+  const groqMessages: GroqMessage[] = orMessages.map((m) => ({
+    role: m.role,
+    content: m.content,
+  }));
+
   const groqResult = await groqChat(groqMessages, {
-    temperature: 0.45,
+    temperature: 0.6,
     maxTokens: 600,
   });
 
@@ -100,8 +133,7 @@ RULES:
     };
   }
 
-  // --- Fallback: local keyword KB (no key set or Groq errored) ---
-  // Pass last 4 history turns for context-aware fallback scoring
+  // --- EMERGENCY: Local keyword KB ---
   const recentHistory = history
     .slice(-4)
     .map((m) => m.content)

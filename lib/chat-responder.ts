@@ -26,7 +26,7 @@ export function getKnowledgeResponse(message: string, historyContext?: string): 
     : trimmed;
 
   if (GREETING_PATTERNS.test(trimmed) && trimmed.length < 40) {
-    return "Hello! I can tell you about DentrixApps - we build AI chatbot assistants for salons, gyms, and dental practices. Want to know how it works or see a live demo?";
+    return "Hey! I'm Maya from DentrixApps. We build AI assistants for salons, gyms, and dental practices that answer questions and capture leads 24/7. Want to see a live demo or learn how it works?";
   }
 
   let best: KnowledgeTopic | null = null;
